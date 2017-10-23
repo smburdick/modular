@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario xmlns="http://www.omnigroup.com/namespace/OmniPlan/v2" xmlns:opns="http://www.omnigroup.com/namespace/OmniPlan/v2" id="ogyt4576Q6B">
+  <start-date>2017-10-22T07:00:00.000Z</start-date>
+  <prototype-task>
+    <task id="t-2">
+      <title>Task 1</title>
+      <effort>28800</effort>
+    </task>
+  </prototype-task>
+  <prototype-task>
+    <task id="t-3">
+      <title>Milestone 1</title>
+      <type>milestone</type>
+    </task>
+  </prototype-task>
+  <prototype-task>
+    <task id="t-4">
+      <title>Group 1</title>
+      <type>group</type>
+    </task>
+  </prototype-task>
+  <prototype-resource>
+    <resource id="r-2">
+      <name>Resource 1</name>
+      <type>Staff</type>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r-3">
+      <name>Equipment 1</name>
+      <type>Equipment</type>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r-4">
+      <name>Material 1</name>
+      <type>Material</type>
+      <units-available>0</units-available>
+      <efficiency>0</efficiency>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r-5">
+      <name>Group 1</name>
+      <type>Group</type>
+    </resource>
+  </prototype-resource>
+  <top-resource idref="r-1"/>
+  <resource id="r-1">
+    <name/>
+    <type>Group</type>
+    <child-resource idref="r1"/>
+  </resource>
+  <resource id="r1">
+    <name>Resource 1</name>
+    <type>Staff</type>
+  </resource>
+  <top-task idref="t-1"/>
+  <task id="t-1">
+    <type>group</type>
+    <child-task idref="t1"/>
+    <child-task idref="t15"/>
+    <child-task idref="t78"/>
+    <child-task idref="t55"/>
+    <child-task idref="t72"/>
+  </task>
+  <task id="t1">
+    <title>Objective 1: Project Proposal (ALL)</title>
+    <type>group</type>
+    <child-task idref="t5"/>
+    <child-task idref="t7"/>
+    <child-task idref="t6"/>
+    <child-task idref="t13"/>
+    <child-task idref="t53"/>
+  </task>
+  <task id="t5">
+    <title>Finalize Use Cases</title>
+    <effort>28800</effort>
+    <start-constraint-date>2017-10-23T15:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-23T15:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t6">
+    <title>ER diagram and Schema</title>
+    <effort>28800</effort>
+  </task>
+  <task id="t7">
+    <title>Project Proposal Completion</title>
+    <effort>28800</effort>
+  </task>
+  <task id="t13">
+    <title>Finalize Scope of Project</title>
+    <effort>28800</effort>
+  </task>
+  <task id="t15">
+    <title>Objective 2: Basic Implementation</title>
+    <type>group</type>
+    <child-task idref="t36"/>
+    <child-task idref="t37"/>
+    <child-task idref="t17"/>
+    <child-task idref="t30"/>
+  </task>
+  <task id="t17">
+    <title>Full Schema Implementation (ALL)</title>
+    <effort>144000</effort>
+  </task>
+  <task id="t18">
+    <title>Homepage (ALL)</title>
+    <effort>432000</effort>
+    <start-constraint-date>2017-10-30T15:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t19">
+    <title>Profile (Presley)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-10-30T15:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t20">
+    <title>Build/Edit (Sam)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-11-06T16:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t21">
+    <title>Cart (Sam)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-10-30T15:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t22">
+    <title>Categories (Gabe)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-10-30T15:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t23">
+    <title>Product Search Results (Ian)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-11-06T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t24">
+    <title>Product Review (Ian)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-10-30T15:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t25">
+    <title>Login/Signup (Presley)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-10-30T15:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-10-30T15:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t26">
+    <title>Product (Gabe)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-11-06T16:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t30">
+    <title>Queries</title>
+    <type>group</type>
+    <child-task idref="t31"/>
+    <child-task idref="t33"/>
+    <child-task idref="t32"/>
+    <child-task idref="t34"/>
+    <prerequisite-task idref="t17"/>
+  </task>
+  <task id="t31">
+    <title>Cart (Sam)</title>
+    <effort>144000</effort>
+  </task>
+  <task id="t32">
+    <title>Search Results (Ian)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-06T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t33">
+    <title>Categories (Gabe)</title>
+    <effort>144000</effort>
+  </task>
+  <task id="t34">
+    <title>Purchase History (Presley)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-06T16:15:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t36">
+    <title>Page Layout (ALL)</title>
+    <type>group</type>
+    <start-constraint-date>2017-10-23T15:15:00.000Z</start-constraint-date>
+    <child-task idref="t49"/>
+    <start-no-earlier-than>2017-10-23T15:15:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t37">
+    <title>Webpages In HTML</title>
+    <type>group</type>
+    <child-task idref="t18"/>
+    <child-task idref="t19"/>
+    <child-task idref="t21"/>
+    <child-task idref="t22"/>
+    <child-task idref="t24"/>
+    <child-task idref="t25"/>
+    <child-task idref="t26"/>
+    <child-task idref="t20"/>
+    <child-task idref="t23"/>
+    <child-task idref="t54"/>
+    <child-task idref="t79"/>
+    <prerequisite-task idref="t36"/>
+  </task>
+  <task id="t49">
+    <title>Sketch Ideas as Group</title>
+    <effort>144000</effort>
+  </task>
+  <task id="t53">
+    <title>Setup Git Repository (Sam)</title>
+    <effort>28800</effort>
+  </task>
+  <task id="t54">
+    <title>Purchase History (Sam &amp; Presley)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-11-06T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t55">
+    <title>Objective 3: Beautification</title>
+    <type>group</type>
+    <child-task idref="t62"/>
+    <child-task idref="t67"/>
+    <child-task idref="t68"/>
+  </task>
+  <task id="t62">
+    <title>Style Sheets</title>
+    <type>group</type>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <child-task idref="t63"/>
+    <child-task idref="t64"/>
+    <child-task idref="t65"/>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t63">
+    <title>Bootstrap (Ian &amp; Presley)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t64">
+    <title>Colors/Logos (Presley)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t65">
+    <title>Implementing Agreed Layout (Presley &amp; Ian)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t67">
+    <title>Editor View</title>
+    <type>group</type>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <child-task idref="t69"/>
+    <child-task idref="t70"/>
+    <child-task idref="t71"/>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t68">
+    <title>Logo/Fonts (ALL)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t69">
+    <title>Three.js View (Sam)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t70">
+    <title>Editor CSS (Gabe)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t71">
+    <title>JQuery Elements (Sam &amp; Gabe)</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-27T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-27T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t72">
+    <title>Objective 4: Presentation (ALL)</title>
+    <type>group</type>
+    <child-task idref="t74"/>
+    <child-task idref="t75"/>
+  </task>
+  <task id="t74">
+    <title>Powerpoint</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-29T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-29T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t75">
+    <title>Live Demo</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-29T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-29T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t78">
+    <title>Objective 2.5: Thanksgiving Catchup</title>
+    <effort>144000</effort>
+    <start-constraint-date>2017-11-20T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-20T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <task id="t79">
+    <title>Upload .obj Page (Ian)</title>
+    <effort>288000</effort>
+    <start-constraint-date>2017-11-06T16:00:00.000Z</start-constraint-date>
+    <start-no-earlier-than>2017-11-06T16:00:00.000Z</start-no-earlier-than>
+  </task>
+  <critical-path root="-1" enabled="false" resources="false">
+    <color r="1" g="0.5" b="0.5"/>
+  </critical-path>
+</scenario>
