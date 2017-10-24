@@ -10,28 +10,28 @@
   <body>
 	<h3>I. Introduction</h3> 
   <p>
-    We are building an application that allows users to order 3D printed models on demand as well as create/upload and share their own models. Users will be able to log into individual accounts with their own profile information and list of 3D models they have created and/or purchased. Users will also be able to browse the site for models that other users have created/uploaded. Along with the ability to upload models from third parties, users will be able to, in browser, create their own models that are saved and viewable by other users. Likewise users will be able to edit other people’s models and save the new modified models to their profile. Our database will be used not only to store basic user information such as name, userid, age, bio, purchasing history, created models, hashed password, and contact info/social media profiles. The database will also hold all of the model data including price, material, number of purchases, dimensions, category, and creator/editors. 
+    We are building an application that allows users to order 3D printed models on demand as well as create/upload and share their own models. Users will be able to log into individual accounts with their own profile information and list of 3D models they have created and/or purchased. Users will also be able to browse the site for models that other users have created/uploaded. Along with the ability to upload models from third parties, users will be able to, in browser, create their own models that are saved and viewable by other users. Likewise users will be able to edit other people’s models and save the new modified models to their profile. Our database will be used not only to store basic user information such as name, userid, age, bio, purchasing history, created models, hashed password, and contact info/social media profiles. The database will also hold all of the model data including price, material, number of purchases, dimensions, category, and creator. 
   </p>
 	<h3>II. Use Cases </h3>
 
     <p>
-      <!-- TODO: copy/edit these from gdoc !-->
       <ol>
         <li>As a user, as long as I am logged in to my account, I can add any model on the site to my cart, and it should stay in the cart until I check out or log in.</li>
+        <li>As a user, so that I don't have to re-enter my address and banking information every time I make a purchase, I would like to keep and address book and information pertaining to my credit cards.</li>
         <li>As a user, so I can purchase the same model again, I can look at my purchasing history and add the item to my cart from their instead of searching for it again.</li>
         <li>As a user, as long as I am logged into my account, I want to be able to create a model in my browser and save it. It should be available whenever I visit the site. </li>
-        <li>As a user who sees a model that I am interested in, I should be able to clone(fork) it into my own collection and modify it to my specifications.</li>
+        <li>As a user who sees a model that I am interested in, I should be able to fork (copy) it into my own collection and modify it to my specifications.</li>
         <li>As a user, I want to be able to edit my user information such as name and bio information so that I can have a custom unique profile.</li>
         <li>As a user, so that I can find models that pertain to my interests, I should be able to view a selection of models pertaining to specific categories. </li>
         <li>As a systems admin, to protect our customers information, we should keep all users behind a password wall with an encrypted hash.</li>
         <li>As a user, so that I can find a specific model, I should be able to search for it using the model’s name and other relevant attributes.</li>
-        <li>As a user who wants to find quality products, I should be able to leave and view a rating from 1-5 stars along with a comments about the rating.</li>
-        <li>As a user, on the homepage, I would like to see a small and interesting assortment of 3D models sorted by category such as featured and popular 3D models.</li>
-        <li>As a user, I would like to be able to upload a separate .OBJ file and add it to my profile.</li>
-        <li>As someone who is interested in the 3D models and would like to be able to browse and save my favorites, I should be able to sign up to have a user account with the site and be able to log in and view my saved information. </li>
+        <li>As a user who wants to share my experiences with any particular, I should be able to write one review giving 1-5 stars and comments for that model.</li>
+        <li>As a user, so that I can group my model with similar ones, I would like to be able to add my models to one or more categories.</li>
+        <li>As a user, so that I can save models created on other platforms to the site, I would like to be able to create a model based on an OBJ file I upload.</li>
+        <li>As someone who is interested in the 3D models and would like to be able to browse and save my favorites as bookmarks, I should be able to sign up to have a user account with the site and be able to log in and view my saved information. </li>
 
       </ol>
-  </p> <!-- TODO: finish Gantt chart, ER model and schema, add these in -->
+  </p>
   <h3>III. Gantt Chart</h3>
   <p style = "margin-left: 10px; margin-right: 10px; "><img src="Modular.png"/></p>
   <h3>IV. ER Diagram</h3>
