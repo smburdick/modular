@@ -85,3 +85,17 @@ CREATE TABLE InCart(
 	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
 	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
 );
+
+CREATE TABLE BelongsTo(
+	model_id INTEGER NOT NULL,
+	category_id INTEGER NOT NULL,
+	PRIMARY KEY (model_id, category_id),
+	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY category_id REFERENCES Category(category_id) ON UPDATE cascase ON DELETE cascade
+);
+
+CREATE TABLE Category(
+	category_id INTEGER PRIMARY KEY NOT NULL,
+	category_name TEXT NOT NULL,
+	category_description TEXT
+);
