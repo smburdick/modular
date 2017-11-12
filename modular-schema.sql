@@ -53,3 +53,15 @@ CREATE TABLE Bookmarks(
 	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
 	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
 );
+
+CREATE TABLE Purchases(
+	user_id INTEGER NOT NULL,
+	model_id INTEGER NOT NULL,
+	purchase_date TEXT NOT NULL,
+	quantity INTEGER,
+	PRIMARY KEY (model_id, user_id, purchase_date),
+	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
+);
+
+
