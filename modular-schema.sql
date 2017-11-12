@@ -13,4 +13,14 @@ CREATE TABLE User(
 	birth_year INTEGER,
 	bio TEXT,
 	hashed_password TEXT
-)
+);
+
+CREATE TABLE Model(
+	model_id INTEGER PRIMARY KEY NOT NULL,
+	creator_id INTEGER,
+	material TEXT,
+	cost TEXT,
+	object_file TEXT,
+	parent_id INTEGER,
+	FOREIGN KEY creator_id REFERENCES User(user_id)  ON UPDATE cascade ON DELETE cascade
+);
