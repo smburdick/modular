@@ -22,5 +22,15 @@ CREATE TABLE Model(
 	cost TEXT,
 	object_file TEXT,
 	parent_id INTEGER,
-	FOREIGN KEY creator_id REFERENCES User(user_id)  ON UPDATE cascade ON DELETE cascade
+	FOREIGN KEY creator_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
+);
+
+CREATE TABLE Created(
+	model_id INTEGER,
+	user_id INTEGER,
+	creation_date TEXT,
+	uploaded_date TEXT,
+	PRIMARY KEY (model_id, user_id),
+	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
 );
