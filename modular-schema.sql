@@ -64,4 +64,15 @@ CREATE TABLE Purchases(
 	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
 );
 
-
+CREATE TABLE Address(
+	user_id INTEGER NOT NULL,
+	address_id TEXT NOT NULL,
+	address_one TEXT,
+	address_two TEXT,
+	city TEXT,
+	state TEXT,
+	zipcode INTEGER,
+	country TEXT,
+	PRIMARY KEY (user_id, address_id),
+	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
+);
