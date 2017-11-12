@@ -76,3 +76,12 @@ CREATE TABLE Address(
 	PRIMARY KEY (user_id, address_id),
 	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
 );
+
+CREATE TABLE InCart(
+	user_id INTEGER NOT NULL,
+	model_id INTEGER NOT NULL,
+	quantity INTEGER,
+	PRIMARY KEY (model_id, user_id),
+	FOREIGN KEY model_id REFERENCES Model(model_id) ON UPDATE cascade ON DELETE cascade,
+	FOREIGN KEY user_id REFERENCES User(user_id) ON UPDATE cascade ON DELETE cascade
+);
