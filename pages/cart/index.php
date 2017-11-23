@@ -1,3 +1,10 @@
+<?php
+  // testing zone
+  $testUserID = 123;
+ // setcookie("userID", $testUserID, time() ); // 86400 = 1 day
+  //$_COOKIE["userID"] = $testUserID; // necessary?
+?>
+
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
 <!-- cart/index.php -->
 <!DOCTYPE html>
@@ -41,18 +48,44 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <?php
-      $db_file = '../db/modular.db';
-      try {
-        $db = new PDO('sqlite:'.$db_file);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        /**
-         * Assume that userID is stored as a cookie somewhere, or perhaps in the url...
-         */
-        $userID = 123; // TODO how are we getting this? should be a cookie for persistence
-        // if userID null: you need to sign in to view your cart?
-        // else: select * from cart natural join user
-        //$query_str = 'select * '
+      $db_file = '../../db/modular.db';
+      $user_id = $_COOKIE["userID"];
+
+      if (isset($user_id)) {
+        try {
+          $db = new PDO('sqlite:'.$db_file);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+          $stmt = $db->prepare('SELECT * FROM InCart NATURAL JOIN Model WHERE user_id = ?;');
+          $stmt->bindParam(1, $user_id);
+          // TODO populate the database with some toy data, and test on it
+          $success = $stmt->execute();
+          $result_set = $stmt->fetchAll();
+
+          if ($success) {
+            foreach ($result_set as $tuple) {
+              echo '$tuple[model_id]';
+            }
+          } else {
+            echo 'fail';
+          }
+
+          // foreach ($result_set as $tuple) {
+          //   echo ' "$tuple[model_id]" ';
+          // }
+
+          $db = null;
+
+          echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a>';
+
+        } catch (PDOException $e) {
+            die('Exception : '.$e->getMessage());
+        }
+      } else {
+        echo 'alert("You must be signed in")';
+        //echo '<br><br><p>You must be signed in to view your cart</p>';
       }
+      
     ?>
     <div class="col-sm-2 sidenav">
       <!--
