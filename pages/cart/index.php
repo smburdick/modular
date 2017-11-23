@@ -1,7 +1,7 @@
 <?php
   // testing zone
-  $testUserID = 123;
- // setcookie("userID", $testUserID, time() ); // 86400 = 1 day
+  $testUserID = 0; // Sam's test user ID
+  setcookie("userID", $testUserID, time() + 86400  ); // 86400 = 1 day
   //$_COOKIE["userID"] = $testUserID; // necessary?
 ?>
 
@@ -60,29 +60,31 @@
           $stmt->bindParam(1, $user_id);
           // TODO populate the database with some toy data, and test on it
           $success = $stmt->execute();
-          $result_set = $stmt->fetchAll();
+          $result_set = $stmt->fetchAll(); // an array of results
 
           if ($success) {
-            foreach ($result_set as $tuple) {
-              echo '$tuple[model_id]';
+            if (sizeof($result_set) == 0) {
+              echo 'Your cart is empty.';
+            } else {
+              foreach ($result_set as $tuple) {
+                echo '<p> '.$tuple["model_id"].' </p> <br>';
+              } 
+              echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a>';
             }
+            
           } else {
-            echo 'fail';
+            // TODO this really shouldn't happen?
           }
-
-          // foreach ($result_set as $tuple) {
-          //   echo ' "$tuple[model_id]" ';
-          // }
 
           $db = null;
 
-          echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a>';
 
         } catch (PDOException $e) {
             die('Exception : '.$e->getMessage());
         }
       } else {
-        echo 'alert("You must be signed in")';
+        echo '<script>alert("You must be signed in to view your cart.")</script>';
+        // TODO redirect to homepage
         //echo '<br><br><p>You must be signed in to view your cart</p>';
       }
       

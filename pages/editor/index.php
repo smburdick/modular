@@ -7,13 +7,14 @@
     <style type="text/css">
     </style>
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="three.min.js"></script>
+    <script src="js/three.min.js"></script>
     <script src="js/Detector.js"></script>
     <script src="js/CanvasRenderer.js"></script>
     <script src="js/Projector.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/dat.gui.min.js"></script>
     <script src="js/KeyboardState.js"></script>
+    <script src="js/OBJLoader.js"></script>
 
 
   </head>
@@ -31,7 +32,7 @@
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
       $model_id = $_GET["modelID"];
-
+      /*
       if (isset($user_id)) {
         try {
           $db = new PDO('sqlite:'.$db_file);
@@ -43,7 +44,7 @@
           $success = $stmt->execute();
           $result_set = $stmt->fetchAll(); // an array of results
 
-          $model = $result_set[0];
+          $model = $result_set[0]; // model data
 
           // TODO we could get values based on the user id, however this would be insecure
           // as anyone could set their cookie to be the user id and edit someone else's model
@@ -67,6 +68,7 @@
         // TODO redirect to homepage
         //echo '<br><br><p>You must be signed in to view your cart</p>';
       }
+      */
         //$obj_file = 123;
     ?>
     <div id="canvas" style="width:600px; margin: 0 auto;">
@@ -104,13 +106,18 @@
              var axes = new THREE.AxisHelper(150);
              axes.position.y = 1;
              scene.add(axes);
-             var obj_file = "<?php echo $obj_file ?>"; // a string representation of the file
+             //var obj_file = "<?php echo $obj_file ?>"; // a string representation of the file
+             var obj_file = "g cube\nv  0.0  0.0  0.0\nv  0.0  0.0  1.0\nv  0.0  1.0  0.0\nv  0.0  1.0  1.0\nv  1.0  0.0  0.0\nv  1.0  0.0  1.0\nv  1.0  1.0  0.0\nv  1.0  1.0  1.0\nvn  0.0  0.0  1.0\nvn  0.0  0.0 -1.0\nvn  0.0  1.0  0.0\nvn  0.0 -1.0  0.0\nvn  1.0  0.0  0.0\nvn -1.0  0.0  0.0\nf  1//2  7//2  5//2\nf  1//2  3//2  7//2 \nf  1//6  4//6  3//6 \nf  1//6  2//6  4//6 \nf  3//3  8//3  7//3 \nf  3//3  4//3  8//3 \nf  5//5  7//5  8//5 \nf  5//5  8//5  6//5 \nf  1//4  5//4  6//4 \nf  1//4  6//4  2//4 \nf  2//1  6//1  8//1 \nf  2//1  8//1  4//1  ";
+             // TODO loader needs to be properly set up.
+            // var loader = new THREE.OBJLoader();
+            // var object = loader.parse(obj_file);
+             // TODO apply color, material
+            // scene.add(object);
              // threejs has obj importer/exporter we can use
-             alert(val);
-             //drawRobot();
+           //  drawRobot();
             }
 
-
+            // TODO this won't be called but may serve as a good example
             function drawRobot() {
 
                 //////////////////////////////
