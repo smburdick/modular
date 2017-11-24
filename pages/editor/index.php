@@ -7,14 +7,15 @@
     <style type="text/css">
     </style>
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/three.min.js"></script>
+    <script src="three.js/build/three.min.js"></script>
     <script src="js/Detector.js"></script>
     <script src="js/CanvasRenderer.js"></script>
     <script src="js/Projector.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/dat.gui.min.js"></script>
     <script src="js/KeyboardState.js"></script>
-    <script src="js/OBJLoader.js"></script>
+    <script src="three.js/examples/js/loaders/LoaderSupport.js"></script>
+    <script src="three.js/examples/js/loaders/OBJLoader2.js"></script>
 
 
   </head>
@@ -32,7 +33,7 @@
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
       $model_id = $_GET["modelID"];
-      /*
+      
       if (isset($user_id)) {
         try {
           $db = new PDO('sqlite:'.$db_file);
@@ -43,6 +44,12 @@
           // TODO populate the database with some toy data, and test on it
           $success = $stmt->execute();
           $result_set = $stmt->fetchAll(); // an array of results
+
+          if($result_set["user_id"] == $user_id) { // TODO not sure how to do this in php
+
+          } else {
+            // sorry can't edit
+          }
 
           $model = $result_set[0]; // model data
 
@@ -63,12 +70,8 @@
         } catch (PDOException $e) {
             die('Exception : '.$e->getMessage());
         }
-      } else {
-        echo '<script>alert("You must be signed in to edit a model.")</script>';
-        // TODO redirect to homepage
-        //echo '<br><br><p>You must be signed in to view your cart</p>';
       }
-      */
+      
         //$obj_file = 123;
     ?>
     <div id="canvas" style="width:600px; margin: 0 auto;">
@@ -106,15 +109,53 @@
              var axes = new THREE.AxisHelper(150);
              axes.position.y = 1;
              scene.add(axes);
-             //var obj_file = "<?php echo $obj_file ?>"; // a string representation of the file
-             var obj_file = "g cube\nv  0.0  0.0  0.0\nv  0.0  0.0  1.0\nv  0.0  1.0  0.0\nv  0.0  1.0  1.0\nv  1.0  0.0  0.0\nv  1.0  0.0  1.0\nv  1.0  1.0  0.0\nv  1.0  1.0  1.0\nvn  0.0  0.0  1.0\nvn  0.0  0.0 -1.0\nvn  0.0  1.0  0.0\nvn  0.0 -1.0  0.0\nvn  1.0  0.0  0.0\nvn -1.0  0.0  0.0\nf  1//2  7//2  5//2\nf  1//2  3//2  7//2 \nf  1//6  4//6  3//6 \nf  1//6  2//6  4//6 \nf  3//3  8//3  7//3 \nf  3//3  4//3  8//3 \nf  5//5  7//5  8//5 \nf  5//5  8//5  6//5 \nf  1//4  5//4  6//4 \nf  1//4  6//4  2//4 \nf  2//1  6//1  8//1 \nf  2//1  8//1  4//1  ";
-             // TODO loader needs to be properly set up.
-            // var loader = new THREE.OBJLoader();
-            // var object = loader.parse(obj_file);
+             var obj_file = "<?php echo $obj_file ?>"; // a string representation of the file
+         /*    let obj_file = `
+                # cube.obj
+                #
+                 
+                g cube
+                 
+                v  0.0  0.0  0.0
+                v  0.0  0.0  1.0
+                v  0.0  1.0  0.0
+                v  0.0  1.0  1.0
+                v  1.0  0.0  0.0
+                v  1.0  0.0  1.0
+                v  1.0  1.0  0.0
+                v  1.0  1.0  1.0
+
+                vn  0.0  0.0  1.0
+                vn  0.0  0.0 -1.0
+                vn  0.0  1.0  0.0
+                vn  0.0 -1.0  0.0
+                vn  1.0  0.0  0.0
+                vn -1.0  0.0  0.0
+                 
+                f  1//2  7//2  5//2
+                f  1//2  3//2  7//2 
+                f  1//6  4//6  3//6 
+                f  1//6  2//6  4//6 
+                f  3//3  8//3  7//3 
+                f  3//3  4//3  8//3 
+                f  5//5  7//5  8//5 
+                f  5//5  8//5  6//5 
+                f  1//4  5//4  6//4 
+                f  1//4  6//4  2//4 
+                f  2//1  6//1  8//1 
+                f  2//1  8//1  4//1 
+             `;*/
+
+             var loader = new THREE.OBJLoader2();
+             var object = loader.parse(obj_file);
+             var bodyMaterial = new THREE.MeshLambertMaterial();
+                bodyMaterial.color.setRGB( 1,1,1);
+            object.children[0].material = bodyMaterial
+            object.scale.set(100,100,100)
+            console.log(object)
              // TODO apply color, material
-            // scene.add(object);
-             // threejs has obj importer/exporter we can use
-           //  drawRobot();
+             scene.add(object);
+            // drawRobot();
             }
 
             // TODO this won't be called but may serve as a good example
