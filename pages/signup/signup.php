@@ -79,11 +79,11 @@
     </div>
     <div class="col-sm-8 text-center"> 
       <h1>Welcome</h1>
-      <h3>Please enter your information belwo</h3>
+      <h3>Please enter your information below</h3>
 
       <?php
       echo '<form action="passengerCheck.php" method="post">
-        First Name: <br> 
+        First Name: <br>
         <input type="text" name="firstName" value='.$f_name.'>
         <br>
         Last name: <br>
@@ -92,10 +92,19 @@
         Username: <br>
         <input type="text" name="username" value='. $username. '>
         <br>
+        Password: <br>
+        <input type="text" name="password" value='. $password. '>
+        <br>
         Birthday:<br>
         (MM/DD/YYYY)<br>
         <input type="text" name="birth_month" value='. $birth_month. '>     <input type="text" name="birth_day" value='. $birth_day. '>      <input type="text" name="birth_year" value='. $birth_year. '>
         <br>
+        Biography: <br>
+        <textarea name="biography" rows="5" cols="30" value=' .$bio. '></textarea>
+        <br>
+
+
+
         <br>
         <input type="submit" value="Submit">
       </form>'
