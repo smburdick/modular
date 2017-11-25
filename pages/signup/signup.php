@@ -36,7 +36,7 @@
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
-        height: 100%;
+        height: auto;
         padding: 15px;
       }
       .row.content {height:auto;} 
@@ -109,6 +109,7 @@
         <input type="submit" value="Submit">
       </form>'
       ?>
+
     </div>
     <div class="col-sm-2 sidenav">
       <!--

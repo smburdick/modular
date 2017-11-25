@@ -81,20 +81,22 @@
       <p><a href="#">Link</a></p>
       -->
     </div>
-      <div class="col-sm-8 text-left">
-        <form action="../profile/profile.php">
+    <?php
+      echo '<div class="col-sm-8 text-left">
+        <form action="../profile/profile.php" method="post">
           <div class="login">
             <h1>Login</h1>
             <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required><br>
+            <input type="text" placeholder="Enter Username" name='.$username.' required><br>
 
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required><br><br>
+            <input type="password" placeholder="Enter Password" name='.$password.' required><br><br>
 
             <button type="submit">Login</button>
           </div>
         </form>
-    </div>
+    </div>'
+    ?>
     <div class="col-sm-2 sidenav">
       <!--
       <div class="well">

@@ -20,23 +20,8 @@
 			$birth_year = $_POST['birth_year'];
 			$password = $_POST['password'];
 			$photo = $_POST['photo'];
-			$missing_fn = false;
-			$missing_ln = false;
-			$missing_un = false;
-			$missing_ps = false;
-			if ($f_name == '')
-				$missing_fn = true;
-			if ($l_name == '')
-				$missing_ln = true;
-			if ($username == '')
-				$missing_un = true;
-			if ($password == '')
-				$missing_pw = true;
-			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-			$cookie_name = "user";
-			$cookie_value = $username;
-			setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 			
 			//set errormode to use exceptions
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -53,7 +38,7 @@
 			//$stmt->bindParam(9, $photo);
 			$stmt->execute();
 			
-			header('Location: http://localhost/modular/pages/profile/profile.php');
+			//header('Location: http://localhost/modular/pages/profile/profile.php');
 
 			$db = null;
 		}
