@@ -22,8 +22,8 @@ CREATE TABLE Model(
 	creator_id INTEGER,
 	material_id INTEGER,
 	mass_in_grams INTEGER,
-	color TEXT, -- hex value, e.g. #FFFFFF
-	object_file TEXT,
+	color TEXT, -- hex value, e.g. "#FFFFFF"
+	object_file GLOB,
 	parent_id INTEGER,
 	name TEXT,
 	PRIMARY KEY(model_id),
