@@ -82,12 +82,12 @@
       <h3>Please enter your information below</h3>
 
       <?php
-      echo '<form action="passengerCheck.php" method="post">
+      echo '<form action="inputSignup.php" method="post">
         First Name: <br>
-        <input type="text" name="firstName" value='.$f_name.'>
+        <input type="text" name="f_name" value='.$f_name.'>
         <br>
         Last name: <br>
-        <input type="text" name="lastName" value='. $l_name. '>
+        <input type="text" name="l_name" value='. $l_name. '>
         <br>
         Username: <br>
         <input type="text" name="username" value='. $username. '>
