@@ -12,22 +12,36 @@ CREATE TABLE User(
 	birth_month INTEGER,
 	birth_year INTEGER,
 	bio TEXT,
-	hashed_password INTEGER
+	hashed_password INTEGER,
+	email TEXT,
+	photo BLOB
 );
 
 CREATE TABLE Model(
 	model_id INTEGER,
 	creator_id INTEGER,
-	material TEXT,
-	cost INTEGER,
+	material_id INTEGER,
+	mass_in_grams INTEGER,
+	color TEXT, -- hex value, e.g. #FFFFFF
 	object_file TEXT,
 	parent_id INTEGER,
+	name TEXT,
 	PRIMARY KEY(model_id),
+	FOREIGN KEY (material_id) REFERENCES Material(material_id)
+		ON UPDATE CASCADE
+		ON DELETE SET NULL,
 	FOREIGN KEY (creator_id) REFERENCES User(user_id) 
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
 	FOREIGN KEY (parent_id) REFERENCES Model(model_id)
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
+		ON DELETE SET NULL
+);
+
+CREATE TABLE Material (
+	material_id INTEGER PRIMARY KEY,
+	name TEXT,
+	cost_per_gram INTEGER NOT NULL
 );
 
 CREATE TABLE Created(
