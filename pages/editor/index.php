@@ -7,15 +7,15 @@
     <style type="text/css">
     </style>
     <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="three.js/build/three.min.js"></script>
+    <script src="js/three.min.js"></script>
     <script src="js/Detector.js"></script>
     <script src="js/CanvasRenderer.js"></script>
     <script src="js/Projector.js"></script>
     <script src="js/OrbitControls.js"></script>
     <script src="js/dat.gui.min.js"></script>
     <script src="js/KeyboardState.js"></script>
-    <script src="three.js/examples/js/loaders/LoaderSupport.js"></script>
-    <script src="three.js/examples/js/loaders/OBJLoader2.js"></script>
+    <script src="js/LoaderSupport.js"></script>
+    <script src="js/OBJLoader2.js"></script>
 
 
   </head>
@@ -51,7 +51,7 @@
           if (strcmp($model["user_id"], $user_id) == 0) { // model's userID matches logged-in userID
             $obj_file = $model["object_file"];
           } else {
-            echo "<p>You don't have permission to edit this model.</p>"
+            echo "<p>You don't have permission to edit this model.</p>";
           }
 
           // TODO we could get values based on the user id, however this would be insecure
@@ -155,7 +155,6 @@
                 bodyMaterial.color.setRGB( 1,1,1);
             object.children[0].material = bodyMaterial
             object.scale.set(100,100,100)
-            console.log(object)
              // TODO apply color, material
              scene.add(object);
             }
