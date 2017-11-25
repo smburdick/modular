@@ -38,7 +38,7 @@
 			//$stmt->bindParam(9, $photo);
 			$stmt->execute();
 			
-			//header('Location: http://localhost/modular/pages/profile/profile.php');
+			header('Location: http://localhost/modular/pages/profile/profile.php');
 
 			$db = null;
 		}
