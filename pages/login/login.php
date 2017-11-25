@@ -1,8 +1,6 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
-  <title>Signup</title>
+  <title>Modular</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,10 +34,16 @@
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
-        height: 100%;
+        height: auto;
         padding: 15px;
       }
       .row.content {height:auto;} 
+    }
+    .login {
+      margin-top: 10%;
+      margin-bottom: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
     }
   </style>
 </head>
@@ -62,12 +66,12 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
-  
+
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -77,38 +81,19 @@
       <p><a href="#">Link</a></p>
       -->
     </div>
-    <div class="col-sm-8 text-center"> 
-      <h1>Welcome</h1>
-      <h3>Please enter your information below</h3>
+      <div class="col-sm-8 text-left">
+        <form action="../profile/profile.php">
+          <div class="login">
+            <h1>Login</h1>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required><br>
 
-      <?php
-      echo '<form action="inputSignup.php" method="post">
-        First Name: <br>
-        <input type="text" name="f_name" value='.$f_name.'>
-        <br>
-        Last name: <br>
-        <input type="text" name="l_name" value='. $l_name. '>
-        <br>
-        Username: <br>
-        <input type="text" name="username" value='. $username. '>
-        <br>
-        Password: <br>
-        <input type="text" name="password" value='. $password. '>
-        <br>
-        Birthday:<br>
-        (MM/DD/YYYY)<br>
-        <input type="text" name="birth_month" value='. $birth_month. '>     <input type="text" name="birth_day" value='. $birth_day. '>      <input type="text" name="birth_year" value='. $birth_year. '>
-        <br>
-        Biography: <br>
-        <textarea name="biography" rows="5" cols="30" value=' .$bio. '></textarea>
-        <br>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required><br><br>
 
-
-
-        <br>
-        <input type="submit" value="Submit">
-      </form>'
-      ?>
+            <button type="submit">Login</button>
+          </div>
+        </form>
     </div>
     <div class="col-sm-2 sidenav">
       <!--
@@ -127,6 +112,8 @@
   <p align="left">2017 Modular</p>
 </footer>
 
+  <footer class="container-fluid text-center">
+    <p align="left">2017 Modular</p>
+  </footer>
 </body>
-</html>
-
+<html>

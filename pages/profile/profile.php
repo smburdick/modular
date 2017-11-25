@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Signup</title>
+  <title>Modular</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
       .sidenav {
-        height: 100%;
+        height: auto;
         padding: 15px;
       }
       .row.content {height:auto;} 
@@ -77,38 +77,12 @@
       <p><a href="#">Link</a></p>
       -->
     </div>
-    <div class="col-sm-8 text-center"> 
+    <div class="col-sm-8 text-left"> 
       <h1>Welcome</h1>
-      <h3>Please enter your information below</h3>
-
-      <?php
-      echo '<form action="inputSignup.php" method="post">
-        First Name: <br>
-        <input type="text" name="f_name" value='.$f_name.'>
-        <br>
-        Last name: <br>
-        <input type="text" name="l_name" value='. $l_name. '>
-        <br>
-        Username: <br>
-        <input type="text" name="username" value='. $username. '>
-        <br>
-        Password: <br>
-        <input type="text" name="password" value='. $password. '>
-        <br>
-        Birthday:<br>
-        (MM/DD/YYYY)<br>
-        <input type="text" name="birth_month" value='. $birth_month. '>     <input type="text" name="birth_day" value='. $birth_day. '>      <input type="text" name="birth_year" value='. $birth_year. '>
-        <br>
-        Biography: <br>
-        <textarea name="biography" rows="5" cols="30" value=' .$bio. '></textarea>
-        <br>
-
-
-
-        <br>
-        <input type="submit" value="Submit">
-      </form>'
-      ?>
+      <p>Scroll through featured products here.</p>
+      <hr>
+      <h3>Test</h3>
+      <p>Featured categories here.</p>
     </div>
     <div class="col-sm-2 sidenav">
       <!--
