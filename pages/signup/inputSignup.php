@@ -46,7 +46,7 @@
 		$stmt->bindParam(8, $hashed_password);
 		$stmt->execute();
 		
-		header('Locaiton: http://localhost/modular/pages/profile/index.html');
+		header('Location: http://localhost/modular/pages/profile/profile.php');
 
 		//$stmt = $db->prepare("SELECT * FROM passengers where ssn = ?");
 		/*if ($stmt->execute(array($_GET['ssn']))) {
