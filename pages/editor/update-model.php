@@ -7,8 +7,11 @@
     $user_id  = $_COOKIE["userID"];
     $model_id = $_GET["model_id"];
     $material_id = $_GET["model_material"];
-    $mass = $_GET["model_pass"];
+    $mass = $_GET["model_mass"];
     $color = $_GET["model_color"];
+    echo 'Mat: '.$material_id.'<br>';
+
+    echo 'Color: '.$color.'<br>';
     $name = $_GET["model_name"];
     // TODO GET all attributes and make an insert stmt
     if (isset($user_id)) {
@@ -36,21 +39,10 @@
                 } else {
                     echo 'There was a problem uploading to the database; please try again.';
                 }
-                
-                
             } else {
-              /*  echo '<script type="text/javascript">
-                            alert("You don\'t have permission to edit this model.")
-                            </script>
-                        ';*/
-                // TODO redirect to homepage.
                 echo 'You don\'t have permission to edit this model.';
             }
-            
-            
             $db = NULL;
-            
-            
         }
         catch (PDOException $e) {
             die('Exception : ' . $e->getMessage());

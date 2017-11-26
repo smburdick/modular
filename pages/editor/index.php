@@ -65,8 +65,9 @@
 
                     $obj_file = $model["object_file"];
                     $model_name = $model["name"];
-                    $model_color = $model["name"];
+                    $model_color = $model["color"];
                     $model_mass = $model["mass_in_grams"];
+                    $model_mat = $model["material_id"];
 
                 } else {
                     echo '<script type="text/javascript">
@@ -101,6 +102,20 @@
 
             const GOLD_ID = 0, SILVER_ID = 1;
 
+            var goldMaterial = new THREE.MeshPhongMaterial({
+                shininess: 100,
+                reflectivity: 100
+            });
+
+            var silverMaterial = new THREE.MeshPhongMaterial({
+                shininess: 10,
+                reflectivity: 0.1
+            });
+
+            var displayColor, displayMat;
+
+            var object, model;
+
             var clock = new THREE.Clock();
 
             function fillScene() {
@@ -126,22 +141,43 @@
                 scene.add(axes);
 
                 var obj_file = "<?php echo $obj_file; ?>"; // a string representation of the file
-                var material_number = "<?php echo $mat_num; ?>";
 
                 //console.log("Obj file: " + obj_file)
                 var loader = new THREE.OBJLoader2();
-                var object = loader.parse(obj_file);
-                var bodyMaterial = new THREE.MeshLambertMaterial();
-                bodyMaterial.color.setRGB(1, 0,0);
+                object = loader.parse(obj_file);
                 //object.children[0].material = bodyMaterial
                 object.scale.set(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR); // this is necessary for making the object be actually visible.
 
-                var model = object.children[0];   // the actual model object is a child object of the created object.
-
-               // model.material = bodyMaterial;
-
+                model = object.children[0];   // the actual model object is a child object of the created object.
 
                 scene.add(object);
+            }
+
+            /**
+             * Update the currently displayed model's material and color.
+             * assumes that model is already created
+             * @param newColor hex value of the color (#______)
+             * @param newMaterial id of material to be added
+             */
+            function updateMaterial(newMaterial) {
+
+                displayMat = newMaterial;
+                // preserve color
+                var currentColor = model.material.color;
+
+                // set material
+                if (displayMat == GOLD_ID) {
+                    model.material = goldMaterial;
+                } else if (displayMat == SILVER_ID) {
+                    model.material = silverMaterial;
+                }
+
+                model.material.color = currentColor;
+
+            }
+
+            function updateColor(newColor) {
+                model.material.color = new THREE.Color(newColor);
             }
 
             function init() {
@@ -182,40 +218,63 @@
                 renderer.render(scene, camera);
             }
 
-            try {
-                init();
-                fillScene();
-                addToDOM();
-                animate();
-            } catch (error) {
-                console.log("Your program encountered an unrecoverable error, can not draw on canvas. Error was:");
-                console.log(error);
+            function display(color, material) {
+                try {
+                    init();
+                    fillScene();
+                    updateColor(color);
+                    updateMaterial(material);
+                    addToDOM();
+                    animate();
+                } catch (error) {
+                    console.log("Your program encountered an unrecoverable error, can not draw on canvas. Error was:");
+                    console.log(error);
+                }
             }
 
         </script>
     </div>
+
+    <script>
+        // This is the first time the view appears
+        const initialMaterial = "<?php echo $model_mat; ?>";
+        const initialColor = "<?php echo $model_color; ?>";
+        display(initialColor, initialMaterial);
+    </script>
+
     <center>
     <?php
         echo '<form action="update-model.php"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
         echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" value="' . $model_mass . '"> g<br>'; // TODO decide on range of valid masses
-        echo 'Material: <select id="material_select" name="model_material" value="' . $model_material . '">';
+        echo 'Material: <select onchange="updateMaterial(this.value);addToDOM();animate();" id="material_select" name="model_material" value="' . $model_material . '">';
         foreach ($materials as $mat) {
+            $selected = '';
+            if ($mat["material_id"] == $model_mat) {
+                $selected = 'selected="selected"';
+            }
             $mat_price = floatval($mat["cost_per_gram"]) / 100; // convert cents to dollars
-            echo '<option value="'. $mat["material_id"] . '">' . $mat["name"] . ': $'. $mat_price . '/g</option>';
+            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["name"] . ': $'. $mat_price . '/g</option>';
         }
         echo '</select><br>';
 
+        // array of colors with their associated hexadeximal values
         $colors = array(
-            0 =>  array("name" => "white", "hex" => "#FFFFFF"),
-            1 =>  array("name" => "red", "hex" => "#FFFFFF")
-
+            0 => array("name" => "white", "hex" => "#FFFFFF"),
+            1 => array("name" => "red", "hex" => "#FF0000"),
+            2 => array("name" => "green", "hex" => "#00FF00"),
+            3 => array("name" => "blue", "hex" => "#0000FF"),
+            4 => array("name" => "black", "hex" => "#000000")
         );
 
-        echo 'Color: <select id="color_select" name="model_color">';
+        echo 'Color: <select onchange="updateColor(this.value); addToDOM(); animate();" id="color_select" name="model_color">';
         foreach ($colors as $color) {
-            echo '<option value="' . $color["rgb"]. '">'. $color["name"] .'</option>';
+            $selected = ''; // if this is the given value of the model, it will be the one in the dropdown.
+            if (strcmp($color["hex"], $model_color) == 0) {
+                $selected = 'selected="selected"';
+            }
+            echo '<option ' . $selected . ' value="' . $color["hex"] . '">' . $color["name"] .'</option>';
         }
         echo '</select><br><br>';
         echo '<input type="submit" value="Submit">';
@@ -226,6 +285,9 @@
 
     <script>
         // TODO update the editor view from here
+        $(document).ready(function(){
+
+        });
     </script>
 
 </body>
