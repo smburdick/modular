@@ -9,11 +9,8 @@
     $material_id = $_GET["model_material"];
     $mass = $_GET["model_mass"];
     $color = $_GET["model_color"];
-    echo 'Mat: '.$material_id.'<br>';
-
-    echo 'Color: '.$color.'<br>';
     $name = $_GET["model_name"];
-    // TODO GET all attributes and make an insert stmt
+
     if (isset($user_id)) {
         try {
             $db = new PDO('sqlite:' . $db_file);

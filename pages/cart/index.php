@@ -83,35 +83,12 @@
             die('Exception : '.$e->getMessage());
         }
       } else {
-        echo '<script>alert("You must be signed in to view your cart.")</script>';
-        // TODO redirect to homepage
-        //echo '<br><br><p>You must be signed in to view your cart</p>';
+        echo '<br><br><p>You must be signed in to view your cart.</p>';
       }
       
     ?>
     <div class="col-sm-2 sidenav">
-      <!--
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-    
-    </div>
-    <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Scroll through featured products here.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Featured categories here.</p>
-    </div>
-    <div class="col-sm-2 sidenav">
-     
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    -->
+
     </div>
   </div>
 </div>

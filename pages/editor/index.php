@@ -218,14 +218,18 @@
                 renderer.render(scene, camera);
             }
 
+            function updateDOMElements() {
+                addToDOM();
+                animate();                
+            }
+
             function display(color, material) {
                 try {
                     init();
                     fillScene();
                     updateColor(color);
                     updateMaterial(material);
-                    addToDOM();
-                    animate();
+                    updateDOMElements();
                 } catch (error) {
                     console.log("Your program encountered an unrecoverable error, can not draw on canvas. Error was:");
                     console.log(error);
@@ -248,10 +252,10 @@
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
         echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" value="' . $model_mass . '"> g<br>'; // TODO decide on range of valid masses
-        echo 'Material: <select onchange="updateMaterial(this.value);addToDOM();animate();" id="material_select" name="model_material" value="' . $model_material . '">';
+        echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
         foreach ($materials as $mat) {
             $selected = '';
-            if ($mat["material_id"] == $model_mat) {
+            if ($mat["material_id"] == $model_mat) { // if provided material is the one in the list, make it the default one in the dropdown
                 $selected = 'selected="selected"';
             }
             $mat_price = floatval($mat["cost_per_gram"]) / 100; // convert cents to dollars
@@ -268,7 +272,7 @@
             4 => array("name" => "black", "hex" => "#000000")
         );
 
-        echo 'Color: <select onchange="updateColor(this.value); addToDOM(); animate();" id="color_select" name="model_color">';
+        echo 'Color: <select onchange="updateColor(this.value); updateDOMElements();" id="color_select" name="model_color">';
         foreach ($colors as $color) {
             $selected = ''; // if this is the given value of the model, it will be the one in the dropdown.
             if (strcmp($color["hex"], $model_color) == 0) {
@@ -281,14 +285,6 @@
         echo '</form>';
     ?>
     </center>
-    <!-- TODO jquery elements to update view. -->
-
-    <script>
-        // TODO update the editor view from here
-        $(document).ready(function(){
-
-        });
-    </script>
 
 </body>
 </html>
