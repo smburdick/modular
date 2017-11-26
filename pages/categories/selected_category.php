@@ -8,6 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- TODO move to separate file -->
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "../css/style.css" />
 </head>
 <body>
 
@@ -42,16 +45,17 @@
       <h1>Categories</h1>
       <?php
       // database path
-      // REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
 	$db_path = '/srv/http/modular/db/modular.db';
-	$category_id = '1';// remove hardcoding later
+	$category_id = $_GET["categoryID"];
+	if($category_id == null) echo "I AM NULL";
+	else echo $category_id;
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_belongsTo = 'select model_id, cost, material from Category natural join BelongsTo natural join Model where Category.category_id = ' . $category_id;
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model where Category.category_id = ' . $category_id;
 	  $result_belongsTo = $db->query($get_belongsTo);
 	  //loop and print out all the categories
 	  foreach($result_belongsTo as $tuple){
-	    echo "<font color='red'>$tuple[model_id]</font> $tuple[cost] $tuple[material] <br/>";
+	    echo "<font color='red'>$tuple[name]</font> <font color='blue'>$tuple[model_id]</font> <br/>";
 	  }
 	//$db = null // disconnect 
 	} catch(PDOException $e){

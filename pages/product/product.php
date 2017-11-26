@@ -8,6 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- TODO move to separate file -->
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "../css/style.css" /> 
 </head>
 <body>
 
@@ -39,31 +42,27 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Categories</h1>
-      <form action="/categories/selected_category.php" method="post">
-	<?php
-	// REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
-	  $db_path = '/srv/http/modular/db/modular.db';
-	  try {
-	    $db = new PDO('sqlite:' . $db_path);
-	    $get_categories = 'select * from category';
-	    $result_set = $db->query($get_categories);
-	    //loop and print out all the categories
-	    foreach($result_set as $tuple){
-	      $name = $tuple[category_name];
-	      $description = $tuple[category_description];
-	      $categoryID = $tuple[category_id];
-	      echo $categoryID;
-	      echo "<input type='checkbox' name = $categoryID></input> <B>$name</B> <i>$description</i><br/>";
-	    }
-	  //$db = null // disconnect 
-	  } catch(PDOException $e){
-	    die('Exception : ' . $e->getMessage());
+      <h1>Product</h1>
+      <?php
+      // database path
+      // REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
+	$db_path = '/srv/http/modular/db/modular.db';
+	$id = $_GET["modelID"]; // model id
+	// need to get name of item, who made it, calculate cost
+	$model = $tuple[model_id];
+	try {
+	  $db = new PDO('sqlite:' . $db_path);
+	  $get_Model = 'select * from Model natural join User where model_id = ' . $id;
+	  $result_set = $db->query($get_Model);
+	  foreach($result_set as $tuple){
+	    $cost = $tuple[mass_in_grams] * 10; // fix this later
+	    echo "<font color='red'>$tuple[name]</font> by $tuple[username] Cost: $cost<br/>";
 	  }
-	?>
-	<br>
-	<input type="submit"/>
-      </form>
+	//$db = null // disconnect 
+	} catch(PDOException $e){
+	  die('Exception : ' . $e->getMessage());
+	}
+      ?>
       <hr>
       <h3>Test</h3>
     </div>
