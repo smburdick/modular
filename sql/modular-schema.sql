@@ -25,7 +25,7 @@ CREATE TABLE Model(
 	color TEXT, -- hex value, e.g. "#FFFFFF"
 	object_file GLOB,
 	parent_id INTEGER,
-	name TEXT,
+	model_name TEXT,
 	PRIMARY KEY(model_id),
 	FOREIGN KEY (material_id) REFERENCES Material(material_id)
 		ON UPDATE CASCADE
@@ -40,7 +40,7 @@ CREATE TABLE Model(
 
 CREATE TABLE Material (
 	material_id INTEGER PRIMARY KEY,
-	name TEXT,
+	material_name TEXT,
 	cost_per_gram INTEGER NOT NULL
 );
 

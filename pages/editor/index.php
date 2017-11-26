@@ -33,13 +33,7 @@
 <body>
 
     <?php
-        /*
-        TODO
-            - Reposition editor view onto the side
-            - editor options: dropdown,...
-            - url should contain modelID. if the user doesn't have this model, page should read "Error: you don't have permission to edit this model"
-            - otherwise, editor should load the model.
-        */
+
         $db_file  = '../../db/modular.db';
         $user_id  = $_COOKIE["userID"];
         $model_id = $_GET["modelID"];
@@ -64,7 +58,7 @@
                     $materials = array($mat_stmt->fetchAll())[0];
 
                     $obj_file = $model["object_file"];
-                    $model_name = $model["name"];
+                    $model_name = $model["model_name"];
                     $model_color = $model["color"];
                     $model_mass = $model["mass_in_grams"];
                     $model_mat = $model["material_id"];
@@ -259,7 +253,7 @@
                 $selected = 'selected="selected"';
             }
             $mat_price = floatval($mat["cost_per_gram"]) / 100; // convert cents to dollars
-            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["name"] . ': $'. $mat_price . '/g</option>';
+            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. $mat_price . '/g</option>';
         }
         echo '</select><br>';
 

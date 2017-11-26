@@ -22,12 +22,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Modular</a> <!-- TODO logo -->
+      <div class="navbar-brand">Modular</div> <!-- TODO logo -->
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a href="cart/index.php">Cart</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -41,11 +41,7 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <!--
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      -->
+
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Welcome</h1>
