@@ -43,27 +43,23 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <?php
-      // database path
       // REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
 	$db_path = '/srv/http/modular/db/modular.db';
-	//$id = $_GET["modelID"]; // model id
-	$id = 0;
-	// need to get name of item, who made it, calculate cost
-	$model = $tuple[model_id];
+	$model_id = $_GET["id"]; // model id
+	//$id = 1;
 	echo "<h1>Product Page</h1>";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_Model = 'select * from Model natural join Created natural join User where model_id = ' . $id . ';';
-	  $get_Material = 'select * from Material natural join Model where model_id = ' . $id . ';';
+	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ';';
 	  $result_set = $db->query($get_Model);
-	  $result_material = $db->query($get_Material);
 	  foreach($result_set as $tuple){
-	    echo "<font color='red' size='6'>$tuple[name]</font> by $tuple[username]<br/>";
-	    foreach($result_material as $tup){
-	      $cost = $tup[mass_in_grams] * $tup[cost_per_gram]; 
-	      echo "COST: ";
-	      //echo "<input type='checkbox' name = $$tup["Model.name"]></input> <B>$tup["Material.name"]</B> <i>$cost</i><br/>";
-	    }
+	    $model_name = $tuple["model_name"];
+	    $creator_name = $tuple["username"];
+	    $creator_id = $tuple["user_id"];
+	    $cost = $tuple["cost_per_gram"] * $tuple["mass_in_grams"] / 100;
+	    // change href to profile.php when that is ready
+	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.html?id=$creator_id'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
+	    echo "$: $cost";
 	  }
 	//$db = null // disconnect 
 	} catch(PDOException $e){

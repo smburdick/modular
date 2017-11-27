@@ -54,7 +54,7 @@
 	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ';';
 	  $result_belongsTo = $db->query($get_belongsTo);
 	  foreach($result_belongsTo as $tuple){
-	    $model_name = $tuple["name"];
+	    $model_name = $tuple["model_name"];
 	    $user_name = $tuple["username"];
 	    $model_id = $tuple["model_id"];
 	    //echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
