@@ -48,7 +48,6 @@
 	    $get_categories = 'select * from category;';
 	    $result_set = $db->query($get_categories);
 	    //loop and print out all the categories
-	    // make buttons 
 	    foreach($result_set as $tuple){
 	      $name = $tuple["category_name"];
 	      $description = $tuple["category_description"];

@@ -50,12 +50,16 @@
 	if(!isset($cat_id)) echo "ERROR!";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model where category_id = ' . $cat_id . ';';
+	  // try to optimize this later, doing three natural joins!
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ';';
 	  $result_belongsTo = $db->query($get_belongsTo);
 	  foreach($result_belongsTo as $tuple){
 	    $model_name = $tuple["name"];
+	    $user_name = $tuple["username"];
 	    $model_id = $tuple["model_id"];
-	    echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
+	    //echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
+	    echo "<a href='/product/product.php?id=$model_id'><button><B>$model_name</B> by $user_name</button></a>";
+	    echo "<br>";
 	  }
 	//$db = null // disconnect 
 	} catch(PDOException $e){
