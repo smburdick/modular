@@ -1,5 +1,4 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <title>Modular</title>
@@ -8,9 +7,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <link rel = "stylesheet"
-   type = "text/css"
-   href = "css/style.css" /> 
+  <!-- TODO move to separate file -->
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "../css/style.css" /> 
 </head>
 <body>
 
@@ -22,12 +22,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <div class="navbar-brand">Modular</div> <!-- TODO logo -->
+      <a class="navbar-brand" href="#">Modular</a> <!-- TODO logo -->
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="cart/index.php">Cart</a></li>
+        <li><a href="#">Cart</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -36,29 +36,38 @@
       </ul>
     </div>
   </div>
-</nav>
-  
+</nav> 
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Scroll through featured products here.</p>
+      <?php
+	$db_path = '/db/modular.db';
+	$model_id = $_GET["id"]; // model id
+	//$id = 1;
+	echo "<h1>Product Page</h1>";
+	try {
+	  $db = new PDO('sqlite:' . $db_path);
+	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ';';
+	  $result_set = $db->query($get_Model);
+	  foreach($result_set as $tuple){
+	    $model_name = $tuple["model_name"];
+	    $creator_name = $tuple["username"];
+	    $creator_id = $tuple["user_id"];
+	    $cost = $tuple["cost_per_gram"] * $tuple["mass_in_grams"] / 100;
+	    // change href to profile.php when that is ready
+	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.html?id=$creator_id'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
+	    echo "$: $cost";
+	  }
+	//$db = null // disconnect 
+	} catch(PDOException $e){
+	  die('Exception : ' . $e->getMessage());
+	}
+      ?>
       <hr>
-      <h3>Test</h3>
-      <p>Featured categories here.</p>
     </div>
     <div class="col-sm-2 sidenav">
-      <!--
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    -->
     </div>
   </div>
 </div>
@@ -69,4 +78,3 @@
 
 </body>
 </html>
-
