@@ -1,12 +1,6 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
-<<<<<<< HEAD
   <title>Modular</title>
-=======
-  <title>Profle</title>
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -45,13 +39,12 @@
       }
       .row.content {height:auto;} 
     }
-<<<<<<< HEAD
-=======
-    img {
-    	width: 25%;
-    	height: 25%;
+    .login {
+      margin-top: 10%;
+      margin-bottom: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
     }
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
   </style>
 </head>
 <body>
@@ -73,28 +66,62 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
-  
+
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-<<<<<<< HEAD
       <!--
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       -->
     </div>
-    <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Scroll through featured products here.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Featured categories here.</p>
+    <?php
+      if (isset($_GET['mu']) && $_GET['mu']){
+        echo 'Missing username!<br>';
+      }
+      if (isset($_GET['mp']) && $_GET['mp']){
+        echo 'Missing password!<br>';
+      }
+
+      $username = '';
+      $password = '';
+
+      if (isset($_GET['username'])){
+        $username = $_GET['username'];
+      }
+      if (isset($_GET['password'])){
+        $password = $_GET['password'];
+      }
+
+
+      echo '<div class="col-sm-4 text-left">
+        <form action="loginValidation.php" method="post">
+          <div class="login">
+            <h1>Login</h1>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name='.$username.' required><br>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name='.$hashed_password.' required><br><br>
+
+            <button type="submit">Login</button>
+          </div>
+        </form>
+    </div>'
+    ?>
+    <div class="col-sm-4 text-left">
+      <br>
+      <h1>Sign Up</h1>
+      <h4>Click below to set up an account</h4><br>
+      <form action="../signup/signup.php">
+        <input type="submit" name="Go to Sign Up">
+      </form>
     </div>
     <div class="col-sm-2 sidenav">
       <!--
@@ -105,16 +132,6 @@
         <p>ADS</p>
       </div>
     -->
-=======
-    </div> 
-    <div class="col-sm-8 text-left">
-      <div class="col-md-12 text-right">
-      	<h1>Presley Reed III</h1>
-      	<h3>Software Engineer</h3>
-      </div>
-    </div>
-    <div class="col-sm-2 sidenav">
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
     </div>
   </div>
 </div>
@@ -124,5 +141,4 @@
 </footer>
 
 </body>
-</html>
-
+<html>

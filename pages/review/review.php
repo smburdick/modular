@@ -12,7 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- important mandatory libraries -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-  <script src="css/stars/js/star-rating.js" type="text/javascript"></script>
+  <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 </head>
 <body>
   <!--TODO: use (now working) database connection to pull variables out into HTML-->
