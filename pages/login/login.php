@@ -100,7 +100,7 @@
       }
 
 
-      echo '<div class="col-sm-8 text-left">
+      echo '<div class="col-sm-4 text-left">
         <form action="loginValidation.php" method="post">
           <div class="login">
             <h1>Login</h1>
@@ -115,6 +115,14 @@
         </form>
     </div>'
     ?>
+    <div class="col-sm-4 text-left">
+      <br>
+      <h1>Sign Up</h1>
+      <h4>Click below to set up an account</h4><br>
+      <form action="../signup/signup.php">
+        <input type="submit" name="Go to Sign Up">
+      </form>
+    </div>
     <div class="col-sm-2 sidenav">
       <!--
       <div class="well">

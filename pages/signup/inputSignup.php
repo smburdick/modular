@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-<p>
-	
 	<?php
 
 		//path to the SQLite database file
@@ -37,8 +32,16 @@
 			$stmt->bindParam(8, $hashed_password);
 			//$stmt->bindParam(9, $photo);
 			$stmt->execute();
+
+			$user_id = 0;
+    		setcookie("username", $username, time() + 86400);
+
+    		echo'<form action="../profile/profile.php">
+    				<input type="submit" name="Visit your new Profile">
+    			 </form>';
 			
-			header('Location: http://localhost/modular/pages/profile/profile.php');
+			//echo'Your account has been made!';
+			
 
 			$db = null;
 		}
@@ -46,7 +49,3 @@
 			die('Exception : '.$e->getMessage());
 		}
 	?>
-
-</p>
-</body>
-</html>
