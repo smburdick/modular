@@ -2,11 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
   <title>Modular</title>
-=======
-  <title>Profle</title>
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -45,13 +41,10 @@
       }
       .row.content {height:auto;} 
     }
-<<<<<<< HEAD
-=======
     img {
-    	width: 25%;
-    	height: 25%;
+      height: 100%;
+      width: 100%;
     }
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
   </style>
 </head>
 <body>
@@ -73,7 +66,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
@@ -82,19 +75,22 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-<<<<<<< HEAD
-      <!--
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      -->
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <p>Scroll through featured products here.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Featured categories here.</p>
+      <div class="col-sm-4">
+        <?php
+        echo '<img src='.$_GET['photo'].'>';
+        ?>
+      </div>
+      <div class="col-sm-8 text-left">
+        <?php
+          echo '
+          <h1>'.$_GET['f_name'].' '.$_GET['l_name'].'</h1>
+          <h3>@'.$_GET['username'].'</h3>
+          <h4> Biography:</h4>
+          <p>'.$_GET['bio'];
+        ?>
+      </div>
     </div>
     <div class="col-sm-2 sidenav">
       <!--
@@ -105,16 +101,6 @@
         <p>ADS</p>
       </div>
     -->
-=======
-    </div> 
-    <div class="col-sm-8 text-left">
-      <div class="col-md-12 text-right">
-      	<h1>Presley Reed III</h1>
-      	<h3>Software Engineer</h3>
-      </div>
-    </div>
-    <div class="col-sm-2 sidenav">
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
     </div>
   </div>
 </div>

@@ -2,11 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-  <title>Modular</title>
-=======
-  <title>Profle</title>
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
+  <title>Signup</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -45,13 +41,6 @@
       }
       .row.content {height:auto;} 
     }
-<<<<<<< HEAD
-=======
-    img {
-    	width: 25%;
-    	height: 25%;
-    }
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
   </style>
 </head>
 <body>
@@ -82,19 +71,45 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-<<<<<<< HEAD
       <!--
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       <p><a href="#">Link</a></p>
       -->
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8 text-center"> 
       <h1>Welcome</h1>
-      <p>Scroll through featured products here.</p>
-      <hr>
-      <h3>Test</h3>
-      <p>Featured categories here.</p>
+      <h3>Please enter your information below</h3>
+
+      <?php
+      echo '<form action="inputSignup.php" method="post">
+        First Name: <br>
+        <input type="text" name="f_name" value='.$f_name.'>
+        <br>
+        Last name: <br>
+        <input type="text" name="l_name" value='. $l_name. '>
+        <br>
+        Username: <br>
+        <input type="text" name="username" value='. $username. '>
+        <br>
+        Password: <br>
+        <input type="text" name="password" value='. $password. '>
+        <br>
+        Birthday:<br>
+        (MM/DD/YYYY)<br>
+        <input type="text" name="birth_month" value='. $birth_month. '>     <input type="text" name="birth_day" value='. $birth_day. '>      <input type="text" name="birth_year" value='. $birth_year. '>
+        <br>
+        Biography: <br>
+        <textarea name="biography" rows="5" cols="30" value=' .$bio. '></textarea>
+        <br>
+
+
+
+        <br>
+        <input type="submit" value="Submit">
+      </form>'
+      ?>
+
     </div>
     <div class="col-sm-2 sidenav">
       <!--
@@ -105,16 +120,6 @@
         <p>ADS</p>
       </div>
     -->
-=======
-    </div> 
-    <div class="col-sm-8 text-left">
-      <div class="col-md-12 text-right">
-      	<h1>Presley Reed III</h1>
-      	<h3>Software Engineer</h3>
-      </div>
-    </div>
-    <div class="col-sm-2 sidenav">
->>>>>>> cd76bc48640d0f2a4fc5cef28290455ddda54651
     </div>
   </div>
 </div>
