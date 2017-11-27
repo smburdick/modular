@@ -24,7 +24,7 @@
             $model = $result_set[0];
             
             if ($model["creator_id"] == $user_id) { // model's userID matches logged-in userID
-                $stmt = $db->prepare('UPDATE Model SET material_id = ?, mass_in_grams = ?, color = ?, model_name = ? WHERE model_id = ?;');
+                $stmt = $db->prepare('UPDATE Model SET material_id = ?, mass_in_grams = ?, color_hex = ?, model_name = ? WHERE model_id = ?;');
                 $stmt->bindParam(1, $material_id);
                 $stmt->bindParam(2, $mass);
                 $stmt->bindParam(3, $color);

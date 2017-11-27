@@ -57,18 +57,19 @@
                     $mat_stmt->execute();
                     $materials = array($mat_stmt->fetchAll())[0];
 
+                    $color_stmt = $db->prepare('SELECT * FROM Color;');
+                    $color_stmt->execute();
+                    $colors = array($color_stmt->fetchAll())[0];
+
                     $obj_file = $model["object_file"];
                     $model_name = $model["model_name"];
-                    $model_color = $model["color"];
+                    $model_color = $model["color_hex"];
                     $model_mass = $model["mass_in_grams"];
                     $model_mat = $model["material_id"];
 
                 } else {
-                    echo '<script type="text/javascript">
-                        alert("You don\'t have permission to edit this model.")
-                        </script>
-                    ';
-                    // TODO redirect to homepage.
+                    echo 'You don\'t have permission to edit this page.<br><br>';
+                    echo '<a href="../index.php"><button>Return to homepage</button></a>';
                 }
                 // TODO we could get values based on the user id, however this would be insecure
                 // as anyone could set their cookie to be the user id and edit someone else's model
@@ -94,7 +95,7 @@
 
             const SCALE_FACTOR = 100;
 
-            const GOLD_ID = 0, SILVER_ID = 1;
+            const GOLD_ID = 0, SILVER_ID = 1, PLASTIC_ID = 2;
 
             var goldMaterial = new THREE.MeshPhongMaterial({
                 shininess: 100,
@@ -102,11 +103,16 @@
             });
 
             var silverMaterial = new THREE.MeshPhongMaterial({
-                shininess: 10,
-                reflectivity: 0.1
+                shininess: 50,
+                reflectivity: 50
             });
 
-            var displayColor, displayMat;
+            var plasticMaterial = new THREE.MeshPhongMaterial({
+                shininess: 0,
+                reflectivity: 0
+            });
+
+       //     var displayColor, displayMat;
 
             var object, model;
 
@@ -147,23 +153,18 @@
                 scene.add(object);
             }
 
-            /**
-             * Update the currently displayed model's material and color.
-             * assumes that model is already created
-             * @param newColor hex value of the color (#______)
-             * @param newMaterial id of material to be added
-             */
             function updateMaterial(newMaterial) {
 
-                displayMat = newMaterial;
+//                displayMat = newMaterial;
                 // preserve color
                 var currentColor = model.material.color;
 
-                // set material
-                if (displayMat == GOLD_ID) {
+                if (newMaterial == GOLD_ID) {
                     model.material = goldMaterial;
-                } else if (displayMat == SILVER_ID) {
+                } else if (newMaterial == SILVER_ID) {
                     model.material = silverMaterial;
+                } else {
+                    model.material = plasticMaterial;
                 }
 
                 model.material.color = currentColor;
@@ -234,7 +235,6 @@
     </div>
 
     <script>
-        // This is the first time the view appears
         const initialMaterial = "<?php echo $model_mat; ?>";
         const initialColor = "<?php echo $model_color; ?>";
         display(initialColor, initialMaterial);
@@ -256,15 +256,6 @@
             echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. $mat_price . '/g</option>';
         }
         echo '</select><br>';
-
-        // array of colors with their associated hexadeximal values
-        $colors = array(
-            0 => array("name" => "white", "hex" => "#FFFFFF"),
-            1 => array("name" => "red", "hex" => "#FF0000"),
-            2 => array("name" => "green", "hex" => "#00FF00"),
-            3 => array("name" => "blue", "hex" => "#0000FF"),
-            4 => array("name" => "black", "hex" => "#000000")
-        );
 
         echo 'Color: <select onchange="updateColor(this.value); updateDOMElements();" id="color_select" name="model_color">';
         foreach ($colors as $color) {
