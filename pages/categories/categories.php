@@ -42,7 +42,7 @@
       <h1>Categories</h1>
 	<?php
 	// REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
-	  $db_path = '/srv/http/modular/db/modular.db';
+	  $db_path = '/db/modular.db';
 	  try {
 	    $db = new PDO('sqlite:' . $db_path);
 	    $get_categories = 'select * from category;';

@@ -43,8 +43,7 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <?php
-      // REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
-	$db_path = '/srv/http/modular/db/modular.db';
+	$db_path = '/db/modular.db';
 	$model_id = $_GET["id"]; // model id
 	//$id = 1;
 	echo "<h1>Product Page</h1>";

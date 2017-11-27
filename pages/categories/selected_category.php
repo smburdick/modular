@@ -45,7 +45,7 @@
       <h1>Categories</h1>
       <?php
       // database path
-	$db_path = '/srv/http/modular/db/modular.db';
+	$db_path = '/db/modular.db';
 	$cat_id = $_GET["id"];
 	if(!isset($cat_id)) echo "ERROR!";
 	try {
