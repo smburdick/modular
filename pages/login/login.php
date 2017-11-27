@@ -82,15 +82,33 @@
       -->
     </div>
     <?php
+      if (isset($_GET['mu']) && $_GET['mu']){
+        echo 'Missing username!<br>';
+      }
+      if (isset($_GET['mp']) && $_GET['mp']){
+        echo 'Missing password!<br>';
+      }
+
+      $username = '';
+      $password = '';
+
+      if (isset($_GET['username'])){
+        $username = $_GET['username'];
+      }
+      if (isset($_GET['password'])){
+        $password = $_GET['password'];
+      }
+
+
       echo '<div class="col-sm-8 text-left">
-        <form action="../profile/profile.php" method="post">
+        <form action="loginValidation.php" method="post">
           <div class="login">
             <h1>Login</h1>
             <label><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name='.$username.' required><br>
 
             <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name='.$password.' required><br><br>
+            <input type="password" placeholder="Enter Password" name='.$hashed_password.' required><br><br>
 
             <button type="submit">Login</button>
           </div>
@@ -114,8 +132,5 @@
   <p align="left">2017 Modular</p>
 </footer>
 
-  <footer class="container-fluid text-center">
-    <p align="left">2017 Modular</p>
-  </footer>
 </body>
 <html>
