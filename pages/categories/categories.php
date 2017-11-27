@@ -40,21 +40,22 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Categories</h1>
-      <form action="/categories/selected_category.php" method="post">
 	<?php
 	// REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
 	  $db_path = '/srv/http/modular/db/modular.db';
 	  try {
 	    $db = new PDO('sqlite:' . $db_path);
-	    $get_categories = 'select * from category';
+	    $get_categories = 'select * from category;';
 	    $result_set = $db->query($get_categories);
 	    //loop and print out all the categories
+	    // make buttons 
 	    foreach($result_set as $tuple){
-	      $name = $tuple[category_name];
-	      $description = $tuple[category_description];
-	      $categoryID = $tuple[category_id];
-	      echo $categoryID;
-	      echo "<input type='checkbox' name = $categoryID></input> <B>$name</B> <i>$description</i><br/>";
+	      $name = $tuple["category_name"];
+	      $description = $tuple["category_description"];
+	      $categoryID = $tuple["category_id"];
+	      echo "<a href='/categories/selected_category.php?id=$categoryID'><button>$name</button></a>";
+	      echo "<br>";
+	      echo "<br>";
 	    }
 	  //$db = null // disconnect 
 	  } catch(PDOException $e){
@@ -62,10 +63,7 @@
 	  }
 	?>
 	<br>
-	<input type="submit"/>
-      </form>
       <hr>
-      <h3>Test</h3>
     </div>
     <div class="col-sm-2 sidenav">
     </div>

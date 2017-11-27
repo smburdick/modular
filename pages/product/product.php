@@ -42,21 +42,28 @@
     <div class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Product</h1>
       <?php
       // database path
       // REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
 	$db_path = '/srv/http/modular/db/modular.db';
-	$id = $_GET["modelID"]; // model id
+	//$id = $_GET["modelID"]; // model id
+	$id = 0;
 	// need to get name of item, who made it, calculate cost
 	$model = $tuple[model_id];
+	echo "<h1>Product Page</h1>";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_Model = 'select * from Model natural join User where model_id = ' . $id;
+	  $get_Model = 'select * from Model natural join Created natural join User where model_id = ' . $id . ';';
+	  $get_Material = 'select * from Material natural join Model where model_id = ' . $id . ';';
 	  $result_set = $db->query($get_Model);
+	  $result_material = $db->query($get_Material);
 	  foreach($result_set as $tuple){
-	    $cost = $tuple[mass_in_grams] * 10; // fix this later
-	    echo "<font color='red'>$tuple[name]</font> by $tuple[username] Cost: $cost<br/>";
+	    echo "<font color='red' size='6'>$tuple[name]</font> by $tuple[username]<br/>";
+	    foreach($result_material as $tup){
+	      $cost = $tup[mass_in_grams] * $tup[cost_per_gram]; 
+	      echo "COST: ";
+	      //echo "<input type='checkbox' name = $$tup["Model.name"]></input> <B>$tup["Material.name"]</B> <i>$cost</i><br/>";
+	    }
 	  }
 	//$db = null // disconnect 
 	} catch(PDOException $e){
@@ -64,7 +71,6 @@
 	}
       ?>
       <hr>
-      <h3>Test</h3>
     </div>
     <div class="col-sm-2 sidenav">
     </div>

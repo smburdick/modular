@@ -46,16 +46,16 @@
       <?php
       // database path
 	$db_path = '/srv/http/modular/db/modular.db';
-	$category_id = $_GET["categoryID"];
-	if($category_id == null) echo "I AM NULL";
-	else echo $category_id;
+	$cat_id = $_GET["id"];
+	if(!isset($cat_id)) echo "ERROR!";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model where Category.category_id = ' . $category_id;
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model where category_id = ' . $cat_id . ';';
 	  $result_belongsTo = $db->query($get_belongsTo);
-	  //loop and print out all the categories
 	  foreach($result_belongsTo as $tuple){
-	    echo "<font color='red'>$tuple[name]</font> <font color='blue'>$tuple[model_id]</font> <br/>";
+	    $model_name = $tuple["name"];
+	    $model_id = $tuple["model_id"];
+	    echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
 	  }
 	//$db = null // disconnect 
 	} catch(PDOException $e){
@@ -63,7 +63,6 @@
 	}
       ?>
       <hr>
-      <h3>Test</h3>
     </div>
     <div class="col-sm-2 sidenav">
     </div>
