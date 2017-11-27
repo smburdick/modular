@@ -18,15 +18,14 @@ CREATE TABLE User(
 );
 
 CREATE TABLE Model(
-	model_id INTEGER,
+	model_id INTEGER PRIMARY KEY,
 	creator_id INTEGER,
 	material_id INTEGER,
 	mass_in_grams INTEGER,
-	color TEXT, -- hex value, e.g. "#FFFFFF"
+	color_hex TEXT, -- hex value, e.g. "#FFFFFF"
 	object_file GLOB,
 	parent_id INTEGER,
-	name TEXT,
-	PRIMARY KEY(model_id),
+	model_name TEXT,
 	FOREIGN KEY (material_id) REFERENCES Material(material_id)
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
@@ -35,13 +34,21 @@ CREATE TABLE Model(
 		ON DELETE SET NULL,
 	FOREIGN KEY (parent_id) REFERENCES Model(model_id)
 		ON UPDATE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY (color_hex) REFERENCES Color(hex)
+		ON UPDATE CASCADE
 		ON DELETE SET NULL
 );
 
 CREATE TABLE Material (
 	material_id INTEGER PRIMARY KEY,
-	name TEXT,
+	material_name TEXT,
 	cost_per_gram INTEGER NOT NULL
+);
+
+CREATE TABLE Color (
+	hex TEXT PRIMARY KEY,
+	name TEXT
 );
 
 CREATE TABLE Created(
