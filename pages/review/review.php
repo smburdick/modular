@@ -85,78 +85,48 @@
     
     </form>
     <!--TODO: use (now working) database connection to pull variables out into HTML-->
-<?php
+    <?php
 
-  ////testing only/////
-  $_COOKIE["userID"] = mt_rand();
-  $_GET["model_ID"] = mt_rand();
-  /////////////////////
+      ////testing only/////
+      $_COOKIE["userID"] = mt_rand();
+      $_GET["model_ID"] = mt_rand();
+      /////////////////////
 
-  $db_file = '../../db/modular.db';
-  $user_id = $_COOKIE["userID"];
-  $model_id = $_GET["model_ID"];
-  $review = $_POST["review"];
-  $rating = $_POST["rating"];
+      $db_file = '../../db/modular.db';
+      $user_id = $_COOKIE["userID"];
+      $model_id = $_GET["model_ID"];
+      $review = $_POST["review"];
+      $rating = $_POST["rating"];
 
-  //$test_query = 'INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (' . $user_id . ', ' . $model_id . ", \"" . $date . "\", \"" . $_POST["review"] . "\", " . $_POST["rating"] . ');';
-  //echo "<p> test_query: " . $test_query . "</p>";
+      try {
+          //open connection to the modular database file
+          $db = new PDO('sqlite:' . $db_file);
 
+          //set errormode to use exceptions
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          //store the rating in the datbase, keep user on the review page
+          $date = date('Y-m-d H:i', strtotime('now'));
 
-  //$insert = "INSERT INTO myTable (title, value) VALUES (:title, :value)";
+          $test_query2 = "INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (:userid, :modelid, :reviewdate, :comment, :stars);";
+          $stmt = $db->prepare($test_query2);
+          // Bind parameters to statement variables
+          $stmt->bindParam(':userid', $user_id);
+          $stmt->bindParam(':modelid', $model_id);
+          $stmt->bindParam(':reviewdate', $date);
+          $stmt->bindParam(':comment', $review);
+          $stmt->bindParam(':stars', $rating);
 
+          //echo "<p> stmt: " . $stmt . "</p>";
+          //$db->query($query_str);
+          $stmt->execute();
 
-
-  //$query_str = $db->prepare('INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (' . $user_id . ', ' . $model_id . ", \"" . $date . "\",  \"" . $_POST["review"] . "\", " . $_POST["rating"] . ');');
-  //echo "<p>" . $query_str . "</p>";
-  try {
-      //open connection to the modular database file
-      //echo "<p> " . $db_file . " </p>";
-      //phpinfo();
-      $db = new PDO('sqlite:' . $db_file);
-
-      //set errormode to use exceptions
-      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      //get the date from the database
-      //$date_query = '\'SELECT date(\'now\');\'';
-      //echo "<p> datequery: " . $date_query . " </p>";
-      //$date = $db->query("SELECT date('now');");
-      //$daquery = $db->prepare($date_query);
-      //$date = $daquery->execute();
-      //store the rating in the datbase, keep user on the review page
-      $date = date('Y-m-d H:i', strtotime('now'));
-      
-      //echo "<p> date: " . $date . " </p>";
-      //echo "<p> test: " . $test . "</p>";
-      //echo "<p> userid: " . $user_id . "</p>";
-      //echo "<p> modelid: " . $model_id . "</p>";
-      //echo "<p> date: " . $date . "</p>";
-      //echo "<p> review: " . $_POST["review"] . "</p>";
-      //echo "<p> rating: " . $_POST["rating"] . "</p>";
-
-      $test_query2 = "INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (:userid, :modelid, :reviewdate, :comment, :stars);";
-      $stmt = $db->prepare($test_query2);
-      // Bind parameters to statement variables
-      $stmt->bindParam(':userid', $user_id);
-      $stmt->bindParam(':modelid', $model_id);
-      $stmt->bindParam(':reviewdate', $date);
-      $stmt->bindParam(':comment', $review);
-      $stmt->bindParam(':stars', $rating);
-
-      //echo "<p> stmt: " . $stmt . "</p>";
-      //$db->query($query_str);
-      $stmt->execute();
-      //loop through each tuple in result set and print out the data
-      //ssn will be shown in blue (see below)
-      /*foreach($result_set as $tuple) {
-           echo "<font color='blue'>$tuple[category_id]</font> $tuple[category_name] $tuple[category_description] <br/>\n";
-      }*/
-        //disconnect from db
-        $db = null;
-    }
-    catch(PDOException $e) {
-        die('Exception : '.$e->getMessage());
-    }
-?>
+            //disconnect from db
+            $db = null;
+        }
+        catch(PDOException $e) {
+            die('Exception : '.$e->getMessage());
+        }
+    ?>
     <div class="col-sm-1 sidenav">   
     </div>
   </div>
