@@ -95,8 +95,6 @@
 
             const SCALE_FACTOR = 100;
 
-            const GOLD_ID = 0, SILVER_ID = 1, PLASTIC_ID = 2;
-
             var goldMaterial = new THREE.MeshPhongMaterial({
                 shininess: 100,
                 reflectivity: 100
@@ -112,9 +110,15 @@
                 reflectivity: 0
             });
 
-       //     var displayColor, displayMat;
+            const materialMap = {
+                0: goldMaterial,
+                1: silverMaterial,
+                2: plasticMaterial
+            }
 
-            var object, model;
+            var object;
+
+            var currentColor, currentMaterial;
 
             var clock = new THREE.Clock();
 
@@ -140,39 +144,24 @@
                 axes.position.y = 1;
                 scene.add(axes);
 
-                var obj_file = "<?php echo $obj_file; ?>"; // a string representation of the file
+                var obj_file = `<?php echo $obj_file; ?>`; // a string representation of the file
 
                 //console.log("Obj file: " + obj_file)
                 var loader = new THREE.OBJLoader2();
                 object = loader.parse(obj_file);
                 //object.children[0].material = bodyMaterial
                 object.scale.set(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR); // this is necessary for making the object be actually visible.
-
-                model = object.children[0];   // the actual model object is a child object of the created object.
+                console.log(object)
 
                 scene.add(object);
             }
 
             function updateMaterial(newMaterial) {
-
-//                displayMat = newMaterial;
-                // preserve color
-                var currentColor = model.material.color;
-
-                if (newMaterial == GOLD_ID) {
-                    model.material = goldMaterial;
-                } else if (newMaterial == SILVER_ID) {
-                    model.material = silverMaterial;
-                } else {
-                    model.material = plasticMaterial;
-                }
-
-                model.material.color = currentColor;
-
+                currentMaterial = materialMap[newMaterial];
             }
 
             function updateColor(newColor) {
-                model.material.color = new THREE.Color(newColor);
+                currentColor = new THREE.Color(newColor);
             }
 
             function init() {
@@ -214,6 +203,10 @@
             }
 
             function updateDOMElements() {
+                for (child of object.children) {
+                    child.material = currentMaterial;
+                    child.material.color = currentColor;
+                }
                 addToDOM();
                 animate();                
             }
