@@ -60,8 +60,32 @@
       <img src="homer.png" style="max-width:100%"/>
     </div>
     <div class="col-sm-3 text-left" style="margin-top: 10px"> 
-      <h1>Product Name</h1>
-      <h3>Other Info</h3>
+    <?php 
+      /*$db_file = '../../db/modular.db';
+      try {
+        //open connection to the modular database file
+        $db = new PDO('sqlite:' . $db_file);
+
+        //set errormode to use exceptions
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //NOT FUNCTIONAL (need proper cookie)
+        //replace Product Name and Other Info below with these 
+        //php strings
+        //get product name and product info from model_id cookie
+        $model_id = $_COOKIE["model_id"];
+        $prod_query = "SELECT FROM Model WHERE id=:id;";
+        $prod_prep = $db->prepare($prod_query);
+        $prod_prep->bindParam(":id", $model_id);
+        $result = $prod_prep->execute();
+        echo "<h1>" . $result . "</h1>";
+        echo "<h3>Other Info</h3>";
+      }
+      catch(PDOException $e) {
+          die('Exception : '.$e->getMessage());
+      }*/
+    ?>
+    <h1>Product Name</h1>
+    <h3>Other Info</h3>
     </div>
     <div class="col-sm-1 sidenav">
       
