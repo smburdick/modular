@@ -5,7 +5,7 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE User(
 	user_id INTEGER PRIMARY KEY,
-	username TEXT NOT NULL,
+	username TEXT NOT NULL UNIQUE,
 	f_name TEXT NOT NULL,
 	l_name TEXT NOT NULL,
 	birth_day INTEGER,
@@ -26,6 +26,7 @@ CREATE TABLE Model(
 	object_file GLOB,
 	parent_id INTEGER,
 	model_name TEXT,
+	uploaded_date INTEGER,
 	FOREIGN KEY (material_id) REFERENCES Material(material_id)
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
@@ -51,6 +52,7 @@ CREATE TABLE Color (
 	name TEXT
 );
 
+/*
 CREATE TABLE Created(
 	model_id INTEGER,
 	user_id INTEGER,
@@ -64,6 +66,7 @@ CREATE TABLE Created(
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
+*/
 
 CREATE TABLE Review(
 	user_id INTEGER,
