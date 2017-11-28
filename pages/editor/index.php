@@ -24,7 +24,9 @@
     <script src="js/KeyboardState.js"></script>
     <script src="js/LoaderSupport.js"></script>
     <script src="js/OBJLoader2.js"></script>
-    <h2>MODULAR</h2>
+    <script src="js/OBJLoader.js"></script>
+    <a href="../"><h2>MODULAR</h2></a>
+    <br><a href="../upload/"><button>Upload new model</button></a>
     <center><h1>Model Editor</h1>
 
 
@@ -85,7 +87,7 @@
             }
         }
     ?>
-    <div id="canvas" style="width:600px; margin: 0 auto;">
+    <div id="canvas" style="width:1200px; margin: 0 auto;">
         <script>
             /*global THREE, Coordinates, document, window  */
             var camera, scene, renderer;
@@ -110,10 +112,17 @@
                 reflectivity: 0
             });
 
+            var glassMaterial = new THREE.MeshPhongMaterial({                transparent: true,
+                shininess: 100,
+                reflectivity: 60,
+                opacity: 0.55
+            });
+
             const materialMap = {
                 0: goldMaterial,
                 1: silverMaterial,
-                2: plasticMaterial
+                2: plasticMaterial,
+                3: glassMaterial
             }
 
             var object;
@@ -147,7 +156,8 @@
                 var obj_file = `<?php echo $obj_file; ?>`; // a string representation of the file
 
                 //console.log("Obj file: " + obj_file)
-                var loader = new THREE.OBJLoader2();
+                //var loader = new THREE.OBJLoader2();
+                var loader = new THREE.OBJLoader();
                 object = loader.parse(obj_file);
                 //object.children[0].material = bodyMaterial
                 object.scale.set(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR); // this is necessary for making the object be actually visible.
