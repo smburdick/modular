@@ -82,22 +82,22 @@
       -->
     </div>
     <?php
-      if (isset($_GET['mu']) && $_GET['mu']){
-        echo 'Missing username!<br>';
-      }
-      if (isset($_GET['mp']) && $_GET['mp']){
-        echo 'Missing password!<br>';
-      }
+      // if (isset($_GET['mu']) && $_GET['mu']){
+      //   echo 'Missing username!<br>';
+      // }
+      // if (isset($_GET['mp']) && $_GET['mp']){
+      //   echo 'Missing password!<br>';
+      // }
 
-      $username = '';
-      $password = '';
+      // $username = '';
+      // $password = '';
 
-      if (isset($_GET['username'])){
-        $username = $_GET['username'];
-      }
-      if (isset($_GET['password'])){
-        $password = $_GET['password'];
-      }
+      // if (isset($_GET['username'])){
+      //   $username = $_GET['username'];
+      // }
+      // if (isset($_GET['password'])){
+      //   $password = $_GET['password'];
+      // }
 
 
       echo '<div class="col-sm-4 text-left">

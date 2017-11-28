@@ -1,8 +1,8 @@
 <?php
 	$cookie_name = "username";
 	$username = $_POST['username'];
-	setcookie($cookie_name, $username, time() + 86400);
-	//echo 'Your cookie is: '.$_COOKIE[$cookie_name];
+	setcookie($cookie_name, $username, time() + 86400, '/');
+	//echo 'Your cookie is: '.$_COOKIE[$cookie_name].' '. $username;
 ?>
 	<?php
 	//path to the SQLite database file
@@ -18,7 +18,6 @@
 		$birth_day = $_POST['birth_day'];
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
-		$password = $_POST['password'];
 		$photo = $_POST['photo'];
 
 		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
