@@ -41,33 +41,22 @@
 
 <?php
 
-  //path to the SQLite database file
   ////testing only/////
-  $_COOKIE["id_increment"] = $_COOKIE["id_increment"] + 1;
-  $increm = $_COOKIE["id_increment"];
   $_COOKIE["userID"] = mt_rand();
   $_GET["model_ID"] = mt_rand();
-
   /////////////////////
+
   $db_file = '../../db/modular.db';
   $user_id = $_COOKIE["userID"];
   $model_id = $_GET["model_ID"];
   $review = $_POST["review"];
   $rating = $_POST["rating"];
-  //$date = getdate();
-  $date = "today is the day";
-  $test = "testing 123";
-  echo "<p> test: " . $test . "</p>";
-  echo "<p> userid: " . $user_id . "</p>";
-  echo "<p> modelid: " . $model_id . "</p>";
-  echo "<p> date: " . $date . "</p>";
-  echo "<p> review: " . $_POST["review"] . "</p>";
-  echo "<p> rating: " . $_POST["rating"] . "</p>";
-  $test_query = 'INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (' . $user_id . ', ' . $model_id . ", \"" . $date . "\", \"" . $_POST["review"] . "\", " . $_POST["rating"] . ');';
-  echo "<p> test_query: " . $test_query . "</p>";
+
+  //$test_query = 'INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (' . $user_id . ', ' . $model_id . ", \"" . $date . "\", \"" . $_POST["review"] . "\", " . $_POST["rating"] . ');';
+  //echo "<p> test_query: " . $test_query . "</p>";
 
 
-  $insert = "INSERT INTO myTable (title, value) VALUES (:title, :value)";
+  //$insert = "INSERT INTO myTable (title, value) VALUES (:title, :value)";
 
 
 
@@ -75,13 +64,29 @@
   //echo "<p>" . $query_str . "</p>";
   try {
       //open connection to the modular database file
-      echo "<p> " . $db_file . " </p>";
+      //echo "<p> " . $db_file . " </p>";
+      //phpinfo();
       $db = new PDO('sqlite:' . $db_file);
 
       //set errormode to use exceptions
       $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+      //get the date from the database
+      //$date_query = '\'SELECT date(\'now\');\'';
+      //echo "<p> datequery: " . $date_query . " </p>";
+      //$date = $db->query("SELECT date('now');");
+      //$daquery = $db->prepare($date_query);
+      //$date = $daquery->execute();
       //store the rating in the datbase, keep user on the review page
+      $date = date('Y-m-d H:i', strtotime('now'));
+      
+      echo "<p> date: " . $date . " </p>";
+      //echo "<p> test: " . $test . "</p>";
+      echo "<p> userid: " . $user_id . "</p>";
+      echo "<p> modelid: " . $model_id . "</p>";
+      //echo "<p> date: " . $date . "</p>";
+      echo "<p> review: " . $_POST["review"] . "</p>";
+      echo "<p> rating: " . $_POST["rating"] . "</p>";
+
       $test_query2 = "INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (:userid, :modelid, :reviewdate, :comment, :stars);";
       $stmt = $db->prepare($test_query2);
       // Bind parameters to statement variables
@@ -91,7 +96,7 @@
       $stmt->bindParam(':comment', $review);
       $stmt->bindParam(':stars', $rating);
 
-      echo "<p> test_query2: " . $test_query2 . "</p>";
+      //echo "<p> stmt: " . $stmt . "</p>";
       //$db->query($query_str);
       $stmt->execute();
       //loop through each tuple in result set and print out the data
