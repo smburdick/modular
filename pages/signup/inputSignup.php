@@ -2,7 +2,6 @@
 	$cookie_name = "username";
 	$username = $_POST['username'];
 	setcookie($cookie_name, $username, time() + 86400, '/');
-	//echo 'Your cookie is: '.$_COOKIE[$cookie_name].' '. $username;
 ?>
 	<?php
 	//path to the SQLite database file
@@ -34,7 +33,6 @@
 		$stmt->bindParam(6, $birth_year);
 		$stmt->bindParam(7, $bio);
 		$stmt->bindParam(8, $hashed_password);
-		//$stmt->bindParam(9, $photo);
 		$stmt->execute();
 
 		echo'<h1>Your Account was created!</h1>
@@ -42,8 +40,6 @@
 			<form action="../profile/profile.php">
 				<input type="Submit" value="Visit your new Profile">
 			</form>';
-		
-		//echo'Your account has been made!';
 		
 
 		$db = null;
