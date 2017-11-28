@@ -48,6 +48,7 @@ CREATE TABLE Review(
 	user_id INTEGER,
 	model_id INTEGER,
 	review_date TEXT NOT NULL,
+	review_title TEXT NOT NULL,
 	comment TEXT NOT NULL,
 	stars INTEGER CHECK (stars > 0 AND stars < 6),
 	PRIMARY KEY (model_id, user_id),

@@ -97,6 +97,7 @@
       $model_id = $_GET["model_ID"];
       $review = $_POST["review"];
       $rating = $_POST["rating"];
+      $review_title = $_POST["review_title"];
 
       try {
           //open connection to the modular database file
@@ -107,12 +108,13 @@
           //store the rating in the datbase, keep user on the review page
           $date = date('Y-m-d H:i', strtotime('now'));
 
-          $test_query2 = "INSERT INTO Review(user_id, model_id, review_date, comment, stars) VALUES (:userid, :modelid, :reviewdate, :comment, :stars);";
+          $test_query2 = "INSERT INTO Review(user_id, model_id, review_date, review_title, comment, stars) VALUES (:userid, :modelid, :reviewdate, :reviewtitle, :comment, :stars);";
           $stmt = $db->prepare($test_query2);
           // Bind parameters to statement variables
           $stmt->bindParam(':userid', $user_id);
           $stmt->bindParam(':modelid', $model_id);
           $stmt->bindParam(':reviewdate', $date);
+          $stmt->bindParam(':reviewtitle', $review_title);
           $stmt->bindParam(':comment', $review);
           $stmt->bindParam(':stars', $rating);
 
