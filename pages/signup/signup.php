@@ -1,4 +1,3 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +70,6 @@
 				<br>
 				<input type="submit" value="Submit">
 			</form>';
-
 			?>
 
 		</div>
