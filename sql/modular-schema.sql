@@ -5,31 +5,54 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE User(
 	user_id INTEGER PRIMARY KEY,
-	username TEXT NOT NULL,
+	username TEXT NOT NULL UNIQUE,
 	f_name TEXT NOT NULL,
 	l_name TEXT NOT NULL,
 	birth_day INTEGER,
 	birth_month INTEGER,
 	birth_year INTEGER,
 	bio TEXT,
-	hashed_password INTEGER
+	hashed_password INTEGER,
+	email TEXT,
+	photo BLOB
 );
 
 CREATE TABLE Model(
-	model_id INTEGER,
+	model_id INTEGER PRIMARY KEY,
 	creator_id INTEGER,
-	material TEXT,
-	cost INTEGER,
-	object_file TEXT,
+	material_id INTEGER,
+	mass_in_grams INTEGER,
+	color_hex TEXT, -- hex value, e.g. "#FFFFFF"
+	object_file GLOB,
 	parent_id INTEGER,
-	PRIMARY KEY(model_id),
+	model_name TEXT,
+	uploaded_date INTEGER,
+	FOREIGN KEY (material_id) REFERENCES Material(material_id)
+		ON UPDATE CASCADE
+		ON DELETE SET NULL,
 	FOREIGN KEY (creator_id) REFERENCES User(user_id) 
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
 	FOREIGN KEY (parent_id) REFERENCES Model(model_id)
 		ON UPDATE CASCADE
+		ON DELETE SET NULL,
+	FOREIGN KEY (color_hex) REFERENCES Color(hex)
+		ON UPDATE CASCADE
+		ON DELETE SET NULL
 );
 
+CREATE TABLE Material (
+	material_id INTEGER PRIMARY KEY,
+	material_name TEXT,
+	cost_per_gram INTEGER NOT NULL
+);
+
+CREATE TABLE Color (
+	hex TEXT PRIMARY KEY,
+	name TEXT
+);
+
+/*
 CREATE TABLE Created(
 	model_id INTEGER,
 	user_id INTEGER,
@@ -43,6 +66,7 @@ CREATE TABLE Created(
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
+*/
 
 CREATE TABLE Review(
 	user_id INTEGER,
