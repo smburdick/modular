@@ -43,10 +43,6 @@
   <div class="row content">
     <div class="col-sm-1 sidenav">
       
-      <!--<p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>-->
-      
     </div>
     <div class="col-sm-4 text-left" style="margin-top: 10px"> 
       <h1>Review Title</h1>
@@ -88,13 +84,6 @@
     <h3>Other Info</h3>
     </div>
     <div class="col-sm-1 sidenav">
-      
-      <!--<div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>-->
     
     </div>
   </div>
