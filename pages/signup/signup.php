@@ -63,7 +63,7 @@
 				<input type="text" name="username" required>  <span class="error"> * </span>
 				<br>
 				Password: <br>
-				<input type="text" name="password" required>  <span class="error"> * </span>
+				<input type="password" name="password" required>  <span class="error"> * </span>
 				<br>
 				Birthday:<br>
 				(MM/DD/YYYY)<br>
