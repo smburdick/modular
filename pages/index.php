@@ -29,6 +29,16 @@
         <li class="active"><a href="#">Home</a></li>
         <li><a href="cart/index.php">Cart</a></li>
         <li><a href="#">Contact</a></li>
+        <li>
+        <form class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        </form>
+      </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- TODO this should be conditioned on whether the user is logged in. We'll need to set a cookie to check this. -->
