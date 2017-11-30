@@ -5,19 +5,15 @@
 	 */
 	$db_file = '../../db/modular.db';
 	$user_id = $_COOKIE["userID"];
-	setcookie("userID", $user_id, time() + 8640); // TODO reset the cookie throughout the pages to ensure user doesn't get logged out in between page changes
 	if (isset($user_id)) {
 		try {
 			$db = new PDO('sqlite:' . $db_file);
-
 			$file_name = basename($_FILES["fileToUpload"]["name"]);
-
 			$path = $_FILES["fileToUpload"]["tmp_name"];
-			//echo 'File content: '  . $_FILES["fileToUpload"]["type"];
 			$file_type = pathinfo($file_name, PATHINFO_EXTENSION); // uploaded file's extension
 			if ($file_type != 'obj') {
-			//if (strcmp($file_type, "obj") != 0 ) {
-				echo 'You must upload an .obj file.';
+				echo 'You must upload an .obj file.<br><br>';
+				echo '<a href="."><button>Try again</button></a>';
 			} else {
 				$contents = file_get_contents($path);
 				$creation_date = time();
