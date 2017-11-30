@@ -37,16 +37,14 @@
     </div>
   </div>
 </nav> 
-<div class="container-fluid text-center">    
+<div class="container-fluid text-left">    
   <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-1 sidenav">
     </div>
-    <div class="col-sm-8 text-left"> 
       <?php
+	echo "<div class='col-sm-6 text-left'>";
 	$db_path = '../../db/modular.db';
 	$model_id = $_GET["id"]; // model id
-	echo null;
-	echo "<h1>Product Page</h1>";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
 	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
@@ -62,9 +60,16 @@
 	    // change href to profile.php when that is ready
 	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
 	    echo "<br>";
-	    echo "<font size='4' color='black'> Material: $material_name, Mass(grams): $mass_in_grams Cost: $ $cost</font>";
+	    echo "<font size='4' color='282a2e'> Material: </font> <font size='4' color='black'><i>$material_name</i></font>";
+	    echo "<br>";
+	    echo "<font size='4' color='282a2e'> Mass in grams:</font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
+	    echo "<br>";
+	    echo "<font size='4' color='282a2e'> price:</font> <font size='4' color='red'><i>$ $cost</font>";
+	    echo "</div>";
+	    echo "<div class='col-sm-7 text-right'>";
+	    echo "<img src='PresleyReed.jpg' width='250' height='300'>";
+	    echo "</div>";
 	  }
-	  echo "";
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
 	}
