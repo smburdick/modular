@@ -42,7 +42,7 @@
       <h1>Categories</h1>
 	<?php
 	// REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
-	  $db_path = '/db/modular.db';
+	  $db_path = '/srv/http/modular/db/modular.db';
 	  try {
 	    $db = new PDO('sqlite:' . $db_path);
 	    $get_categories = 'select * from category;';
@@ -52,7 +52,7 @@
 	      $name = $tuple["category_name"];
 	      $description = $tuple["category_description"];
 	      $categoryID = $tuple["category_id"];
-	      echo "<a href='/categories/selected_category.php?id=$categoryID'><button>$name</button></a>";
+	      echo "<a href='/categories/selected_category.php?id=$categoryID'><button>$name</button></a> $tuple[category_description]";
 	      echo "<br>";
 	      echo "<br>";
 	    }

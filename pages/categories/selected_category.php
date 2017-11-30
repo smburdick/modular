@@ -45,13 +45,13 @@
       <h1>Categories</h1>
       <?php
       // database path
-	$db_path = '/db/modular.db';
+	$db_path = '/srv/http/modular/db/modular.db';
 	$cat_id = $_GET["id"];
 	if(!isset($cat_id)) echo "ERROR!";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
 	  // try to optimize this later, doing three natural joins!
-	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ';';
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model join User where category_id = ' . $cat_id . ' and creator_id = user_id;';
 	  $result_belongsTo = $db->query($get_belongsTo);
 	  foreach($result_belongsTo as $tuple){
 	    $model_name = $tuple["model_name"];
@@ -59,6 +59,7 @@
 	    $model_id = $tuple["model_id"];
 	    //echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
 	    echo "<a href='/product/product.php?id=$model_id'><button><B>$model_name</B> by $user_name</button></a>";
+	    echo "<br>";
 	    echo "<br>";
 	  }
 	//$db = null // disconnect 

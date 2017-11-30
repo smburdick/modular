@@ -43,32 +43,33 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <?php
-	$db_path = '/db/modular.db';
+	$db_path = '/srv/http/modular/db/modular.db';
 	$model_id = $_GET["id"]; // model id
-	//$id = 1;
+	echo null;
 	echo "<h1>Product Page</h1>";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ';';
+	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
 	  $result_set = $db->query($get_Model);
 	  foreach($result_set as $tuple){
 	    $model_name = $tuple["model_name"];
 	    $creator_name = $tuple["username"];
 	    $creator_id = $tuple["user_id"];
-	    $cost = $tuple["cost_per_gram"] * $tuple["mass_in_grams"] / 100;
+	    $cost_per_gram = $tuple["cost_per_gram"];
+	    $mass_in_grams = $tuple["mass_in_grams"];
+	    $cost = $cost_per_gram * $mass_in_grams / 100;
+	    $material_name = $tuple["material_name"];
 	    // change href to profile.php when that is ready
-	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.html?id=$creator_id'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
-	    echo "$: $cost";
+	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.html?username=$creator_name'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
+	    echo "<br>";
+	    echo "<font size='4' color='black'> Material: $material_name, Mass(grams): $mass_in_grams Cost: $ $cost</font>";
 	  }
+	  echo "";
 	//$db = null // disconnect 
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
 	}
       ?>
-      <hr>
-    </div>
-    <div class="col-sm-2 sidenav">
-    </div>
   </div>
 </div>
 
