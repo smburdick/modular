@@ -27,7 +27,13 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<?php
+					if (isset($_COOKIE['username'])){
+						echo '<li><a href="../profile/profile.php">Profile</a></li>';
+					}else{
+						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+					}
+				?>
 			</ul>
 		</div>
 	</div>
@@ -58,7 +64,7 @@
 		<h1>Sign Up</h1>
 		<h4>Click below to set up an account</h4><br>
 		<form action="../signup/signup.php">
-			<input type="submit" name="Go to Sign Up">
+			<button type="submit" name="Go to Sign Up">Signup</button>
 		</form>
 	</div>
 		<div class="col-sm-2 sidenav">

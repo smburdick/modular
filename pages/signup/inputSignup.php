@@ -2,7 +2,7 @@
 	$username = $_POST['username'];
 	setcookie('username', $username, time() + 86400, '/');
 ?>
-	<?php
+<?php
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
