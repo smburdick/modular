@@ -43,7 +43,7 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <?php
-	$db_path = '/srv/http/modular/db/modular.db';
+	$db_path = '../../db/modular.db';
 	$model_id = $_GET["id"]; // model id
 	echo null;
 	echo "<h1>Product Page</h1>";
@@ -60,15 +60,15 @@
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
 	    // change href to profile.php when that is ready
-	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.html?username=$creator_name'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
+	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
 	    echo "<br>";
 	    echo "<font size='4' color='black'> Material: $material_name, Mass(grams): $mass_in_grams Cost: $ $cost</font>";
 	  }
 	  echo "";
-	//$db = null // disconnect 
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
 	}
+	$db = null // disconnect 
       ?>
   </div>
 </div>
