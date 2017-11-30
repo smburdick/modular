@@ -28,7 +28,13 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<?php
+					if (isset($_COOKIE['username'])){
+						echo '<li><a href="../profile/profile.php">Profile</a></li>';
+					}else{
+						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+					}
+				?>
 			</ul>
 		</div>
 	</div>

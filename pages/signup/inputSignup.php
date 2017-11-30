@@ -1,7 +1,6 @@
 <?php
-	$cookie_name = "username";
 	$username = $_POST['username'];
-	setcookie($cookie_name, $username, time() + 86400, '/');
+	setcookie('username', $username, time() + 86400, '/');
 ?>
 	<?php
 	//path to the SQLite database file

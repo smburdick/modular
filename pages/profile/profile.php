@@ -35,9 +35,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<?php
 					if (isset($_COOKIE['username'])){
-						echo '<li><a href="profile.php">Profile</a></li>';
+						echo '<li><a href="../profile/profile.php">Profile</a></li>';
 					}else{
-						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>';
+						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
 					}
 				?>
 			</ul>
