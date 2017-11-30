@@ -18,6 +18,7 @@
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
 		$photo = $_POST['photo'];
+		$emailAddress = $_POST['email'];
 
 		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 		//set errormode to use exceptions
@@ -28,7 +29,7 @@
 		$data = $checkUsername->fetchAll();
 
 		if (strcmp($username, $data[0][1]) !== 0){
-			$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
+			$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);");
 			$stmt->bindParam(1, $username);
 			$stmt->bindParam(2, $f_name);
 			$stmt->bindParam(3, $l_name);
@@ -37,6 +38,7 @@
 			$stmt->bindParam(6, $birth_year);
 			$stmt->bindParam(7, $bio);
 			$stmt->bindParam(8, $hashed_password);
+			$stmt->bindParam(9, $emailAddress);
 			$stmt->execute();
 
 			echo'<h1>Your Account was created!</h1>

@@ -55,6 +55,9 @@
 				Last name: <br>
 				<input type="text" name="l_name">
 				<br>
+				Email: <br>
+				<input type="text" name="email">
+				<br>
 				Username: <br>
 				<input type="text" name="username">
 				<br>

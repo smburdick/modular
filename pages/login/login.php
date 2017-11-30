@@ -44,10 +44,10 @@
 					<br>
 					<h1>Login</h1>
 					<label><b>Username</b></label>
-					<input type="text" placeholder="Enter Username" required><br>
+					<input type="text" name="username" placeholder="Enter Username" required><br>
 
 					<label><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" required><br><br>
+					<input type="password" name="password" placeholder="Enter Password" required><br><br>
 
 					<button type="submit">Login</button>
 				</form>
