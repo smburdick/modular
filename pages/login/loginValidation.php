@@ -14,8 +14,6 @@
 		$password = $_POST['password'];
 		$hashed_password = '';
 		
-		//$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-		
 		//set errormode to use exceptions
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		//return all passengers, and store the result set
@@ -23,11 +21,6 @@
 		$stmt->bindParam(1, $username);
 		$success = $stmt->execute();
 		$returnedValues = $stmt->fetchAll();
-
-		echo 'Your username is: '.$username.'<br>';
-		echo 'Your password is: '.$password.'<br>';
-		echo 'You entered: '.$returnedValues[0][1].'<br>';
-		echo 'You entered: '.$returnedValues[0][8].'<br>';
 
 		if (strcmp($returnedValues[0][1], $username) !== 0 || password_verify($password, $returnedValues[0][8])){
 			echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
