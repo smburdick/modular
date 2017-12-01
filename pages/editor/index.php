@@ -143,12 +143,12 @@
                 scene.add(light);
 
                 var gridXZ = new THREE.GridHelper(2000, 100, new THREE.Color(0xCCCCCC), new THREE.Color(0x888888));
-                scene.add(gridXZ);
+                //scene.add(gridXZ);
 
                 //axes
                 var axes = new THREE.AxisHelper(150);
                 axes.position.y = 1;
-                scene.add(axes);
+                //scene.add(axes);
 
                 var obj_file = `<?php echo $obj_file; ?>`; // a string representation of the file
 
@@ -157,7 +157,7 @@
 
                 scaleFactor = "<?php echo $model_mass;?>"; // mass indicates display size
                 rescale(scaleFactor);
-                object.position.y = 500;
+                object.position.y = 300;
 
                 scene.add(object);
             }
