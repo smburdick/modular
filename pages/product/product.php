@@ -37,12 +37,12 @@
     </div>
   </div>
 </nav> 
-<div class="container-fluid text-left">    
+<div class="container-fluid text-center" style="height: 465px">    
   <div class="row content">
     <div class="col-sm-1 sidenav">
     </div>
       <?php
-	echo "<div class='col-sm-6 text-left'>";
+	echo "<div class='col-sm-3 text-center'>";
 	$db_path = '../../db/modular.db';
 	$model_id = $_GET["id"]; // model id
 	try {
@@ -50,24 +50,30 @@
 	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
 	  $result_set = $db->query($get_Model);
 	  foreach($result_set as $tuple){
+	    // change href to profile.php when that is ready
+	    echo "<img src='PresleyReed.jpg' width='320' height='400'>";
+	    echo "</div>";
+	    echo "<div class='col-sm-6 text-left'>";
 	    $model_name = $tuple["model_name"];
 	    $creator_name = $tuple["username"];
-	    $creator_id = $tuple["user_id"];
-	    $cost_per_gram = $tuple["cost_per_gram"];
 	    $mass_in_grams = $tuple["mass_in_grams"];
+	    $cost_per_gram = $tuple["cost_per_gram"];
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
-	    // change href to profile.php when that is ready
-	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4' color='black'> by <i>$creator_name</i></font></a>";
+	    $model_id = $tuple["model_id"];
+	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
 	    echo "<br>";
 	    echo "<font size='4' color='282a2e'> Material: </font> <font size='4' color='black'><i>$material_name</i></font>";
 	    echo "<br>";
 	    echo "<font size='4' color='282a2e'> Mass in grams:</font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
 	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> price:</font> <font size='4' color='red'><i>$ $cost</font>";
-	    echo "</div>";
-	    echo "<div class='col-sm-7 text-right'>";
-	    echo "<img src='PresleyReed.jpg' width='250' height='300'>";
+	    echo "<font size='4' color='282a2e'> price:</font> <font size='4' color='red'><i>$ $cost</i></font>";
+	    echo "<br>";
+	    echo "<form action='/cart/index.php'>";
+	    echo "<font size='4' color='282a2e'> quantity:</font> <input name='count' type='number' value='1' min='1'/>"; 
+	    echo "</form>";
+	    $quantity = 1;
+	    echo "<a href='/cart/index.php?id=$model_id'&quantity=$quantity><button>Add to cart </button></a>";
 	    echo "</div>";
 	  }
 	} catch(PDOException $e){
@@ -77,10 +83,38 @@
       ?>
   </div>
 </div>
-
-<footer class="container-fluid text-center">
-  <p align="left">2017 Modular</p>
-</footer>
-
+<?php 
+  echo "<div class='container-fluid text-center'>";
+  echo "<div class='row content'>";
+  echo "<div class='col-sm-1 sidenav'>";
+  echo "</div>";
+  echo "<font size='6' color''282a2e>Reviews</font>"; 
+  $db_path = '../../db/modular.db';
+  $model_id = $_GET["id"]; // model id
+  try {
+    $db = new PDO('sqlite:' . $db_path);
+    $get_Model = 'select * from Review natural join User natural join Model where model_id = ' . $model_id;
+    $result_set = $db->query($get_Model);
+    foreach($result_set as $tuple){
+      //echo "<br>";
+      $score = $tuple["stars"];
+      $comment = $tuple["comment"];
+      echo "<style> asdf {border :2px solid #021a40;} </style>";
+      echo "<asdf>";
+      echo "<font size='4' color='black'>";
+      echo "<br>";
+      echo $score;
+      echo "<br>";
+      echo $comment;
+      echo "</font>";
+      echo "</asdf>";
+    }
+  } catch(PDOException $e){
+      die('Exception : ' . $e->getMessage());
+  }
+  //$db = null // disconnect 
+  echo "</div>";
+  echo "</div>";
+?>
 </body>
 </html>
