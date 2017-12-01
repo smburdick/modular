@@ -167,7 +167,6 @@
             }
 
             function updateColor(newColor) {
-                console.log(currentColor)
                 currentColor = new THREE.Color(newColor);
             }
 
@@ -204,7 +203,6 @@
 
             function rescale(newScaleFactor) {
                 if (newScaleFactor <= MAX_SCALE_FACTOR) {
-                    console.log('rescale')
                     object.scale.set(newScaleFactor, newScaleFactor, newScaleFactor);
                 }
             }
@@ -253,7 +251,7 @@
                 $selected = 'selected="selected"';
             }
             $mat_price = floatval($mat["cost_per_gram"]) / 100; // convert cents to dollars
-            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. $mat_price . '/g</option>';
+            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. sprintf("%.2f", $mat_price). '/g</option>';
         }
         echo '</select><br>';
 
