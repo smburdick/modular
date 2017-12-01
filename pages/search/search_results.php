@@ -140,12 +140,12 @@
             $search_query = "SELECT * FROM Category WHERE category_name LIKE " . $like_string . ";";
             $result = $db->query($search_query);
             $new_results;
+            echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
               $query = "SELECT * FROM BelongsTo NATURAL JOIN Model WHERE category_id == " . $tuple[category_id];
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                <div class="card-deck">
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
@@ -163,11 +163,11 @@
                       //<a href="#" class="card-link">Another link</a>
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
                       ?>
-                  </div>
                 </div>
                 <?php
               }
             }
+            echo "</div>";
           }
           //SEARCH MODEL BY COLOR
           else if($search_by == color){
@@ -243,6 +243,7 @@
               foreach($new_results as $tuple) {
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                    <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
@@ -283,13 +284,13 @@
             //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             $new_results;
+            ?>
+          <div class="card-deck">
+            <?php
             foreach($result as $tuple) {
               $query = "SELECT * FROM User INNER JOIN Model ON User.user_id = Model.creator_id WHERE username == '" . $tuple[username] . "';";
               //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
-              ?>
-              <div class="card-deck">
-              <?php
               foreach($new_results as $tuple) {
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
@@ -316,6 +317,9 @@
               }
             }
             echo "</div>";
+            //echo "</div>";
+            //echo "</div>";
+            //echo "</div>";
           }
           //SEARCH MODEL BY MODEL NAME 
           if($search_by == model){
@@ -333,9 +337,9 @@
             $search_query = "SELECT * FROM Model WHERE model_name LIKE " . $like_string . ";";
             //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
+            echo "<div class=\"card-deck\">";
               foreach($result as $tuple) {
                 ?>
-                <div class="card-deck">
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
@@ -354,35 +358,12 @@
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
                       ?>
                   </div>
+                
                 <?php
               }
               echo "</div>";
-              echo "</div>";
-              echo "</div>";
           }
-          
-          //also want to include color and material as search criteria
-          //$stmt = $db->prepare($search_query);
-          // Bind parameters to statement variables
-          /*$stmt->bindParam(':userid', $user_id);
-          $stmt->bindParam(':modelid', $model_id);
-          $stmt->bindParam(':reviewdate', $date);
-          $stmt->bindParam(':reviewtitle', $review_title);
-          $stmt->bindParam(':comment', $review);
-          $stmt->bindParam(':stars', $rating);
-    
-          //echo "<p> stmt: " . $stmt . "</p>";*/
-          
-          //$result = $stmt->execute();
-          //echo "<p>" . $result . " eyyyyy </p>";
 
-         
-          /*foreach($result as $tuple) {
-            $query = "SELECT * FROM BelongsTo NATURAL JOIN Model WHERE category_id == " . $tuple[category_id];
-            $new_results[] = $db->query($query);
-          }*/
-          
-            //disconnect from db
             $db = null;
 
         }
