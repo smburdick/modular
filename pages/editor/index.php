@@ -24,7 +24,9 @@
     <script src="js/KeyboardState.js"></script>
     <script src="js/LoaderSupport.js"></script>
     <script src="js/OBJLoader2.js"></script>
-    <h2>MODULAR</h2>
+    <script src="js/OBJLoader.js"></script>
+    <a href="../"><h2>MODULAR</h2></a>
+    <br><a href="../upload/"><button>Upload new model</button></a>
     <center><h1>Model Editor</h1>
 
 
@@ -46,9 +48,7 @@
                 $stmt->bindParam(1, $model_id);
                 $success    = $stmt->execute();
                 $result_set = $stmt->fetchAll(); // an array of results
-                
-                $obj_file = NULL;
-                
+                                
                 $model = $result_set[0];
                 
                 if ($model["creator_id"] == $user_id) { // model's userID matches logged-in userID
@@ -68,13 +68,9 @@
                     $model_mat = $model["material_id"];
 
                 } else {
-                    echo 'You don\'t have permission to edit this page.<br><br>';
+                    echo 'You don\'t have permission to edit this model.<br><br>';
                     echo '<a href="../index.php"><button>Return to homepage</button></a>';
                 }
-                // TODO we could get values based on the user id, however this would be insecure
-                // as anyone could set their cookie to be the user id and edit someone else's model
-                // but for our purposes this should be fine
-                // in real world code we'd have an extra layer of verification--could hold a password as the cookie, and use this as verification.
 
                 $db = NULL;
                 
@@ -85,7 +81,7 @@
             }
         }
     ?>
-    <div id="canvas" style="width:600px; margin: 0 auto;">
+    <div id="canvas" style="width:1200px; margin: 0 auto;">
         <script>
             /*global THREE, Coordinates, document, window  */
             var camera, scene, renderer;
@@ -93,7 +89,7 @@
 
             var obj_file;
 
-            const SCALE_FACTOR = 100;
+            var scaleFactor = 100;
 
             var goldMaterial = new THREE.MeshPhongMaterial({
                 shininess: 100,
@@ -110,11 +106,21 @@
                 reflectivity: 0
             });
 
+            var glassMaterial = new THREE.MeshPhongMaterial({
+                transparent: true,
+                shininess: 100,
+                reflectivity: 60,
+                opacity: 0.55
+            });
+
             const materialMap = {
                 0: goldMaterial,
                 1: silverMaterial,
-                2: plasticMaterial
+                2: plasticMaterial,
+                3: glassMaterial
             }
+
+            const MAX_SCALE_FACTOR = 2000;
 
             var object;
 
@@ -146,12 +152,12 @@
 
                 var obj_file = `<?php echo $obj_file; ?>`; // a string representation of the file
 
-                //console.log("Obj file: " + obj_file)
-                var loader = new THREE.OBJLoader2();
+                var loader = new THREE.OBJLoader();
                 object = loader.parse(obj_file);
-                //object.children[0].material = bodyMaterial
-                object.scale.set(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR); // this is necessary for making the object be actually visible.
-                console.log(object)
+
+                scaleFactor = "<?php echo $model_mass;?>"; // mass indicates display size
+                rescale(scaleFactor);
+                object.position.y = 500;
 
                 scene.add(object);
             }
@@ -161,6 +167,7 @@
             }
 
             function updateColor(newColor) {
+                console.log(currentColor)
                 currentColor = new THREE.Color(newColor);
             }
 
@@ -168,18 +175,12 @@
                 var canvasWidth = 600;
                 var canvasHeight = 400;
                 var canvasRatio = canvasWidth / canvasHeight;
-
-                // RENDERER
                 renderer = new THREE.WebGLRenderer({ antialias: true });
-
                 renderer.gammaInput = true;
                 renderer.gammaOutput = true;
                 renderer.setSize(canvasWidth, canvasHeight);
                 renderer.setClearColor(0xAAAAAA, 1.0);
-
-                // CAMERA
                 camera = new THREE.PerspectiveCamera(45, canvasRatio, 1, 7000);
-                // CONTROLS
                 cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
                 camera.position.set(-400, 1500, -2500);
                 cameraControls.target.set(4, 301, 92);
@@ -198,8 +199,14 @@
             function render() {
                 var delta = clock.getDelta();
                 cameraControls.update(delta);
-
                 renderer.render(scene, camera);
+            }
+
+            function rescale(newScaleFactor) {
+                if (newScaleFactor <= MAX_SCALE_FACTOR) {
+                    console.log('rescale')
+                    object.scale.set(newScaleFactor, newScaleFactor, newScaleFactor);
+                }
             }
 
             function updateDOMElements() {
@@ -238,7 +245,7 @@
         echo '<form action="update-model.php"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
-        echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" value="' . $model_mass . '"> g<br>'; // TODO decide on range of valid masses
+        echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
         echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
         foreach ($materials as $mat) {
             $selected = '';
