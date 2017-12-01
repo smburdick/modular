@@ -84,7 +84,7 @@
             }
         }
     ?>
-    <div id="canvas" style="width:1200px; margin: 0 auto;">
+    <div id="canvas">
         <script>
             /*global THREE, Coordinates, document, window  */
             var camera, scene, renderer;
@@ -257,6 +257,8 @@
         echo '<form action="update-model.php" method="post"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
         echo '<input type="hidden" name="image" id="image" value=""><br>';
+        echo '<button type="button" id="shutter"><img height="50px" width="50px" src="img/camera.png"></button><br>'; // button must be of type button to make it not submit
+        echo 'Your screenshot: <br><img id="screenshot" src="' . $image . '"><br>'; // TODO should be scaled down
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
         echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
         echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
@@ -280,17 +282,18 @@
         }
         echo '</select><br>';
         echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
-        echo '<input type="submit" value="Submit" id="submit" onclick="takeScreenshot()" id="submitButton">';
+        echo '<input type="submit" value="Submit" id="submit" id="submitButton">';
         echo '</form>';
 
     ?>
     </center>
 
 <script>
-    // callback to add screenshot to POST request
-    $('#submit').click(function() {
+    // callback to add screenshot to display and image submission
+    $('#shutter').click(function() {
         var screenshot = takeScreenshot();
         $('#image').val(screenshot);
+        $('#screenshot').attr("src", screenshot);
     });
 </script>
 </body>

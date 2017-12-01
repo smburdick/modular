@@ -15,15 +15,17 @@
 				echo 'You must upload an .obj file.<br><br>';
 				echo '<a href="."><button>Try again</button></a>';
 			} else {
+				$default_img = file_get_contents('./img/default.png');
 				$contents = file_get_contents($path);
 				$creation_date = time();
 				$default_name = basename($file_name, '.obj');
 				// insert new model, default material (plastic) and color (white). parent_id is NULL since it wasn't forked
-				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?, "My awesome model", NULL);');
+				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?, "My awesome model", ?);');
 				$stmt->bindParam(1, $user_id);
 				$stmt->bindParam(2, $contents);
 				$stmt->bindParam(3, $default_name);
 				$stmt->bindParam(4, $creation_date);
+				$stmt->bindParam(5, $default_img);
 				$success = $stmt->execute();
 				if ($success) {
 					echo 'Model created successfully.<br><br>';
