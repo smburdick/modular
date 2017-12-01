@@ -65,6 +65,9 @@
 				Password: <br>
 				<input type="password" name="password" required>  <span class="error"> * </span>
 				<br>
+				Verify Password: <br>
+				<input type="password" name="verify_password" required>  <span class="error"> * </span>
+				<br>
 				Birthday:<br>
 				(MM/DD/YYYY)<br>
 				<input type="text" name="birth_month">     <input type="text" name="birth_day">      <input type="text" name="birth_year">
