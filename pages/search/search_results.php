@@ -39,44 +39,18 @@
 </nav>
   
 <div class="container-fluid text-center">    
-  <div class="row content" style="height: 100px">
-    <div class="col-sm-1 sidenav"></div>
-    <div class="col-sm-10 text-left" style="margin-top: 10px"> 
+  <div class="row content" style="overflow: hidden; height: auto">
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
+    <div class="col-sm-10 text-left" style="margin-top: 10px; overflow: hidden;"> 
       <h3>Search Results</h3>
       <p>Sort By</p>
     </div>
-    <div class="col-sm-1 sidenav"></div>
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
   </div>
-  <div class="row content">
-    <div class="col-sm-1 sidenav">   
+  <div class="row content" style="overflow: hidden; height: 100%">
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px">
     </div>
     <div class="col-sm-10 text-left">
-      <div class="card-deck">
-  <div class="card">
-    <img class="card-img-top" src="../review/homer.png" alt="Card image cap" style="height: 200px; width: 100%>
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="../review/homer.png" alt="Card image cap" style="height: 200px; width: 100%>
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="../review/homer.png" alt="Card image cap" style="height: 200px; width: 100%">
-    <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-</div>
       <ul class="nav nav-tabs">
       <?php 
         $search_by = $_GET['link'];
@@ -171,21 +145,26 @@
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="width: 60rem;">
+                <div class="card-deck">
+                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                    <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
-                      echo "<h4 class=\"card-title\">$tuple[model_name]</h4>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
+                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
                       //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      echo "<a href=\"#\" class=\"card-link\">Card link</a>";
+                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "</div>";
                       //<a href="#" class="card-link">Another link</a>
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
                       ?>
-                    </div>
                   </div>
+                </div>
                 <?php
               }
             }
@@ -210,26 +189,35 @@
               $query = "SELECT * FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
               //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
+              ?>
+              <div class="card-deck">
+              <?php
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="width: 60rem;">
+                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
-                      echo "<h4 class=\"card-title\">$tuple[model_name]</h4>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
+                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
                       //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      echo "<a href=\"#\" class=\"card-link\">Card link</a>";
+                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
                       //<a href="#" class="card-link">Another link</a>
+
                       ?>
-                    </div>
                   </div>
+                
                 <?php
+                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[name]</small></div>";
+                echo "</div>";
               }
             }
+            echo "</div>";
           }
           //SEARCH MODEL BY MATERIAL
           else if($search_by == material){
@@ -247,30 +235,37 @@
             //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             $new_results;
+            echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
               $query = "SELECT * FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple[material_name] . "';";
               //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="width: 60rem;">
+                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
-                      echo "<h4 class=\"card-title\">$tuple[model_name]</h4>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
+                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
                       //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      echo "<a href=\"#\" class=\"card-link\">Card link</a>";
+                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
                       //<a href="#" class="card-link">Another link</a>
+
                       ?>
-                    </div>
                   </div>
+                
                 <?php
+                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[material_name]</small></div>";
+                echo "</div>";
               }
             }
+            echo "</div>";
+            //echo "</div>";
           }
           //SEARCH MODEL BY USERNAME
           else if($search_by == user){
@@ -292,31 +287,39 @@
               $query = "SELECT * FROM User INNER JOIN Model ON User.user_id = Model.creator_id WHERE username == '" . $tuple[username] . "';";
               //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
+              ?>
+              <div class="card-deck">
+              <?php
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="width: 60rem;">
+                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                    <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
-                      echo "<h4 class=\"card-title\">$tuple[model_name]</h4>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
+                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
                       //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      echo "<a href=\"#\" class=\"card-link\">Card link</a>";
+                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
                       //<a href="#" class="card-link">Another link</a>
+
                       ?>
-                    </div>
                   </div>
+                
                 <?php
+                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[username]</small></div>";
+                echo "</div>";
               }
             }
+            echo "</div>";
           }
           //SEARCH MODEL BY MODEL NAME 
-          echo "<p>" . $search_by . "</p>";
           if($search_by == model){
-            echo "<p>" . $search_by . "</p>";
+            //echo "<p>" . $search_by . "</p>";
             foreach($search_like as $value){
               //echo "<p>" . $value . "</p>";
               if($i == $count){
@@ -328,28 +331,35 @@
               $i++;
             }
             $search_query = "SELECT * FROM Model WHERE model_name LIKE " . $like_string . ";";
-            echo "<p>" . $search_query . "</p>";
+            //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
               foreach($result as $tuple) {
                 ?>
-                  <div class="card" style="width: 60rem;">
+                <div class="card-deck">
+                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                    <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
                     <div class="card-body">
                       <?php
-                      echo "<h4 class=\"card-title\">$tuple[model_name]</h4>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
+                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
+                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
                       //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      echo "<a href=\"#\" class=\"card-link\">Card link</a>";
+                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "</div>";
                       //<a href="#" class="card-link">Another link</a>
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
                       ?>
-                    </div>
                   </div>
                 <?php
               }
-            }
+              echo "</div>";
+              echo "</div>";
+              echo "</div>";
+          }
           
           //also want to include color and material as search criteria
           //$stmt = $db->prepare($search_query);
@@ -383,7 +393,7 @@
     </div>
     
     </form>
-    <div class="col-sm-1 sidenav">   
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px">   
     </div>
   </div>
 
