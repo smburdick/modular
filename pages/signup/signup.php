@@ -28,7 +28,13 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<?php
+					if (isset($_COOKIE['username'])){
+						echo '<li><a href="../profile/profile.php">Profile</a></li>';
+					}else{
+						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
+					}
+				?>
 			</ul>
 		</div>
 	</div>
@@ -37,29 +43,30 @@
 <div class="container-fluid text-center">    
 	<div class="row content">
 		<div class="col-sm-2 sidenav">
-			<!--
-			<p><a href="#">Link</a></p>
-			<p><a href="#">Link</a></p>
-			<p><a href="#">Link</a></p>
-			-->
 		</div>
 		<div class="col-sm-8 text-center"> 
 			<h1>Welcome</h1>
 			<h3>Please enter your information below</h3>
-
+			<p><span class="error">* required field</span></p>
 			<?php
 			echo '<form action="inputSignup.php" method="post">
 				First Name: <br>
-				<input type="text" name="f_name">
+				<input type="text" name="f_name" required> <span class="error"> * </span>
 				<br>
 				Last name: <br>
-				<input type="text" name="l_name">
+				<input type="text" name="l_name" required>  <span class="error"> * </span>
+				<br>
+				Email: <br>
+				<input type="text" name="email" required>  <span class="error"> * </span>
 				<br>
 				Username: <br>
-				<input type="text" name="username">
+				<input type="text" name="username" required>  <span class="error"> * </span>
 				<br>
 				Password: <br>
-				<input type="text" name="password">
+				<input type="password" name="password" required>  <span class="error"> * </span>
+				<br>
+				Verify Password: <br>
+				<input type="password" name="verify_password" required>  <span class="error"> * </span>
 				<br>
 				Birthday:<br>
 				(MM/DD/YYYY)<br>

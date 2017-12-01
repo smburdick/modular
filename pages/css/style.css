@@ -40,3 +40,7 @@ table {
     align-self: center;
     width:100%;
 }
+
+.error {
+    color: #FF0000;
+}

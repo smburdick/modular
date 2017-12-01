@@ -1,9 +1,8 @@
 <?php
-	$cookie_name = "username";
 	$username = $_POST['username'];
-	setcookie($cookie_name, $username, time() + 86400, '/');
+	setcookie('username', $username, time() + 86400, '/');
 ?>
-	<?php
+<?php
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
@@ -18,41 +17,51 @@
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
 		$photo = $_POST['photo'];
+		$emailAddress = $_POST['email'];
+		$verify_password = $_POST['verify_password'];
 
-		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-		//set errormode to use exceptions
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$checkUsername = $db->prepare("SELECT * FROM user WHERE username = ?");
-		$checkUsername->bindParam(1, $username);
-		$ifPresent = $checkUsername->execute();
-		$data = $checkUsername->fetchAll();
-
-		if (strcmp($username, $data[0][1]) !== 0){
-			$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?);");
-			$stmt->bindParam(1, $username);
-			$stmt->bindParam(2, $f_name);
-			$stmt->bindParam(3, $l_name);
-			$stmt->bindParam(4, $birth_day);
-			$stmt->bindParam(5, $birth_month);
-			$stmt->bindParam(6, $birth_year);
-			$stmt->bindParam(7, $bio);
-			$stmt->bindParam(8, $hashed_password);
-			$stmt->execute();
-
-			echo'<h1>Your Account was created!</h1>
-				<h3>Click here to go to your profile page:</h3>
-				<form action="../profile/profile.php">
-					<input type="Submit" value="Visit your new Profile">
-				</form>';
-		}
-		else{
-			echo '<h2>This username is already taken.</h2><p>Click the button below to try again.</p><br>';
-			echo '<form action="signup.php">
+		if (strcmp($password, $verify_password) !== 0){
+			echo '<h2>The passwords that you entered did not match</h2>
+				  <h4>Click below to try again</h4>
+				  <form action="signup.php">
 					<input type="Submit" value="Try Again">
 				  </form>';
 		}
+		else{
+			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+			//set errormode to use exceptions
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$checkUsername = $db->prepare("SELECT * FROM user WHERE username = ?");
+			$checkUsername->bindParam(1, $username);
+			$ifPresent = $checkUsername->execute();
+			$data = $checkUsername->fetchAll();
 
-		
+			if (strcmp($username, $data[0][1]) !== 0){
+				$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);");
+				$stmt->bindParam(1, $username);
+				$stmt->bindParam(2, $f_name);
+				$stmt->bindParam(3, $l_name);
+				$stmt->bindParam(4, $birth_day);
+				$stmt->bindParam(5, $birth_month);
+				$stmt->bindParam(6, $birth_year);
+				$stmt->bindParam(7, $bio);
+				$stmt->bindParam(8, $hashed_password);
+				$stmt->bindParam(9, $emailAddress);
+				$stmt->execute();
+
+				echo'<h1>Your Account was created!</h1>
+					<h3>Click here to go to your profile page:</h3>
+					<form action="../profile/profile.php">
+						<input type="Submit" value="Visit your new Profile">
+					</form>';
+			}
+			else{
+				echo '<h2>This username is already taken.</h2><p>Click the button below to try again.</p><br>';
+				echo '<form action="signup.php">
+						<input type="Submit" value="Try Again">
+					  </form>';
+			}
+		}
 		
 
 		$db = null;
