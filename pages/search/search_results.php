@@ -86,47 +86,26 @@
       $db_file = '../../db/modular.db';
       $search_terms = $_GET['srch-term'];
       echo "<p>results for \"" . $search_terms . "\"</p>";
-      //global $search_array;
       $search_array = preg_split("[ ]", $search_terms);
-      //$search_array[0] = "%" . $search_array[0] . "%";
-      //echo "<p>" . $search_array[0] . " count: " . count($search_array) . "</p>";
       //create expression for select query
       $i = 0;
       $search_like = array();
       foreach($search_array as $value){
         $value = "%" . $value . "%";
-        //print $value."\n";
-        //$search_array[] = $value;
         $search_like[] = $value;
-        //print $search_array[i]."\n";
-        //$i++;
       }
-      //echo "<p> value " . $value . "</p>";
-      //echo "<p> search 0 " . $search_array[0] . "</p>";
-      //echo "<p> search 1 " . $search_array[1] . "</p>";
-      //echo "<p> search_like 0 " . $search_like[0] . "</p>";
-      //echo "<p> search_like 1 " . $search_like[1] . "</p>";
-      //print_r($search_array);
-      //$user_id = $_COOKIE["userID"];
-      //$model_id = $_GET["model_ID"];
-      //$review = $_POST["review"];
-      //$rating = $_POST["rating"];
-      //$review_title = $_POST["review_title"];
       try {
 
           //open connection to the modular database file
           $db = new PDO('sqlite:' . $db_file);
-
           //set errormode to use exceptions
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           //store the rating in the datbase, keep user on the review page
           $date = date('Y-m-d H:i', strtotime('now'));
           //SEARCH MODEL BY CATEGORY (DEFAULT)
-          //$like_string = "";
           $count = count($search_like) - 1;
           $i = 0;
           //SEARCH MODEL BY CATEGORY
-          //echo "<p>" . $search_like[0] . "</p>";
           if($search_by == category || $search_by == ""){
             foreach($search_like as $value){
               if($i == $count){
@@ -152,15 +131,9 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
-                      //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
                       echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      //<a href="#" class="card-link">Another link</a>
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
                       ?>
                 </div>
@@ -172,7 +145,6 @@
           //SEARCH MODEL BY COLOR
           else if($search_by == color){
             foreach($search_like as $value){
-              //echo "<p>" . $value . "</p>";
               if($i == $count){
                 $like_string .= "'".$value."'";
               }
@@ -182,12 +154,10 @@
               $i++;
             }
             $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . ";";
-            //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             $new_results;
             foreach($result as $tuple) {
               $query = "SELECT * FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
-              //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
               ?>
               <div class="card-deck">
@@ -200,18 +170,9 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
-                      //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
-                      //<a href="#" class="card-link">Another link</a>
-
                       ?>
                   </div>
-                
                 <?php
                 echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[name]</small></div>";
                 echo "</div>";
@@ -222,7 +183,6 @@
           //SEARCH MODEL BY MATERIAL
           else if($search_by == material){
             foreach($search_like as $value){
-              //echo "<p>" . $value . "</p>";
               if($i == $count){
                 $like_string .= "'".$value."'";
               }
@@ -232,13 +192,11 @@
               $i++;
             }
             $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . ";";
-            //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
               $query = "SELECT * FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple[material_name] . "';";
-              //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
@@ -248,15 +206,7 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
-                      //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
-                      //<a href="#" class="card-link">Another link</a>
-
                       ?>
                   </div>
                 
@@ -266,12 +216,10 @@
               }
             }
             echo "</div>";
-            //echo "</div>";
           }
           //SEARCH MODEL BY USERNAME
           else if($search_by == user){
             foreach($search_like as $value){
-              //echo "<p>" . $value . "</p>";
               if($i == $count){
                 $like_string .= "'".$value."'";
               }
@@ -281,7 +229,6 @@
               $i++;
             }
             $search_query = "SELECT * FROM User WHERE username LIKE " . $like_string . ";";
-            //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             $new_results;
             ?>
@@ -289,7 +236,6 @@
             <?php
             foreach($result as $tuple) {
               $query = "SELECT * FROM User INNER JOIN Model ON User.user_id = Model.creator_id WHERE username == '" . $tuple[username] . "';";
-              //echo "<p>" . $query . "</p>";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
@@ -299,14 +245,7 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
-                      //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
-                      //<a href="#" class="card-link">Another link</a>
 
                       ?>
                   </div>
@@ -317,15 +256,10 @@
               }
             }
             echo "</div>";
-            //echo "</div>";
-            //echo "</div>";
-            //echo "</div>";
           }
           //SEARCH MODEL BY MODEL NAME 
           if($search_by == model){
-            //echo "<p>" . $search_by . "</p>";
             foreach($search_like as $value){
-              //echo "<p>" . $value . "</p>";
               if($i == $count){
                 $like_string .= "'".$value."'";
               }
@@ -335,7 +269,6 @@
               $i++;
             }
             $search_query = "SELECT * FROM Model WHERE model_name LIKE " . $like_string . ";";
-            //echo "<p>" . $search_query . "</p>";
             $result = $db->query($search_query);
             echo "<div class=\"card-deck\">";
               foreach($result as $tuple) {
@@ -346,15 +279,8 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[username]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[material_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[category_name]</h6>";
-                      //echo "<h6 class=\"card-subtitle mb-2 text-muted\">$tuple[uploaded_date]</h6>";
-                      //<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                       echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      //<a href="#" class="card-link">Another link</a>
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
                       ?>
                   </div>
