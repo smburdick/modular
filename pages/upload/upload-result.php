@@ -19,7 +19,7 @@
 				$creation_date = time();
 				$default_name = basename($file_name, '.obj');
 				// insert new model, default material (plastic) and color (white). parent_id is NULL since it wasn't forked
-				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?);');
+				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?, "My awesome model", NULL);');
 				$stmt->bindParam(1, $user_id);
 				$stmt->bindParam(2, $contents);
 				$stmt->bindParam(3, $default_name);

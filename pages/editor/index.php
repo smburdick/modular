@@ -2,7 +2,9 @@
     // testing zone
     $testUserID = 0; // Sam's test user ID
     setcookie("userID", $testUserID, time() + 86400); // 86400 = 1 day
-    //$_COOKIE["userID"] = $testUserID; // necessary?
+    setcookie("image", "", 1); // delete image cookie
+    setcookie("testCookie", "", 1); // delete image cookie
+    session_start();
 ?>
 
 <!-- editor/index.php -->
@@ -27,8 +29,7 @@
     <script src="js/OBJLoader.js"></script>
     <a href="../"><h2>MODULAR</h2></a>
     <br><a href="../upload/"><button>Upload new model</button></a>
-    <center><h1>Model Editor</h1>
-
+    <center><h1>Model Editor</h1><br>
 
 </head>
 
@@ -66,6 +67,8 @@
                     $model_color = $model["color_hex"];
                     $model_mass = $model["mass_in_grams"];
                     $model_mat = $model["material_id"];
+                    $model_descr = $model["description"];
+                    $image = $model["image"];
 
                 } else {
                     echo 'You don\'t have permission to edit this model.<br><br>';
@@ -124,6 +127,8 @@
 
             var object;
 
+            var image;
+
             var currentColor, currentMaterial;
 
             var clock = new THREE.Clock();
@@ -174,7 +179,10 @@
                 var canvasWidth = 600;
                 var canvasHeight = 400;
                 var canvasRatio = canvasWidth / canvasHeight;
-                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true,
+                    preserveDrawingBuffer: true
+                });
                 renderer.gammaInput = true;
                 renderer.gammaOutput = true;
                 renderer.setSize(canvasWidth, canvasHeight);
@@ -216,6 +224,11 @@
                 animate();                
             }
 
+            function takeScreenshot() {
+                var screenshot = renderer.domElement.toDataURL("image/png");
+                return screenshot;
+            }
+
             function display(color, material) {
                 try {
                     init();
@@ -240,8 +253,10 @@
 
     <center>
     <?php
-        echo '<form action="update-model.php"><br>';
+
+        echo '<form action="update-model.php" method="post"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
+        echo '<input type="hidden" name="image" id="image" value=""><br>';
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
         echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
         echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
@@ -255,7 +270,7 @@
         }
         echo '</select><br>';
 
-        echo 'Color: <select onchange="updateColor(this.value); updateDOMElements();" id="color_select" name="model_color">';
+        echo 'Color: <select onchange="updateColor(this.value); updateDOMElements(); takeScreenshot()" id="color_select" name="model_color">';
         foreach ($colors as $color) {
             $selected = ''; // if this is the given value of the model, it will be the one in the dropdown.
             if (strcmp($color["hex"], $model_color) == 0) {
@@ -263,11 +278,20 @@
             }
             echo '<option ' . $selected . ' value="' . $color["hex"] . '">' . $color["name"] .'</option>';
         }
-        echo '</select><br><br>';
-        echo '<input type="submit" value="Submit">';
+        echo '</select><br>';
+        echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
+        echo '<input type="submit" value="Submit" id="submit" onclick="takeScreenshot()" id="submitButton">';
         echo '</form>';
+
     ?>
     </center>
 
+<script>
+    // callback to add screenshot to POST request
+    $('#submit').click(function() {
+        var screenshot = takeScreenshot();
+        $('#image').val(screenshot);
+    });
+</script>
 </body>
 </html>
