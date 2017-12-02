@@ -12,13 +12,14 @@
 
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
-		<div class="navbar-header">
+		<div class="navbar-header" style= "max-height: 30px; display: block; margin: 0 auto">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>                        
 			</button>
-			<a class="navbar-brand" href="#">Modular</a> <!-- TODO logo -->
+			<img src="../../logo/modular_logo.png" href="#" style="max-height: 45px"></img>
+			<!-- <img src="../../logo/modular_logo.png" class="navbar.logo"></img> -->
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
