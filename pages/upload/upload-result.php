@@ -5,29 +5,29 @@
 	 */
 	$db_file = '../../db/modular.db';
 	$user_id = $_COOKIE["userID"];
-	setcookie("userID", $user_id, time() + 8640); // TODO reset the cookie throughout the pages to ensure user doesn't get logged out in between page changes
 	if (isset($user_id)) {
 		try {
 			$db = new PDO('sqlite:' . $db_file);
-
 			$file_name = basename($_FILES["fileToUpload"]["name"]);
-
 			$path = $_FILES["fileToUpload"]["tmp_name"];
-			//echo 'File content: '  . $_FILES["fileToUpload"]["type"];
 			$file_type = pathinfo($file_name, PATHINFO_EXTENSION); // uploaded file's extension
+			$default_img_file = './img/default.png';
 			if ($file_type != 'obj') {
-			//if (strcmp($file_type, "obj") != 0 ) {
-				echo 'You must upload an .obj file.';
+				echo 'You must upload an .obj file.<br><br>';
+				echo '<a href="."><button>Try again</button></a>';
 			} else {
+				$default_img = fread(fopen($default_img_file, "r"), filesize($default_img_file));
+				$default_img = 'data:image/png;base64,' . base64_encode($default_img);
 				$contents = file_get_contents($path);
 				$creation_date = time();
 				$default_name = basename($file_name, '.obj');
 				// insert new model, default material (plastic) and color (white). parent_id is NULL since it wasn't forked
-				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?);');
+				$stmt = $db->prepare('INSERT INTO Model VALUES (NULL, ?, 2, 100, "#FFFFFF", ?, NULL, ?, ?, "My awesome model", ?);');
 				$stmt->bindParam(1, $user_id);
 				$stmt->bindParam(2, $contents);
 				$stmt->bindParam(3, $default_name);
 				$stmt->bindParam(4, $creation_date);
+				$stmt->bindParam(5, $default_img);
 				$success = $stmt->execute();
 				if ($success) {
 					echo 'Model created successfully.<br><br>';

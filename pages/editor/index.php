@@ -2,7 +2,9 @@
     // testing zone
     $testUserID = 0; // Sam's test user ID
     setcookie("userID", $testUserID, time() + 86400); // 86400 = 1 day
-    //$_COOKIE["userID"] = $testUserID; // necessary?
+    setcookie("image", "", 1); // delete image cookie
+    setcookie("testCookie", "", 1); // delete image cookie
+    session_start();
 ?>
 
 <!-- editor/index.php -->
@@ -24,9 +26,10 @@
     <script src="js/KeyboardState.js"></script>
     <script src="js/LoaderSupport.js"></script>
     <script src="js/OBJLoader2.js"></script>
-    <h2>MODULAR</h2>
-    <center><h1>Model Editor</h1>
-
+    <script src="js/OBJLoader.js"></script>
+    <a href="../"><h2>MODULAR</h2></a>
+    <br><a href="../upload/"><button>Upload new model</button></a>
+    <center><h1>Model Editor</h1><br>
 
 </head>
 
@@ -46,10 +49,9 @@
                 $stmt->bindParam(1, $model_id);
                 $success    = $stmt->execute();
                 $result_set = $stmt->fetchAll(); // an array of results
-                
-                $obj_file = NULL;
-                
+                                
                 $model = $result_set[0];
+                $editable = true;
                 
                 if ($model["creator_id"] == $user_id) { // model's userID matches logged-in userID
                    
@@ -66,15 +68,15 @@
                     $model_color = $model["color_hex"];
                     $model_mass = $model["mass_in_grams"];
                     $model_mat = $model["material_id"];
+                    $model_descr = $model["description"];
+                    $image = $model["image"];
+                    echo '<div id="canvas">';
 
                 } else {
-                    echo 'You don\'t have permission to edit this page.<br><br>';
+                    echo 'You don\'t have permission to edit this model.<br><br>';
                     echo '<a href="../index.php"><button>Return to homepage</button></a>';
+                    $editable = false;
                 }
-                // TODO we could get values based on the user id, however this would be insecure
-                // as anyone could set their cookie to be the user id and edit someone else's model
-                // but for our purposes this should be fine
-                // in real world code we'd have an extra layer of verification--could hold a password as the cookie, and use this as verification.
 
                 $db = NULL;
                 
@@ -85,7 +87,6 @@
             }
         }
     ?>
-    <div id="canvas" style="width:600px; margin: 0 auto;">
         <script>
             /*global THREE, Coordinates, document, window  */
             var camera, scene, renderer;
@@ -93,7 +94,7 @@
 
             var obj_file;
 
-            const SCALE_FACTOR = 100;
+            var scaleFactor = 100;
 
             var goldMaterial = new THREE.MeshPhongMaterial({
                 shininess: 100,
@@ -110,13 +111,25 @@
                 reflectivity: 0
             });
 
+            var glassMaterial = new THREE.MeshPhongMaterial({
+                transparent: true,
+                shininess: 100,
+                reflectivity: 60,
+                opacity: 0.55
+            });
+
             const materialMap = {
                 0: goldMaterial,
                 1: silverMaterial,
-                2: plasticMaterial
+                2: plasticMaterial,
+                3: glassMaterial
             }
 
+            const MAX_SCALE_FACTOR = 2000;
+
             var object;
+
+            var image;
 
             var currentColor, currentMaterial;
 
@@ -137,21 +150,21 @@
                 scene.add(light);
 
                 var gridXZ = new THREE.GridHelper(2000, 100, new THREE.Color(0xCCCCCC), new THREE.Color(0x888888));
-                scene.add(gridXZ);
+                //scene.add(gridXZ);
 
                 //axes
                 var axes = new THREE.AxisHelper(150);
                 axes.position.y = 1;
-                scene.add(axes);
+                //scene.add(axes);
 
                 var obj_file = `<?php echo $obj_file; ?>`; // a string representation of the file
 
-                //console.log("Obj file: " + obj_file)
-                var loader = new THREE.OBJLoader2();
+                var loader = new THREE.OBJLoader();
                 object = loader.parse(obj_file);
-                //object.children[0].material = bodyMaterial
-                object.scale.set(SCALE_FACTOR, SCALE_FACTOR, SCALE_FACTOR); // this is necessary for making the object be actually visible.
-                console.log(object)
+
+                scaleFactor = "<?php echo $model_mass;?>"; // mass indicates display size
+                rescale(scaleFactor);
+                object.position.y = 300;
 
                 scene.add(object);
             }
@@ -168,18 +181,15 @@
                 var canvasWidth = 600;
                 var canvasHeight = 400;
                 var canvasRatio = canvasWidth / canvasHeight;
-
-                // RENDERER
-                renderer = new THREE.WebGLRenderer({ antialias: true });
-
+                renderer = new THREE.WebGLRenderer({
+                    antialias: true,
+                    preserveDrawingBuffer: true
+                });
                 renderer.gammaInput = true;
                 renderer.gammaOutput = true;
                 renderer.setSize(canvasWidth, canvasHeight);
                 renderer.setClearColor(0xAAAAAA, 1.0);
-
-                // CAMERA
                 camera = new THREE.PerspectiveCamera(45, canvasRatio, 1, 7000);
-                // CONTROLS
                 cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
                 camera.position.set(-400, 1500, -2500);
                 cameraControls.target.set(4, 301, 92);
@@ -198,8 +208,13 @@
             function render() {
                 var delta = clock.getDelta();
                 cameraControls.update(delta);
-
                 renderer.render(scene, camera);
+            }
+
+            function rescale(newScaleFactor) {
+                if (newScaleFactor <= MAX_SCALE_FACTOR) {
+                    object.scale.set(newScaleFactor, newScaleFactor, newScaleFactor);
+                }
             }
 
             function updateDOMElements() {
@@ -209,6 +224,11 @@
                 }
                 addToDOM();
                 animate();                
+            }
+
+            function takeScreenshot() {
+                var screenshot = renderer.domElement.toDataURL("image/png");
+                return screenshot;
             }
 
             function display(color, material) {
@@ -235,10 +255,14 @@
 
     <center>
     <?php
-        echo '<form action="update-model.php"><br>';
+    if ($editable) {
+        echo '<form action="update-model.php" method="post"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
+        echo '<input type="hidden" name="image" id="image" value=""><br>';
+        echo '<button type="button" id="shutter"><img height="50px" width="50px" src="img/camera.png"></button><br>'; // button must be of type button to make it not submit
+        echo 'Your screenshot: <br><img id="screenshot" src="' . $image . '"><br>'; // TODO should be scaled down
         echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
-        echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" value="' . $model_mass . '"> g<br>'; // TODO decide on range of valid masses
+        echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
         echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
         foreach ($materials as $mat) {
             $selected = '';
@@ -246,11 +270,11 @@
                 $selected = 'selected="selected"';
             }
             $mat_price = floatval($mat["cost_per_gram"]) / 100; // convert cents to dollars
-            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. $mat_price . '/g</option>';
+            echo '<option ' . $selected . ' value="'. $mat["material_id"] . '">' . $mat["material_name"] . ': $'. sprintf("%.2f", $mat_price). '/g</option>';
         }
         echo '</select><br>';
 
-        echo 'Color: <select onchange="updateColor(this.value); updateDOMElements();" id="color_select" name="model_color">';
+        echo 'Color: <select onchange="updateColor(this.value); updateDOMElements(); takeScreenshot()" id="color_select" name="model_color">';
         foreach ($colors as $color) {
             $selected = ''; // if this is the given value of the model, it will be the one in the dropdown.
             if (strcmp($color["hex"], $model_color) == 0) {
@@ -258,11 +282,21 @@
             }
             echo '<option ' . $selected . ' value="' . $color["hex"] . '">' . $color["name"] .'</option>';
         }
-        echo '</select><br><br>';
-        echo '<input type="submit" value="Submit">';
+        echo '</select><br>';
+        echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
+        echo '<input type="submit" value="Submit" id="submit" id="submitButton">';
         echo '</form>';
+    }
     ?>
     </center>
 
+<script>
+    // callback to add screenshot to display and image submission
+    $('#shutter').click(function() {
+        var screenshot = takeScreenshot();
+        $('#image').val(screenshot);
+        $('#screenshot').attr("src", screenshot);
+    });
+</script>
 </body>
 </html>

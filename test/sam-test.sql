@@ -28,5 +28,7 @@ insert into Material values (
 	10
 );
 
+insert into Material values (NULL, 'Glass', 15);
+
 
 --insert into InCart values(0,0,4);

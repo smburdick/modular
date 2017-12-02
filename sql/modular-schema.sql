@@ -27,6 +27,8 @@ CREATE TABLE Model(
 	parent_id INTEGER,
 	model_name TEXT,
 	uploaded_date INTEGER,
+	description TEXT,
+	image GLOB,
 	FOREIGN KEY (material_id) REFERENCES Material(material_id)
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
