@@ -37,7 +37,7 @@
     </div>
   </div>
 </nav> 
-<div class="container-fluid text-center" style="height: 465px">    
+<div class="container-fluid text-center" style="height: 450px">    
   <div class="row content">
     <div class="col-sm-1 sidenav">
     </div>
@@ -72,7 +72,6 @@
 	    echo "<form action='/cart/index.php'>";
 	    echo "<font size='4' color='282a2e'> quantity:</font> <input name='count' type='number' value='1' min='1'/>"; 
 	    echo "</form>";
-	    $quantity = 1;
 	    echo "<a href='/cart/index.php?id=$model_id'&quantity=$quantity><button>Add to cart </button></a>";
 	    echo "</div>";
 	  }
@@ -96,18 +95,22 @@
     $get_Model = 'select * from Review natural join User natural join Model where model_id = ' . $model_id;
     $result_set = $db->query($get_Model);
     foreach($result_set as $tuple){
-      //echo "<br>";
       $score = $tuple["stars"];
       $comment = $tuple["comment"];
-      echo "<style> asdf {border :2px solid #021a40;} </style>";
-      echo "<asdf>";
-      echo "<font size='4' color='black'>";
-      echo "<br>";
-      echo $score;
-      echo "<br>";
-      echo $comment;
-      echo "</font>";
-      echo "</asdf>";
+      echo "<div class='card' style='width:200px'>";
+      echo "<div class='card-header'>header</div>";
+      echo "<div class='card-body'>Basic card</div>";
+      echo "<div class='card-footer'>footer</div>";
+      echo "</div>";
+      //echo "<style> asdf {border :2px solid #021a40;} </style>";
+      //echo "<asdf>";
+      //echo "<font size='4' color='black'>";
+      //echo "<br>";
+      //echo $score;
+      //echo "<br>";
+      //echo $comment;
+      //echo "</font>";
+      //echo "</asdf>";
     }
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());

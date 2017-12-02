@@ -50,9 +50,15 @@
 	if(!isset($cat_id)) echo "ERROR!";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  // try to optimize this later, doing three natural joins!
-	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model join User where category_id = ' . $cat_id . ' and creator_id = user_id;';
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ';';
 	  $result_belongsTo = $db->query($get_belongsTo);
+	  // try to optimize this later, doing three natural joins!
+	  //$stmt = $db->prepare('select * from Category natural join BelongsTo natural join Model join User where category_id = ? and creator_id = user_id;');
+	  //$stmt->bindParam(1, $cat_id); 
+	  //$stmt->execute(); 
+	  //$result_set = $stmt->fetchAll(); // fetch all tuples?
+	  //echo sizeOf($result_set);
+	  //$result_belongsTo = $db->query($get_belongsTo);
 	  foreach($result_belongsTo as $tuple){
 	    $model_name = $tuple["model_name"];
 	    $user_name = $tuple["username"];
