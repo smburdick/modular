@@ -55,8 +55,14 @@
 	      $name = $tuple["category_name"];
 	      $description = $tuple["category_description"];
 	      $categoryID = $tuple["category_id"];
-	      echo "<a href='/categories/selected_category.php?id=$categoryID'><button>$name</button></a> $tuple[category_description]";
-	      echo "<br>";
+	      echo "<div class='card'>";
+	      echo "<div class='card-header'>";
+	      echo "<a href='/categories/selected_category.php?id=$categoryID'>$name</a>";
+	      echo "<div class='card-body'>";
+	      echo "<i>$tuple[category_description]</i>";
+	      echo "</div>";
+	      echo "</div>";
+	      echo "</div>";
 	      echo "<br>";
 	    }
 	  } catch(PDOException $e){

@@ -53,7 +53,7 @@
 	    // change href to profile.php when that is ready
 	    echo "<img src='PresleyReed.jpg' width='320' height='400'>";
 	    echo "</div>";
-	    echo "<div class='col-sm-6 text-left'>";
+	    echo "<div class='col-sm-8 text-left'>";
 	    $model_name = $tuple["model_name"];
 	    $creator_name = $tuple["username"];
 	    $mass_in_grams = $tuple["mass_in_grams"];
@@ -87,20 +87,29 @@
   echo "<div class='row content'>";
   echo "<div class='col-sm-1 sidenav'>";
   echo "</div>";
-  echo "<font size='6' color''282a2e>Reviews</font>"; 
+  echo "<div class='col-sm-9 text-center'>";
+  echo "<font size='6' color='282a2e'>Reviews</font>"; 
   $db_path = '../../db/modular.db';
   $model_id = $_GET["id"]; // model id
   try {
     $db = new PDO('sqlite:' . $db_path);
     $get_Model = 'select * from Review natural join User natural join Model where model_id = ' . $model_id;
     $result_set = $db->query($get_Model);
+    echo "<br>";
+    echo "<br>";
     foreach($result_set as $tuple){
+      echo "<div class='col-sm-1'>";
+      echo "</div>";
       $score = $tuple["stars"];
+      $user_name = $tuple["username"];
+      $model_name = $tuple["model_name"];
+      $date = $tuple["review_date"];
+      // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
-      echo "<div class='card' style='width:200px'>";
-      echo "<div class='card-header'>header</div>";
-      echo "<div class='card-body'>Basic card</div>";
-      echo "<div class='card-footer'>footer</div>";
+      echo "<div class='card col-sm-10'>";
+      echo "<div class='card-header'><i>$user_name</i> gave <i>$model_name</i> $score stars</div>";
+      echo "<div class='card-body'>$comment</div>";
+      echo "<div class='card-footer'>Date $date</div>";
       echo "</div>";
       //echo "<style> asdf {border :2px solid #021a40;} </style>";
       //echo "<asdf>";
@@ -112,10 +121,11 @@
       //echo "</font>";
       //echo "</asdf>";
     }
+    //echo "</div>";
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());
   }
-  //$db = null // disconnect 
+  //$db = null // disconnect
   echo "</div>";
   echo "</div>";
 ?>
