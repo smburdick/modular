@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "../css/style.css" />
   <!-- TODO move to separate file -->
 </head>
 <body>
@@ -42,7 +45,7 @@
       <h1>Categories</h1>
 	<?php
 	// REMEMBER TO CHANGE DB PATH WHEN YOU MOVE OVER BACK TO SERVER
-	  $db_path = '/db/modular.db';
+	  $db_path = '../../db/modular.db';
 	  try {
 	    $db = new PDO('sqlite:' . $db_path);
 	    $get_categories = 'select * from category;';
@@ -52,14 +55,20 @@
 	      $name = $tuple["category_name"];
 	      $description = $tuple["category_description"];
 	      $categoryID = $tuple["category_id"];
-	      echo "<a href='/categories/selected_category.php?id=$categoryID'><button>$name</button></a>";
-	      echo "<br>";
+	      echo "<div class='card'>";
+	      echo "<div class='card-header'>";
+	      echo "<a href='/categories/selected_category.php?id=$categoryID'>$name</a>";
+	      echo "<div class='card-body'>";
+	      echo "<i>$tuple[category_description]</i>";
+	      echo "</div>";
+	      echo "</div>";
+	      echo "</div>";
 	      echo "<br>";
 	    }
-	  //$db = null // disconnect 
 	  } catch(PDOException $e){
 	    die('Exception : ' . $e->getMessage());
 	  }
+	  $db = null // disconnect 
 	?>
 	<br>
       <hr>

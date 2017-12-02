@@ -45,26 +45,41 @@
       <h1>Categories</h1>
       <?php
       // database path
-	$db_path = '/db/modular.db';
+	$db_path = '../../db/modular.db';
 	$cat_id = $_GET["id"];
 	if(!isset($cat_id)) echo "ERROR!";
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  // try to optimize this later, doing three natural joins!
-	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ';';
+	  $get_belongsTo = 'select * from Category natural join BelongsTo natural join Model natural join User where category_id = ' . $cat_id . ' and creator_id = user_id;';
 	  $result_belongsTo = $db->query($get_belongsTo);
+	  // try to optimize this later, doing three natural joins!
+	  //$stmt = $db->prepare('select * from Category natural join BelongsTo natural join Model join User where category_id = ? and creator_id = user_id;');
+	  //$stmt->bindParam(1, $cat_id); 
+	  //$stmt->execute(); 
+	  //$result_set = $stmt->fetchAll(); // fetch all tuples?
+	  //echo sizeOf($result_set);
+	  //$result_belongsTo = $db->query($get_belongsTo);
+	  //echo "<b>SIZE: </b> " . sizeOf($result_belongsTo);
 	  foreach($result_belongsTo as $tuple){
 	    $model_name = $tuple["model_name"];
 	    $user_name = $tuple["username"];
 	    $model_id = $tuple["model_id"];
-	    //echo "<font color='red'>$model_name</font> <font color='blue'><br/>";
-	    echo "<a href='/product/product.php?id=$model_id'><button><B>$model_name</B> by $user_name</button></a>";
+	    echo "<div class='card'>";
+	    echo "<div class='card-header'>";
+	    echo "<a href='/product/product.php?id=$model_id'><b>$model_name</b> by <i>$user_name</i></a>";
+	    echo "</div>";
+	    echo "<div class='card-body'>";
+	    echo "<font size='3' color='black'> THIS IS WHERE THE DESCRIPTION WILL BE.</font>";
+	    // PUT MODEL DESCRIPTION HERE!!!
+	    echo "</div>";
+	    echo "</div>";
+	    echo "<br>";
 	    echo "<br>";
 	  }
-	//$db = null // disconnect 
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
 	}
+	$db = null // disconnect 
       ?>
       <hr>
     </div>
