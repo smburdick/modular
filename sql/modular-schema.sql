@@ -28,6 +28,7 @@ CREATE TABLE Model(
 	model_name TEXT,
 	uploaded_date INTEGER,
 	description TEXT,
+	image GLOB,
 	FOREIGN KEY (material_id) REFERENCES Material(material_id)
 		ON UPDATE CASCADE
 		ON DELETE SET NULL,
@@ -52,22 +53,6 @@ CREATE TABLE Color (
 	hex TEXT PRIMARY KEY,
 	name TEXT
 );
-
-/*
-CREATE TABLE Created(
-	model_id INTEGER,
-	user_id INTEGER,
-	creation_date TEXT,
-	uploaded_date TEXT,
-	PRIMARY KEY (model_id, user_id),
-	FOREIGN KEY (model_id) REFERENCES Model(model_id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE,
-	FOREIGN KEY (user_id) REFERENCES User(user_id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-*/
 
 CREATE TABLE Review(
 	user_id INTEGER,
@@ -100,7 +85,7 @@ CREATE TABLE Bookmarks(
 CREATE TABLE Purchases(
 	user_id INTEGER,
 	model_id INTEGER,
-	purchase_date TEXT,
+	purchase_date INTEGER,
 	quantity INTEGER CHECK (quantity > 0),
 	PRIMARY KEY (model_id, user_id, purchase_date),
 	FOREIGN KEY (model_id) REFERENCES Model(model_id)
