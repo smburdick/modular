@@ -55,44 +55,57 @@
 			</div>
 			<div class="col-sm-8 text-left">
 				<?php
-				$db_file = '../../db/modular.db';
-				$db = new PDO('sqlite:' . $db_file);
-				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$checkingUsername = '';
-				if (!isset($_GET['username'])){
-					$checkingUsername = $username;
-				}else{
-					$checkingUsername = $_GET['username'];
-				}
-				
-				$data = 0;
-				$success = '';
-					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ");
+					$db_file = '../../db/modular.db';
+					$db = new PDO('sqlite:' . $db_file);
+					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$checkingUsername = '';
+					if (!isset($_GET['username'])){
+						$checkingUsername = $username;
+					}else{
+						$checkingUsername = $_GET['username'];
+					}
+					
+					$data = 0;
+					$success = '';
+					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
 					$stmt->bindParam(1, $checkingUsername);
 					$success = $stmt->execute();
 					$data = $stmt->fetchAll();
 
-				if ($success){
-					echo '
-					<h1>'.$data[0]['f_name'].' '.$data[0]['l_name'].'</h1>
-					<h3>@'.$data[0]['username'].'</h3>
-					<h4>Birthday: '.$data[0]['birth_month'].'/'.$data[0]['birth_day'].'/'.$data[0]['birth_year'].'</h4>
-					<h4> Biography:</h4>
-					<p>'.$data[0]['bio'];
-				}
+					if ($success){
+						echo '
+						<h1>'.$data[0]['f_name'].' '.$data[0]['l_name'].'</h1>
+						<h3>@'.$data[0]['username'].'</h3>
+						<h4>Birthday: '.$data[0]['birth_month'].'/'.$data[0]['birth_day'].'/'.$data[0]['birth_year'].'</h4>
+						<h4> Biography:</h4>
+						<p>'.$data[0]['bio'];
+						echo '<form action="../profile/updateProfile.php">
+								<input type="Submit" value="Edit your Profile">
+							</form>';
+					}
+
+					$db = null;
 				?>
 			</div>
 		</div>
 		<div class="col-sm-2 sidenav">
-			<!--
-			<div class="well">
-				<p>ADS</p>
-			</div>
-			<div class="well">
-				<p>ADS</p>
-			</div>
-		-->
 		</div>
+	</div>
+	<div class="row content">
+		<div class="col-sm-2 sidenav">
+		</div>
+		<div class="col-sm-8 text-left">
+			<?php
+				$db_file = '../../db/modular.db';
+				$db = new PDO('sqlite:' . $db_file);
+				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+				$db = null;
+			?>
+		</div>
+		<div class="col-sm-2 sidenav">
+		</div>
+
 	</div>
 </div>
 
