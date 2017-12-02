@@ -79,7 +79,7 @@
                 $cost = $tuple["mass_in_grams"] * ( floatval($tuple["cost_per_gram"]) / 100); // model unit cost
                 $item_qty_total = $cost * $tuple["quantity"];
                 $cart_subtotal += $item_qty_total;
-                echo '<tr><th>'.$tuple["model_name"].'</th><th>'. $tuple["quantity"] .'</th><th>$'. $cost .' </tr>';
+                echo '<a href="../product/product.php?id=' . $tuple["model_id"] . '"><tr><th>'.$tuple["model_name"].'</th><th>'. $tuple["quantity"] .'</th><th>$'. sprintf("%.2f", $cost) .' </tr></a>';
               }
               echo '</table>';
               echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a></center>';

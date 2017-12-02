@@ -51,6 +51,7 @@
                 $result_set = $stmt->fetchAll(); // an array of results
                                 
                 $model = $result_set[0];
+                $editable = true;
                 
                 if ($model["creator_id"] == $user_id) { // model's userID matches logged-in userID
                    
@@ -69,10 +70,12 @@
                     $model_mat = $model["material_id"];
                     $model_descr = $model["description"];
                     $image = $model["image"];
+                    echo '<div id="canvas">';
 
                 } else {
                     echo 'You don\'t have permission to edit this model.<br><br>';
                     echo '<a href="../index.php"><button>Return to homepage</button></a>';
+                    $editable = false;
                 }
 
                 $db = NULL;
@@ -84,7 +87,6 @@
             }
         }
     ?>
-    <div id="canvas">
         <script>
             /*global THREE, Coordinates, document, window  */
             var camera, scene, renderer;
@@ -253,7 +255,7 @@
 
     <center>
     <?php
-
+    if ($editable) {
         echo '<form action="update-model.php" method="post"><br>';
         echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
         echo '<input type="hidden" name="image" id="image" value=""><br>';
@@ -284,7 +286,7 @@
         echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
         echo '<input type="submit" value="Submit" id="submit" id="submitButton">';
         echo '</form>';
-
+    }
     ?>
     </center>
 
