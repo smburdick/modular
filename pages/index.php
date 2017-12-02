@@ -30,7 +30,7 @@
         <li><a href="cart/index.php">Cart</a></li>
         <li><a href="#">Contact</a></li>
         <li>
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" method="get" action="search/search_results.php">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
             <div class="input-group-btn">
