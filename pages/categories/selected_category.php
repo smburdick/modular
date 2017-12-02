@@ -64,13 +64,13 @@
 	    $model_name = $tuple["model_name"];
 	    $user_name = $tuple["username"];
 	    $model_id = $tuple["model_id"];
+	    $description = $tuple["description"];
 	    echo "<div class='card'>";
 	    echo "<div class='card-header'>";
 	    echo "<a href='/product/product.php?id=$model_id'><b>$model_name</b> by <i>$user_name</i></a>";
 	    echo "</div>";
 	    echo "<div class='card-body'>";
-	    echo "<font size='3' color='black'> THIS IS WHERE THE DESCRIPTION WILL BE.</font>";
-	    // PUT MODEL DESCRIPTION HERE!!!
+	    echo "<font size='3' color='black'>$description</font>";
 	    echo "</div>";
 	    echo "</div>";
 	    echo "<br>";

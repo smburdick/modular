@@ -47,7 +47,7 @@
 	$model_id = $_GET["id"]; // model id
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
+	  $get_Model = 'select * from Model natural join Material natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
 	  $result_set = $db->query($get_Model);
 	  foreach($result_set as $tuple){
 	    // change href to profile.php when that is ready
@@ -61,18 +61,23 @@
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
 	    $model_id = $tuple["model_id"];
+	    $description = $tuple["description"];
 	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
 	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> Material: </font> <font size='4' color='black'><i>$material_name</i></font>";
+	    echo "<font size='4' color='282a2e'> <u>Material:</u> </font> <font size='4' color='black'><i>$material_name</i></font>";
 	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> Mass in grams:</font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
+	    echo "<font size='4' color='282a2e'> <u>Mass in grams:</u></font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
 	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> price:</font> <font size='4' color='red'><i>$ $cost</i></font>";
+	    echo "<font size='4' color='282a2e'> <u>price:</u></font> <font size='4' color='red'><i>$ $cost</i></font>";
 	    echo "<br>";
 	    echo "<form action='/cart/index.php'>";
-	    echo "<font size='4' color='282a2e'> quantity:</font> <input name='count' type='number' value='1' min='1'/>"; 
+	    echo "<font size='4' color='282a2e'><u>quantity:</u></font> <input name='count' type='number' value='1' min='1'/>"; 
 	    echo "</form>";
 	    echo "<a href='/cart/index.php?id=$model_id'&quantity=$quantity><button>Add to cart </button></a>";
+	    echo "<br>";
+	    echo "<br>";
+	    echo "<font size='4' color='282a2e'><b><i>Description:</i></b></font>";
+	    echo "<p>$description</p>";
 	    echo "</div>";
 	  }
 	} catch(PDOException $e){
@@ -109,7 +114,7 @@
       echo "<div class='card col-sm-10'>";
       echo "<div class='card-header'><i>$user_name</i> gave <i>$model_name</i> $score stars</div>";
       echo "<div class='card-body'>$comment</div>";
-      echo "<div class='card-footer'>Date $date</div>";
+      echo "<div class='card-footer'>Reviewd on $date</div>";
       echo "</div>";
       //echo "<style> asdf {border :2px solid #021a40;} </style>";
       //echo "<asdf>";
