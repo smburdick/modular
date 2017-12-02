@@ -26,8 +26,6 @@
 		$bio = $returnedValues[0][7];
 		$email = $returnedValues[0][9];
 
-		echo $email;
-
 		echo '<form action="update.php" method="post">
 				First Name: <br>
 				<input type="text" name="f_name" value="'.$f_name.'"> <span class="error"> * </span>

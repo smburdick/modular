@@ -67,10 +67,10 @@
 					
 					$data = 0;
 					$success = '';
-						$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ");
-						$stmt->bindParam(1, $checkingUsername);
-						$success = $stmt->execute();
-						$data = $stmt->fetchAll();
+					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
+					$stmt->bindParam(1, $checkingUsername);
+					$success = $stmt->execute();
+					$data = $stmt->fetchAll();
 
 					if ($success){
 						echo '
