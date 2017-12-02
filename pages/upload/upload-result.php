@@ -11,11 +11,13 @@
 			$file_name = basename($_FILES["fileToUpload"]["name"]);
 			$path = $_FILES["fileToUpload"]["tmp_name"];
 			$file_type = pathinfo($file_name, PATHINFO_EXTENSION); // uploaded file's extension
+			$default_img_file = './img/default.png';
 			if ($file_type != 'obj') {
 				echo 'You must upload an .obj file.<br><br>';
 				echo '<a href="."><button>Try again</button></a>';
 			} else {
-				$default_img = file_get_contents('./img/default.png');
+				$default_img = fread(fopen($default_img_file, "r"), filesize($default_img_file));
+				$default_img = 'data:image/png;base64,' . base64_encode($default_img);
 				$contents = file_get_contents($path);
 				$creation_date = time();
 				$default_name = basename($file_name, '.obj');
