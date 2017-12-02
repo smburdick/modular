@@ -50,7 +50,7 @@
 </nav>
   
 <div class="container-fluid text-center" style=" height: 100%">
-  <div class="row content" style="min-width: 761px">
+  <div class="row content" style="min-width: 761px; max-height: 350px">
     <div class="col-sm-1 sidenav">
     </div>
     <div class="col-sm-4 text-left" style="margin-top: 10px"> 
@@ -115,7 +115,7 @@
 
 </div>
 
-<footer class="container-fluid text-center" style="height: 100px">
+<footer class="container-fluid text-center">
   <p align="left">2017 Modular</p>
 </footer>
 
