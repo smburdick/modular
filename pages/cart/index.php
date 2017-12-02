@@ -1,7 +1,7 @@
 <?php
   // testing zone
   $testUserID = 0; // Sam's test user ID
-  setcookie("userID", $testUserID, time() + 86400  ); // 86400 = 1 day
+  setcookie("userID", $testUserID, time() + 86400, '/'  ); // 86400 = 1 day
   //$_COOKIE["userID"] = $testUserID; // necessary?
 ?>
 
@@ -79,10 +79,11 @@
                 $cost = $tuple["mass_in_grams"] * ( floatval($tuple["cost_per_gram"]) / 100); // model unit cost
                 $item_qty_total = $cost * $tuple["quantity"];
                 $cart_subtotal += $item_qty_total;
-                echo '<a href="../product/product.php?id=' . $tuple["model_id"] . '"><tr><th>'.$tuple["model_name"].'</th><th>'. $tuple["quantity"] .'</th><th>$'. sprintf("%.2f", $cost) .' </tr></a>';
+                echo '<tr><th><a href="../product/product.php?id=' . $tuple["model_id"] . '">'.$tuple["model_name"].'</a></th>' . '<th>'. $tuple["quantity"] .'</th><th>$'. sprintf("%.2f", $cost) .' </tr>';
               }
               echo '</table>';
-              echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a></center>';
+              echo '<form action="../checkout/" method="post"><input type="hidden" name="checking_out" value="true"><input type="submit" value="Checkout"></form>';
+              //echo '<a href="../checkout/index.php?user_id=' . $user_id . '"><button type="button">Checkout</button></a></center>';
             }
             
           } else {

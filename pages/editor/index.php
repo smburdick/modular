@@ -4,7 +4,6 @@
     setcookie("userID", $testUserID, time() + 86400); // 86400 = 1 day
     setcookie("image", "", 1); // delete image cookie
     setcookie("testCookie", "", 1); // delete image cookie
-    session_start();
 ?>
 
 <!-- editor/index.php -->
