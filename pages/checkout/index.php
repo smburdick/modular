@@ -19,12 +19,11 @@
 	        	$result_set = $stmt->fetchAll();
 	        	$time = time();
 	        	foreach($result_set as $tuple) {
-	        		echo 'deleting tuple';
 	        		$stmt = $db->prepare('INSERT INTO Purchases VALUES (?, ?, ?, ?);');
 	        		$stmt->bindParam(1, $tuple["user_id"]);
 	        		$stmt->bindParam(2, $tuple["model_id"]);
 	        		$stmt->bindParam(3, $time);
-	        		$stmt->bindParam(4, $quantity["quantity"]);
+	        		$stmt->bindParam(4, $tuple["quantity"]);
 	        		$stmt->execute();
 	        	}
 	        }
@@ -33,7 +32,7 @@
           	$stmt->bindParam(1, $user_id);
           	$stmt->execute();
           	$db = null;
-          	echo '<h2>Thank you</h2><br>Your order should arrive soon.';
+          	echo '<h2>Thank you</h2>Your order should arrive soon.';
 
 		} catch (PDOException $e) {
 			die('Exception: ' . $e->getMessage());
