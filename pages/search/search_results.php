@@ -14,7 +14,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
   <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 </head>
-<body>
+<body style="height: 100%">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -23,13 +23,23 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="../../pages">Modular</a> <!-- TODO logo -->
+      <a class="navbar-brand" href="../">Modular</a> <!-- TODO logo -->
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Cart</a></li>
+        <li class="active"><a href="../">Home</a></li>
+        <li><a href="../cart">Cart</a></li>
         <li><a href="#">Contact</a></li>
+        <li>
+          <form class="navbar-form" role="search" method="get" action="search_results.php">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -38,12 +48,12 @@
   </div>
 </nav>
   
-<div class="container-fluid text-center">    
-  <div class="row content" style="overflow: hidden; height: auto">
+<div class="container-fluid text-center" style="overflow: hidden; height: 100%">    
+  <div class="row content" style="overflow: hidden; height: 100%">
     <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
     <div class="col-sm-10 text-left" style="margin-top: 10px; overflow: hidden;"> 
       <h3>Search Results</h3>
-      <p>Sort By</p>
+      <p>Search For</p>
     </div>
     <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
   </div>
@@ -116,7 +126,7 @@
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Category WHERE category_name LIKE " . $like_string . ";";
+            $search_query = "SELECT * FROM Category WHERE category_name LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             $new_results;
             echo "<div class=\"card-deck\">";
@@ -131,8 +141,7 @@
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
                       ?>
@@ -153,7 +162,7 @@
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . ";";
+            $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             $new_results;
             foreach($result as $tuple) {
@@ -191,7 +200,7 @@
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . ";";
+            $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             $new_results;
             echo "<div class=\"card-deck\">";
@@ -228,7 +237,7 @@
               }
               $i++;
             }
-            $search_query = "SELECT * FROM User WHERE username LIKE " . $like_string . ";";
+            $search_query = "SELECT * FROM User WHERE username LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             $new_results;
             ?>
@@ -268,7 +277,7 @@
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Model WHERE model_name LIKE " . $like_string . ";";
+            $search_query = "SELECT * FROM Model WHERE model_name LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             echo "<div class=\"card-deck\">";
               foreach($result as $tuple) {
