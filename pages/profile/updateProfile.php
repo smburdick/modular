@@ -24,7 +24,9 @@
 		$birth_month = $returnedValues[0][5];
 		$birth_year = $returnedValues[0][6];
 		$bio = $returnedValues[0][7];
-		$emailAddress = $returnedValues[0][9];
+		$email = $returnedValues[0][9];
+
+		echo $email;
 
 		echo '<form action="update.php" method="post">
 				First Name: <br>
@@ -34,7 +36,7 @@
 				<input type="text" name="l_name" value="'.$l_name.'">  <span class="error"> * </span>
 				<br>
 				Email: <br>
-				<input type="text" name="email" value="'.$emailAddress.'" required>  <span class="error"> * </span>
+				<input type="text" name="email" value="'.$email.'" required>  <span class="error"> * </span>
 				<br>
 				Username: <br>
 				<input type="text" name="username" value="'.$username.'"required>  <span class="error"> * </span>
