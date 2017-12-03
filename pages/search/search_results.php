@@ -93,14 +93,14 @@ generate_head("Search Results", "search");
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
-              $query = "SELECT Model.model_id, Model.model_name, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple[category_id];
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple[category_id];
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[image];
+                      $image = $tuple[2];
                       $modname = $tuple[1];
                       $modid = $tuple[0];
 	                    echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -132,14 +132,14 @@ generate_head("Search Results", "search");
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
-    			    $query = "SELECT Model.model_id, Model.model_name, name FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
+    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
     			    $new_results = $db->query($query);
     			    foreach($new_results as $tuple) {
     			      ?>
-    			        <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+    			        <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
     			        <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
     			          <?php
-                          $image = $tuple[image];
+                          $image = $tuple[2];
                           $modname = $tuple[1];
                           $modid = $tuple[0];
     	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -172,14 +172,14 @@ generate_head("Search Results", "search");
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
-              $query = "SELECT Model.model_id, Model.model_name, material_name FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple[material_name] . "';";
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, material_name FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple[material_name] . "';";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[image];
+                      $image = $tuple[2];
                       $modname = $tuple[1];
                       $modid = $tuple[0];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -214,14 +214,14 @@ generate_head("Search Results", "search");
           <div class="card-deck">
             <?php
             foreach($result as $tuple) {
-              $query = "SELECT Model.model_id, Model.model_name, username FROM User INNER JOIN Model ON User.user_id = Model.creator_id WHERE username == '" . $tuple[username] . "';";
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, username FROM User INNER JOIN Model ON User.user_id = Model.creator_id WHERE username == '" . $tuple[username] . "';";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[image];
+                      $image = $tuple[2];
                       $modname = $tuple[1];
                       $modid = $tuple[0];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -293,7 +293,7 @@ generate_head("Search Results", "search");
             }
             //join all these tables so we can get all the data 
             $join_table = "Material NATURAL JOIN (Color NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id))))";
-            $q1 = "SELECT Model.model_id, Model.model_name, name, material_name, category_name, username FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
+            $q1 = "SELECT Model.model_id, Model.model_name, Model.image, name, material_name, category_name, username FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
             //echo "<p>".$q1."</p>";
 
             //queries for each relation
@@ -311,7 +311,6 @@ generate_head("Search Results", "search");
 
             $matched_models = array();
             $model_counts = array();
-
 
             foreach($color_match as $tuple){
               //if this model already exists in the array
@@ -429,10 +428,10 @@ generate_head("Search Results", "search");
               $result = $db->query("SELECT model_id, model_name, uploaded_date, image FROM Model WHERE model_id == ".$value.";");
               foreach($result as $tuple) {
                 ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[image];
+                      $image = $tuple[2];
                       $modname = $tuple[1];
                       $modid = $tuple[0];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -440,7 +439,7 @@ generate_head("Search Results", "search");
                       echo "<h4 class=\"card-title\">$modname</h4>";
                       echo "<a href=\"../product/product.php?id=$modid\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">Modular 2017</small></div>";
                       ?>
                   </div>
                 <?php
@@ -460,12 +459,12 @@ generate_head("Search Results", "search");
               }
               $i++;
             }
-            $search_query = "SELECT model_id, model_name, uploaded_date FROM Model WHERE model_name LIKE " . $like_string . " COLLATE NOCASE;";
+            $search_query = "SELECT model_id, model_name, uploaded_date, image FROM Model WHERE model_name LIKE " . $like_string . " COLLATE NOCASE;";
             $result = $db->query($search_query);
             echo "<div class=\"card-deck\">";
               foreach($result as $tuple) {
                 ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+                  <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
                       $image = $tuple[image];
