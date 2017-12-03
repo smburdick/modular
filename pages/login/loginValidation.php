@@ -2,6 +2,9 @@
 	$cookie_name = "username";
 	$username = $_POST['username'];
 	setcookie($cookie_name, $username, time() + 86400, '/');
+	$cookie_name = "user_id";
+	$user_id = $_POST['user_id'];
+	setcookie($cookie_name, $user_id, time() + 86400, '/');
 ?>
 <?php
 	//path to the SQLite database file
@@ -22,18 +25,26 @@
 		$success = $stmt->execute();
 		$returnedValues = $stmt->fetchAll();
 
-		if (strcmp($returnedValues[0][1], $username) !== 0 && password_verify($password, $returnedValues[0][8]) !== 0){
+		if ($returnedValues[0][1] == $username){
+			if (password_verify($password, $returnedValues[0]['hashed_password'])){
+				echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
+				echo '<form action="../profile/profile.php">
+					<input type="Submit" value="Go to your Profile">
+				  </form>';
+			}else{
 			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
 			echo '<form action="login.php">
 					<input type="Submit" value="Try Again">
 				  </form>';
-		}else{
-			echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
-			echo '<form action="../profile/profile.php">
-					<input type="Submit" value="Go to your Profile">
-				  </form>';
 			
+			}
+		}else{
+			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
+			echo '<form action="login.php">
+					<input type="Submit" value="Try Again">
+				  </form>';
 		}
+		
 
 		$db = null;
 	}
