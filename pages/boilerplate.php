@@ -13,7 +13,7 @@ function generate_head($page_name, $active_page) {
 	echo '<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header" style= "max-height: 30px; display: block; margin: 0 auto;">
-            <img src="../../logo/modular_logo.png" href="../home/" style="max-height: 45px"></img>
+            <a href="../home/"><img src="../../logo/modular_logo.png" style="max-height: 45px"></img></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -25,8 +25,8 @@ function generate_head($page_name, $active_page) {
 		echo '
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">';
-				// search bar
-		echo '<li><form class="navbar-form" role="search" method="get" action="search/search_results.php">
+		// search bar
+		echo '<li><form class="navbar-form" role="search" method="get" action="../search/search_results.php">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
             <div class="input-group-btn">
