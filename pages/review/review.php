@@ -66,8 +66,8 @@ generate_head("Search Results", "search");
     </div>
     
     </form>
-    <!--TODO: use (now working) database connection to pull variables out into HTML-->
     <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
+
     </div>
   </div>
 

@@ -1,8 +1,4 @@
 <?php
-    // testing zone
-    $testUserID = 0; // Sam's test user ID
-    setcookie("userID", $testUserID, time() + 86400*30); // 86400 = 1 day
-    //$_COOKIE["userID"] = $testUserID; // necessary?
     include '../boilerplate.php';
     echo '<!DOCTYPE html>
 	<html lang="en">';
@@ -15,6 +11,7 @@
 <body>
 <div class="container-fluid text-center"> 
   <div class="row content">
+
     <div class="col-sm-2 sidenav">
 
     </div>
@@ -22,7 +19,7 @@
 
 
 	<?php
-		$user_id  = $_COOKIE["userID"];
+		$user_id  = $_COOKIE["user_id"];
 		if (isset($user_id)) {
 			echo '<h1>Upload a new model</h1><br>';
 			echo '<form action="upload-result.php" method="post" enctype="multipart/form-data">';
@@ -43,9 +40,7 @@
     </div>
   </div>
 </div>
-	<?php
-	   generate_footer();
-	?>
+
 </body>
 
 </html>
