@@ -1,8 +1,7 @@
 <?php
   // testing zone
   $testUserID = 0; // Sam's test user ID
-  setcookie("userID", $testUserID, time() + 86400, '/'  ); // 86400 = 1 day
-  //$_COOKIE["userID"] = $testUserID; // necessary?
+  setcookie("user_id", $testUserID, time() + 86400, '/'); // 86400 = 1 day
 ?>
 
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
@@ -53,7 +52,7 @@
     <div class="col-sm-8 text-left"> 
     <?php
       $db_file = '../../db/modular.db';
-      $user_id = $_COOKIE["userID"];
+      $user_id = $_COOKIE["user_id"];
 
       if (isset($user_id)) {
         try {

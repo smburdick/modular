@@ -101,12 +101,12 @@
     <?php
 
       ////testing only/////
-      $_COOKIE["userID"] = mt_rand();
+      $_COOKIE["user_id"] = mt_rand();
       $_GET["model_ID"] = mt_rand();
       /////////////////////
 
       $db_file = '../../db/modular.db';
-      $user_id = $_COOKIE["userID"];
+      $user_id = $_COOKIE["user_id"];
       $model_id = $_GET["model_ID"];
       $review = $_POST["review"];
       $rating = $_POST["rating"];

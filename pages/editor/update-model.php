@@ -4,7 +4,7 @@
      */
 
     $db_file  = '../../db/modular.db';
-    $user_id  = $_COOKIE["userID"];
+    $user_id  = $_COOKIE["user_id"];
     $model_id = $_POST["model_id"];
     $material_id = $_POST["model_material"];
     $mass = $_POST["model_mass"];

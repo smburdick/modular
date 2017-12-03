@@ -1,7 +1,7 @@
 <?php
 
 	$checking_out = $_POST["checking_out"];
-	$user_id = $_COOKIE["userID"];
+	$user_id = $_COOKIE["user_id"];
 	if ($checking_out && isset($user_id)) {
 		try {
 			$db_file = '../../db/modular.db';
