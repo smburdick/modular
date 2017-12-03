@@ -46,7 +46,7 @@
 							</form><br>';
 						echo '<form action="../profile/addAddress.php">
 								<input type="Submit" value="Add an Address">
-							</form>';
+							</form><br>';
 						echo '<form action="../profile/addCredit.php">
 								<input type="Submit" value="Add a Credit Card">
 							</form>';
