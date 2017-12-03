@@ -1,8 +1,5 @@
 <?php
 
-// TODO these are for pages in directories of the form pages/[name]
- // i => (DisplayName, href) 
-
 function generate_head($page_name, $active_page) {
 	echo '<head>';
 	echo '<title>' . $page_name . '</title>';
@@ -15,14 +12,15 @@ function generate_head($page_name, $active_page) {
 	echo '</head>';
 	echo '<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>                        
-			</button>
-			<a class="navbar-brand" href="../">Modular</a>
-		</div>';
+		<div class="navbar-header" style= "max-height: 30px; display: block; margin: 0 auto;">
+            <img src="../../logo/modular_logo.png" href="#" style="max-height: 45px"></img>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            
+        </div>';
 		// generate the navbar items 
 		echo '
 		<div class="collapse navbar-collapse" id="myNavbar">
@@ -36,7 +34,6 @@ function generate_head($page_name, $active_page) {
             </div>
         </div>
         </form></li>';
-		// TODO navbar items
 		$navbar_elts = array(
 			array("Upload", "../upload/"),
 			array("Categories", "../categories/"),

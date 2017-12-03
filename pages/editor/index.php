@@ -1,7 +1,7 @@
 <?php
     // testing zone
     $testUserID = 0; // Sam's test user ID
-    setcookie("userID", $testUserID, time() + 86400); // 86400 = 1 day
+    setcookie("user_id", $testUserID, time() + 86400); // 86400 = 1 day
     setcookie("image", "", 1); // delete image cookie
     setcookie("testCookie", "", 1); // delete image cookie
 ?>
@@ -37,7 +37,7 @@
     <?php
 
         $db_file  = '../../db/modular.db';
-        $user_id  = $_COOKIE["userID"];
+        $user_id  = $_COOKIE["user_id"];
         $model_id = $_GET["modelID"];
         if (isset($user_id)) {
             try {
