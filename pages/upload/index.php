@@ -21,7 +21,7 @@
 	<?php
 		$user_id  = $_COOKIE["user_id"];
 		if (isset($user_id)) {
-			echo '<h1>Upload a new model</h1><br>';
+			echo '<h2>Upload a new model</h2><br>';
 			echo '<form action="upload-result.php" method="post" enctype="multipart/form-data">';
 			echo '<p>Object file: (must be a <code>.obj</code> file)</p>';
 			echo '<input type="file" name="fileToUpload" id="fileToUpload"><br><br>';

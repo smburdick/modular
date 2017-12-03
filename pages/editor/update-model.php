@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- editor/index.php -->
+<!-- Model editor view -->
+
+<?php
+    include '../boilerplate.php';
+    generate_head('Editor', '');
+?>
+<body>
+<div class="container-fluid text-center"> 
+    <div class="row content">
+
+        <div class="col-sm-2 sidenav">
+        </div>
+
+        <div class="col-sm-8 text-left"> <br><br>
 <?php
     /**
      * Updates the model data with the given parameters.
@@ -53,7 +71,10 @@
         echo 'Please sign in to edit a model.';
     }
 ?>
-<br><br>
-<form action="../index.php">
-    <input type="submit" value="Return to homepage">
-</form>
+</div>
+        <div class="col-sm-2 sidenav">
+        </div>
+</div>
+</div>
+</body>
+</html>
