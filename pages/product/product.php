@@ -40,6 +40,7 @@
     <div class="col-sm-1 sidenav">
     </div>
       <?php
+      setcookie("user_id","3",time()+(8640 * 60)); // remember to remove this later
 // GET RID OF PRESLEYS PHOTO AND MAKE IT IMAGE (in slack)
 // MAKE BETTER addedToCart.php 
 // make better css for editor and project
@@ -55,38 +56,44 @@
 	    // change href to profile.php when that is ready
 	    echo "<img src='PresleyReed.jpg' width='320' height='400'>";
 	    echo "</div>";
-	    echo "<div class='col-sm-8 text-left'>";
-	    $model_name = $tuple["model_name"];
-	    $creator_name = $tuple["username"];
+	    echo "<div class='col-sm-8 text-left'>"; 
+	    $model_name = $tuple["model_name"]; $creator_name = $tuple["username"];
 	    $mass_in_grams = $tuple["mass_in_grams"];
 	    $cost_per_gram = $tuple["cost_per_gram"];
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
 	    $model_id = $tuple["model_id"];
 	    $current_user = $_COOKIE["user_id"];
-	    //if(!isset($current_user)) echo "USER NOT SET";
-	    //else echo "USER SET " . $current_user;
 	    $description = $tuple["description"];
-	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> <u>Material:</u> </font> <font size='4' color='black'><i>$material_name</i></font>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> <u>Mass in grams:</u></font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> <u>price:</u></font> <font size='4' color='red'><i>$ $cost</i></font>";
-	    echo "<br>";
-	    echo "<form action='/product/addedToCart.php' method='post'";
-	    echo "<font size='4' color='282a2e'><u>quantity</u></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
-	    echo "<input type='hidden' name='current_user' value=$current_user>";
-	    echo "<input type='hidden' name='model_id' value=$model_id>";
-	    echo "<br>";
-	    echo "<input type='submit' value='Add to cart'/>";
-	    echo "</form>";
-	    echo "<br>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'><b><i>Description:</i></b></font>";
-	    echo "<p>$description</p>";
-	    echo "</div>";
+	      echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>Material:</u> </font> <font size='4' color='black'><i>$material_name</i></font>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>Mass in grams:</u></font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>price:</u></font> <font size='4' color='red'><i>$ $cost</i></font>";
+	      echo "<br>";
+	      echo "<p><font size='4' color='282a2e'><b><u><i>Description: </i></u></b></font>$description</p>";
+	    if(!isset($current_user)) {
+	      echo "<font size='3' color='282a2e'> Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart</font>";
+	    } else {
+	      echo "<form action='/product/addedToCart.php' method='post'";
+	      echo "<font size='4' color='282a2e'><u>quantity</u></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
+	      echo "<input type='hidden' name='current_user' value=$current_user>";
+	      echo "<input type='hidden' name='model_id' value=$model_id>";
+	      echo "<input type='hidden' name='model_name' value=$model_name>";
+	      echo "<br>";
+	      echo "<input type='submit' value='Add to cart'/>";
+	      echo "</form>";
+	      echo "<form action='/product/addedToBookmarks.php' method='post'>";
+	      echo "<input type='hidden' name='current_user' value=$current_user>";
+	      echo "<input type='hidden' name='model_id' value=$model_id>";
+	      echo "<br>";
+	      echo "<input type='submit' value='Add to bookmarks'/>";
+	      echo "</form>";
+	      echo "<br>";
+	      echo "</div>";
+	    }
 	  }
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
