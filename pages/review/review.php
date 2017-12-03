@@ -26,7 +26,8 @@ generate_head("Review", "search");
     <?php 
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
-      $model_id = $_POST["model_ID"];
+      $model_id = $_GET["id"];
+
       //if(isset($user_id)){
         try {
           //open connection to the modular database file
@@ -36,13 +37,17 @@ generate_head("Review", "search");
           //NOT FUNCTIONAL (need proper cookie)
           //replace Product Name and Other Info below with these 
           //php strings
-          echo "<h2>Product Name</h2>";
-          $prod_query = "SELECT model_name FROM Model WHERE model_id=:id;";
+          //echo "<h2>Product Name</h2>";
+          $prod_query = "SELECT model_name FROM Model WHERE model_id=:id LIMIT 1;";
           $prod_prep = $db->prepare($prod_query);
           $prod_prep->bindParam(":id", $model_id);
           $result = $prod_prep->execute();
-          echo "<h2>" . $result . "</h2>";
-          echo "<h3>Other Info</h3>";
+          $result = $prod_prep->fetchAll();
+
+          echo "<h2>" . $result[0][0] . "</h2>";
+          echo "<p> </p>";
+          //echo "<h4>Description</h4>";
+          echo "<p>". $result[0][9] . "</p>";
          }
          catch(PDOException $e) {
             die('Exception : '.$e->getMessage());
