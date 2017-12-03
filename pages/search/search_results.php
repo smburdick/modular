@@ -469,6 +469,7 @@ generate_head("Search Results", "search");
                     <?php
                       $image = $tuple[image];
                       $modname = $tuple[model_name];
+                      $modid = $tuple[model_id];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
 	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">$modname</h4>";
