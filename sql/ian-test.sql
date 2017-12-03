@@ -1,4 +1,4 @@
-INSERT INTO Category VALUES (
+/*INSERT INTO Category VALUES (
 	1,
 	"fun",
 	"just a whole lotta fun stuff my dude"
@@ -32,7 +32,7 @@ INSERT INTO Category VALUES (
 	6,
 	"hun",
 	"just a whole lotta hun stuff my dude"
-	);
+	);*/
 
 
 /*CREATE TABLE Material (
@@ -62,9 +62,9 @@ CREATE TABLE User(
 );*/
 
 
-insert into Material values (0, "wood", 999);
+/*insert into Material values (0, "wood", 999);
 insert into Color values ('#FFFFFF', 'white');
-insert into User values (0, "ian", "ian", "white", null ,null, null, null, null, null, null);
+insert into User values (0, "ian", "ian", "white", null ,null, null, null, null, null, null);*/
 insert into Model values (0,0,0,100,'#FFFFFF', null, 0, "cube", 0);
 INSERT INTO Category VALUES (
 	0,
