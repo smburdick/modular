@@ -1,12 +1,5 @@
 <?php
-	$cookie_name = "username";
 	$username = $_POST['username'];
-	setcookie($cookie_name, $username, time() + 86400, '/');
-	$cookie_name = "user_id";
-	$user_id = $_POST['user_id'];
-	setcookie($cookie_name, $user_id, time() + 86400, '/');
-?>
-<?php
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
@@ -24,9 +17,10 @@
 		$stmt->bindParam(1, $username);
 		$success = $stmt->execute();
 		$returnedValues = $stmt->fetchAll();
-
 		if ($returnedValues[0][1] == $username){
 			if (password_verify($password, $returnedValues[0]['hashed_password'])){
+				setcookie("username", $username, time() + 86400*30, '/');
+				setcookie("user_id", $returnedValues[0][0], time() + 86400*30, '/');
 				echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
 				echo '<form action="../profile/profile.php">
 					<input type="Submit" value="Go to your Profile">
@@ -44,8 +38,6 @@
 					<input type="Submit" value="Try Again">
 				  </form>';
 		}
-		
-
 		$db = null;
 	}
 	catch(PDOException $e) {
