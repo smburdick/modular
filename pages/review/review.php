@@ -2,7 +2,7 @@
 <html>
 <?php
 include "../boilerplate.php";
-generate_head("Search Results", "search");
+generate_head("Review", "search");
 ?>
 <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
