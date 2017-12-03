@@ -44,9 +44,10 @@
 						echo '<form action="../profile/updateProfile.php">
 								<input type="Submit" value="Edit your Profile">
 							</form>';
+						echo '<form action="../profile/addAddress.php">
+								<input type="Submit" value="Add an Address">
+							</form>';
 					}
-
-					//$db = null;
 				?>
 			</div>
 		</div>
