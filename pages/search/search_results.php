@@ -431,7 +431,7 @@ generate_head("Search Results", "search");
                   <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[2];
+                      $image = $tuple[3];
                       $modname = $tuple[1];
                       $modid = $tuple[0];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
@@ -468,12 +468,13 @@ generate_head("Search Results", "search");
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
                       $image = $tuple[image];
+                      $modname = $tuple[model_name];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
 	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">$modname</h4>";
                       echo "<a href=\"../product/product.php?id=$modid\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">Modular 2017</small></div>";
                       ?>
                   </div>
                 
