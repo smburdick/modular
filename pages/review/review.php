@@ -1,58 +1,15 @@
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Modular</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="../css/style.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- important mandatory libraries -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-  <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
-</head>
-
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="../">Modular</a> <!-- TODO logo -->
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="../">Home</a></li>
-        <li><a href="../cart">Cart</a></li>
-        <li><a href="#">Contact</a></li>
-        <li>
-          <form class="navbar-form" role="search" method="get" action="../search/search_results.php">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
-            </div>
-          </form>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+<html>
+<?php
+include "../boilerplate.php";
+generate_head("Search Results", "search");
+?>
+<script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
+<link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 <body style="height: 100%">
-<div class="container-fluid text-center" style=" height: 100%">
-  <div class="row content" style="min-width: 761px; height: 100%">
-    <div class="col-sm-1 sidenav" style="height: 100%">
+<div class="container-fluid text-center" style=" height: auto; overflow: hidden">
+  <div class="row content" style="min-width: 761px; height: auto">
+    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
     </div>
     <div class="col-sm-4 text-left" style="margin-top: 10px"> 
       <h2>Headline</h2>
@@ -95,12 +52,12 @@
     //echo "<h3>Other Info</h3>";
     ?>
     </div>
-    <div class="col-sm-1 sidenav" style="height: 100%">
+    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
     
     </div>
   </div>
-  <div class="row content" style="height: 100%">
-    <div class="col-sm-1 sidenav" style="height: 100%">   
+  <div class="row content" style="height: auto; overflow: hidden">
+    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
     </div>
     <div class="col-sm-10 text-left">
       <h2>Review</h2>
@@ -110,7 +67,7 @@
     
     </form>
     <!--TODO: use (now working) database connection to pull variables out into HTML-->
-    <div class="col-sm-1 sidenav" style="height: 100%">   
+    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
     </div>
   </div>
 
