@@ -1,38 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<?php
+	// From here the use can select their address and banking info.
+  include '../boilerplate.php';
+  generate_head('Checkout', '');
+?>
+<body>
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+
+    </div>
+    <div class="col-sm-8 text-left"> <br><br>
+    <h2>Checkout</h2><br>
 <?php
 
 	$checking_out = $_POST["checking_out"];
-	$user_id = $_COOKIE["userID"];
+	$user_id = $_COOKIE["user_id"];
 	if ($checking_out && isset($user_id)) {
 		try {
 			$db_file = '../../db/modular.db';
           	$db = new PDO('sqlite:'.$db_file);
           	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          	$stmt = $db->prepare('SELECT * FROM InCart WHERE user_id = ?;');
-	        $stmt->bindParam(1, $user_id);
-
-	        $success = $stmt->execute();
-
-	        $cart_subtotal = 0;
-
-	        if ($success) {
-	        	$result_set = $stmt->fetchAll();
-	        	$time = time();
-	        	foreach($result_set as $tuple) {
-	        		$stmt = $db->prepare('INSERT INTO Purchases VALUES (?, ?, ?, ?);');
-	        		$stmt->bindParam(1, $tuple["user_id"]);
-	        		$stmt->bindParam(2, $tuple["model_id"]);
-	        		$stmt->bindParam(3, $time);
-	        		$stmt->bindParam(4, $tuple["quantity"]);
-	        		$stmt->execute();
-	        	}
-	        }
-
-          	$stmt = $db->prepare('DELETE FROM InCart WHERE user_id = ?;');
+          	// get the user addresses
+          	$stmt = $db->prepare('SELECT * FROM Address WHERE user_id = ?;');
           	$stmt->bindParam(1, $user_id);
           	$stmt->execute();
+          	$addresses = $stmt->fetchAll();
+          	// get the banking account info
+          	$stmt = $db->prepare('SELECT * FROM BankingInfo WHERE user_id = ?;');
+          	$stmt->bindParam(1, $user_id);
+          	$stmt->execute();
+          	$banking_infos = $stmt->fetchAll();
+
           	$db = null;
-          	echo '<h2>Thank you</h2>Your order should arrive soon.';
 
 		} catch (PDOException $e) {
 			die('Exception: ' . $e->getMessage());
@@ -40,6 +43,33 @@
 	} else {
 		echo 'Error';
 	}
+	
 ?>
-<br><br>
-<a href="../"><button>Return to homepage</button></a>
+	<form action="checkout.php" method="post">
+			<?php
+			echo 'Billing Address: <select>';
+				//print_selects($addresses);
+			foreach ($addresses as $address) {
+				echo '<option name="shipping_address" value="' . $address["address_id"] . '">' . $address["address_line_one"] . '   ' . $address["address_line_two"] . '   ' . $address["city"] .'</option>' ;
+			}
+			echo '</select><br>';
+			echo 'Banking Info:<select>';
+			foreach ($banking_infos as $info) {
+				echo '<option name="banking_info" value="' . $info["banking_info_id"] . '">' . $info["name_on_card"] . '   ' . $address["card_number"] . '   ' . $address["ccv"] .'</option>' ;
+			}
+			echo '</select><br>';
+			echo 'Banking Info:<select>';
+			foreach ($addresses as $address) {
+				echo '<option name="billing_address" value="' . $address["address_id"] . '">' . $address["address_line_one"] . '   ' . $address["address_line_two"] . '   ' . $address["city"] .'</option>' ;
+			}
+			echo '</select>';
+			?>
+			<br><br>
+			<input type="hidden" name="checking_out" value="true">
+			<input type="submit" value="Submit">
+    </form>
+	</div>
+	</div>
+</div>
+</body>
+</html>
