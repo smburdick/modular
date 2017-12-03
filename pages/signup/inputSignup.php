@@ -1,10 +1,4 @@
 <?php
-	$username = $_POST['username'];
-	setcookie('username', $username, time() + 86400, '/');
-	$user_id = $_POST['user_id'];
-	setcookie('user_id', $user_id, time() + 86400, '/');
-?>
-<?php
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
@@ -60,6 +54,7 @@
 				$user_id = $stmt->fetchAll()[0][0];
 
 				setcookie("user_id", $user_id, time() + 86400, '/');
+				setcookie("username", $username, time() + 86400, '/');
 
 				echo'<h1>Your Account was created!</h1>
 					<h3>Click here to go to your profile page:</h3>
