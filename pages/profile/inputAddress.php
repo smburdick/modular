@@ -18,7 +18,7 @@
 		$zipcode = $_POST['zipcode'];
 		$country = $_POST['country'];
 
-		$stmt = $db->prepare("INSERT INTO Address VALUES (?,NULL,?,?,?,?,?,?);");
+		$stmt = $db->prepare("INSERT INTO Address VALUES (?,null,?,?,?,?,?,?);");
 		$stmt->bindParam(1, $user_id);
 		$stmt->bindParam(2, $address_line_one);
 		$stmt->bindParam(3, $address_line_two);

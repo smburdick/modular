@@ -1,9 +1,9 @@
 <?php	
-	echo '<h2>Please add your Address Below</h2>
+	echo '<h2>Please add your Credit Card Info Below</h2>
 	<form action="inputAddress.php" method="post">
-		Address 1:<br>
-		<input type="text" name="address_line_one"><span class="error"> * </span><br>
-		Address 2:<br>
+		Card Number:<br>
+		<input type="text" name="card_number"><span class="error"> * </span><br>
+		:<br>
 		<input type="text" name="address_line_two"><span class="error"> * </span><br>
 		City: <br>
 		<input type="text" name="city"><span class="error"> * </span><br>
