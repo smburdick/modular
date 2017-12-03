@@ -13,14 +13,6 @@
 		</div>
 		<div class="col-sm-8 text-left"> 
 			<div class="col-sm-4">
-				<br>
-				<center><img src="empty_profile_img.png" style="height: 75%; width: 75%"><br><br>
-				<form action="uploadImage.php">
-					<input type="Submit" value="Upload a Profile Image">
-				</form>
-				</center>
-			</div>
-			<div class="col-sm-4 text-left">
 				<?php
 					$db_file = '../../db/modular.db';
 					$db = new PDO('sqlite:' . $db_file);
@@ -38,6 +30,15 @@
 					$stmt->bindParam(1, $checkingUsername);
 					$success = $stmt->execute();
 					$data = $stmt->fetchAll();
+				
+				echo '<br>
+				<center><img src="'.$data[0]['photo'].'" style="height: 75%; width: 75%"><br><br>
+				<form action="uploadImage.php">
+					<input type="Submit" value="Upload a Profile Image">
+				</form>
+				</center>
+			</div>
+			<div class="col-sm-4 text-left">';
 
 					if ($success){
 						echo '
@@ -83,7 +84,7 @@
 				  $new_results = $db->query($query);
 				  foreach($new_results as $tuple) {
 					?>
-					  <div class="card" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
+					  <div class="card" align="center" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
 						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
 						<?php
 						echo '<img class="card-img-top" src="'.$tuple['image'].'">
