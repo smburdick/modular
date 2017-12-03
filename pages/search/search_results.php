@@ -93,7 +93,7 @@ generate_head("Search Results", "search");
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
-              $query = "SELECT * FROM BelongsTo NATURAL JOIN Model WHERE category_id == " . $tuple[category_id];
+              $query = "SELECT * FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple[category_id];
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
@@ -105,7 +105,7 @@ generate_head("Search Results", "search");
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_name]</small></div>";
                       ?>
                 </div>
                 <?php
@@ -139,7 +139,7 @@ generate_head("Search Results", "search");
 			          <div class="card-body">
 			            <?php
 			            echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-			            echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+			            echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
 			            ?>
 			        </div>
 			      <?php
@@ -176,7 +176,7 @@ generate_head("Search Results", "search");
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       ?>
                   </div>
                 
@@ -215,7 +215,7 @@ generate_head("Search Results", "search");
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
 
                       ?>
                   </div>
@@ -423,7 +423,7 @@ generate_head("Search Results", "search");
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
                       ?>
@@ -456,7 +456,7 @@ generate_head("Search Results", "search");
                     <div class="card-body">
                       <?php
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+                      echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
                       echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[uploaded_date]</small></div>";
                       ?>

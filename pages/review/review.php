@@ -12,10 +12,10 @@ generate_head("Review", "search");
     <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
     </div>
     <div class="col-sm-4 text-left" style="margin-top: 10px"> 
-      <h2>Headline</h2>
+      <h3>Headline</h3>
       <form method="post" action="review_help.php">
         <input type="text" name="review_title" placeholder="What's most important to know?" style="width:100%">
-      <h2>Rating</h2>
+      <h3>Rating</h3>
       <input name="rating" id="input-id" type="text" class="rating" data-size="sm" style="showCaption: false">
       <script type = "text/javascript">$("#input-id").rating();</script>
     </div>
