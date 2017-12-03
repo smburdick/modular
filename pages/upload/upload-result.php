@@ -1,8 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
 	/**
 	 * This is the landing page of the file uploader.
 	 * Add a new file to the database.
 	 */
+	include '../boilerplate.php';
+	generate_head('Upload Model', 'Upload');
+?>
+<body>
+<div class="container-fluid text-center"> 
+  <div class="row content">
+
+    <div class="col-sm-2 sidenav">
+    </div>
+
+    <div class="col-sm-8 text-left"> 
+<br><br>
+<?php
 	$db_file = '../../db/modular.db';
 	$user_id = $_COOKIE["user_id"];
 	if (isset($user_id)) {
@@ -49,5 +64,12 @@
 		echo 'You must be signed in to upload a model.';
 	}
 ?>
-<br><br>
-<a href="../index.php"><button>Return to homepage</button></a>
+</div>
+
+    <div class="col-sm-2 sidenav">
+    </div>
+
+</div>
+</div>
+</body>
+</html>
