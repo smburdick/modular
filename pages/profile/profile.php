@@ -33,12 +33,12 @@
 				
 				echo '<br>
 				<center><img src="'.$data[0]['photo'].'" style="height: 75%; width: 75%"><br><br>
-				<form action="uploadImage.php">
+				<!--<form action="uploadImage.php">
 					<input type="Submit" value="Upload a Profile Image">
-				</form>
+				</form>-->
 				</center>
 			</div>
-			<div class="col-sm-7 text-left">';
+			<div class="col-sm-8 text-left">';
 
 					if ($success){
 						echo '
@@ -57,11 +57,6 @@
 							<input type="Submit" value="Add a Credit Card">
 						</form>';
 					}
-				?>
-			</div>
-			<div class="col-sm-1 text-center">
-				<?php
-					
 				?>
 			</div>
 		</div>
