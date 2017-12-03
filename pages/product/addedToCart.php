@@ -30,8 +30,8 @@
     $insert_stmt->bindParam(3, $quantity);
     echo "<br>";
     echo "also made it here";
-    $temp = $db->exec($insert_stmt);
-    //$insert_stmt->execute();
+    //$temp = $db->exec($insert_stmt);
+    $insert_stmt->execute();
     echo "<br>";
     echo "<b>inserting</b>";
   }

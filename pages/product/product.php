@@ -40,6 +40,9 @@
     <div class="col-sm-1 sidenav">
     </div>
       <?php
+// GET RID OF PRESLEYS PHOTO AND MAKE IT IMAGE (in slack)
+// MAKE BETTER addedToCart.php 
+// make better css for editor and project
 	echo "<div class='col-sm-3 text-center'>";
 	$db_path = '../../db/modular.db';
 	$model_id = $_GET["id"]; // model id
@@ -60,7 +63,7 @@
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
 	    $model_id = $tuple["model_id"];
-	    $current_user = $_COOKIE["userID"];
+	    $current_user = $_COOKIE["user_id"];
 	    //if(!isset($current_user)) echo "USER NOT SET";
 	    //else echo "USER SET " . $current_user;
 	    $description = $tuple["description"];
