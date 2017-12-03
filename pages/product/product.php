@@ -50,14 +50,18 @@
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
 	  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	  $get_Model = 'select * from Model natural join Material natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
-	  $result_set = $db->query($get_Model);
+	  //$get_Model = 'select * from Model natural join Material natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
+	  $get_Model = $db->prepare("select * from Model natural join Material natural join User where model_id = ? and creator_id = user_id");
+	  $get_Model->bindParam(1, $model_id); 
+	  $get_Model->execute();
+	  $result_set = $get_Model->fetchAll();
 	  foreach($result_set as $tuple){
 	    // change href to profile.php when that is ready
 	    echo "<img src='PresleyReed.jpg' width='320' height='400'>";
 	    echo "</div>";
 	    echo "<div class='col-sm-8 text-left'>"; 
-	    $model_name = $tuple["model_name"]; $creator_name = $tuple["username"];
+	    $model_name = $tuple["model_name"]; 
+	    $creator_name = $tuple["username"];
 	    $mass_in_grams = $tuple["mass_in_grams"];
 	    $cost_per_gram = $tuple["cost_per_gram"];
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
@@ -113,8 +117,10 @@
   $model_id = $_GET["id"]; // model id
   try {
     $db = new PDO('sqlite:' . $db_path);
-    $get_Model = 'select * from Review natural join User natural join Model where model_id = ' . $model_id;
-    $result_set = $db->query($get_Model);
+    $get_Review = $db->prepare("select * from Review natural join User natural join Model where model_id = ?");
+    $get_Review->bindParam(1, $model_id); 
+    $get_Review->execute();  
+    $result_set = $get_Review->fetchAll();
     echo "<br>";
     echo "<br>";
     foreach($result_set as $tuple){
@@ -129,7 +135,7 @@
       echo "<div class='card col-sm-10'>";
       echo "<div class='card-header'><i>$user_name</i> gave <i>$model_name</i> $score stars</div>";
       echo "<div class='card-body'>$comment</div>";
-      echo "<div class='card-footer'>Reviewd on $date</div>";
+      echo "<div class='card-footer'>Reviewed on $date</div>";
       echo "</div>";
     }
     //echo "</div>";
