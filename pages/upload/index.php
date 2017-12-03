@@ -1,7 +1,4 @@
 <?php
-    // testing zone
-    $testUserID = 0; // Sam's test user ID
-    setcookie("user_id", $testUserID, time() + 86400*30); // 86400 = 1 day
     include '../boilerplate.php';
     echo '<!DOCTYPE html>
 	<html lang="en">';
@@ -14,6 +11,7 @@
 <body>
 <div class="container-fluid text-center"> 
   <div class="row content">
+
     <div class="col-sm-2 sidenav">
 
     </div>
@@ -42,9 +40,7 @@
     </div>
   </div>
 </div>
-	<?php
-	   generate_footer();
-	?>
+
 </body>
 
 </html>
