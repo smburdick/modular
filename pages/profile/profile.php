@@ -33,12 +33,12 @@
 				
 				echo '<br>
 				<center><img src="'.$data[0]['photo'].'" style="height: 75%; width: 75%"><br><br>
-				<form action="uploadImage.php">
+				<!--<form action="uploadImage.php">
 					<input type="Submit" value="Upload a Profile Image">
-				</form>
+				</form>-->
 				</center>
 			</div>
-			<div class="col-sm-4 text-left">';
+			<div class="col-sm-8 text-left">';
 
 					if ($success){
 						echo '
@@ -50,17 +50,13 @@
 						echo '<br><form action="../profile/updateProfile.php">
 							<input type="Submit" value="Edit your Profile">
 						</form><br>';
-					}
-				?>
-			</div>
-			<div class="col-sm-4 text-center">
-				<?php
-					echo '<br><br><form action="../profile/addAddress.php">
+						echo '<br><form action="../profile/addAddress.php">
 							<input type="Submit" value="Add an Address">
 						</form><br><br>';
-					echo '<form action="../profile/addCredit.php">
+						echo '<form action="../profile/addCredit.php">
 							<input type="Submit" value="Add a Credit Card">
 						</form>';
+					}
 				?>
 			</div>
 		</div>
@@ -71,6 +67,8 @@
 		<div class="col-sm-2 sidenav">
 		</div>
 		<div class="col-sm-8 text-left">
+			<hr>
+			<h3>Models</h3>
 			<center><br>
 			<?php
 				echo "<div class=\"card-deck\">";
