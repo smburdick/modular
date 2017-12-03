@@ -1,6 +1,8 @@
 <?php
 	$username = $_POST['username'];
 	setcookie('username', $username, time() + 86400, '/');
+	$user_id = $_POST['user_id'];
+	setcookie('user_id', $user_id, time() + 86400, '/');
 ?>
 <?php
 	//path to the SQLite database file
@@ -48,6 +50,7 @@
 				$stmt->bindParam(8, $hashed_password);
 				$stmt->bindParam(9, $emailAddress);
 				$stmt->execute();
+				$data = $stmt->fetchAll();
 
 				$stmt = $db->prepare('SELECT user_id FROM user WHERE username = ?;');
 				$stmt->bindParam(1, $username);
