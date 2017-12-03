@@ -3,6 +3,7 @@
 	$cookie_name = "username";
 	$username = $_POST['username'];
 	setcookie($cookie_name, $username, time() + 86400, '/');
+	setcookie("user_id", $_COOKIE["user_id"], time() + 86400, '/');
 ?>
 
 <?php
