@@ -20,9 +20,7 @@ generate_head("Review", "search");
       <script type = "text/javascript">$("#input-id").rating();</script>
     </div>
     <div class="col-sm-3 text-left" style="margin-top: 10px"> 
-      <img src="homer.png" style="max-width:100%"/>
-    </div>
-    <div class="col-sm-3 text-left" style="margin-top: 10px"> 
+
     <?php 
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
@@ -34,15 +32,15 @@ generate_head("Review", "search");
           $db = new PDO('sqlite:' . $db_file);
           //set errormode to use exceptions
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          //NOT FUNCTIONAL (need proper cookie)
-          //replace Product Name and Other Info below with these 
-          //php strings
-          //echo "<h2>Product Name</h2>";
-          $prod_query = "SELECT model_name FROM Model WHERE model_id=:id LIMIT 1;";
+          $prod_query = "SELECT model_name, image FROM Model WHERE model_id=:id LIMIT 1;";
           $prod_prep = $db->prepare($prod_query);
           $prod_prep->bindParam(":id", $model_id);
           $result = $prod_prep->execute();
           $result = $prod_prep->fetchAll();
+          $image = $result[0][1];
+          echo '<img src="'.$image.'" style="max-width:100%"/>
+          </div>
+          <div class="col-sm-3 text-left" style="margin-top: 10px">';
 
           echo "<h2>" . $result[0][0] . "</h2>";
           echo "<p> </p>";
