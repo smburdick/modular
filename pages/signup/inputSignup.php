@@ -57,7 +57,7 @@
 				$stmt->execute();
 				$user_id = $stmt->fetchAll()[0][0];
 
-				setcookie("user_id", $user_id, time() * 86400, '/');
+				setcookie("user_id", $user_id, time() + 86400, '/');
 
 				echo'<h1>Your Account was created!</h1>
 					<h3>Click here to go to your profile page:</h3>

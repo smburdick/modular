@@ -13,9 +13,14 @@
 		</div>
 		<div class="col-sm-8 text-left"> 
 			<div class="col-sm-4">
-				
+				<br>
+				<center><img src="empty_profile_img.png" style="height: 75%; width: 75%"><br><br>
+				<form action="uploadImage.php">
+					<input type="Submit" value="Upload a Profile Image">
+				</form>
+				</center>
 			</div>
-			<div class="col-sm-8 text-left">
+			<div class="col-sm-4 text-left">
 				<?php
 					$db_file = '../../db/modular.db';
 					$db = new PDO('sqlite:' . $db_file);
@@ -41,16 +46,20 @@
 						<h4>Birthday: '.$data[0]['birth_month'].'/'.$data[0]['birth_day'].'/'.$data[0]['birth_year'].'</h4>
 						<h4> Biography:</h4>
 						<p>'.$data[0]['bio'];
-						echo '<form action="../profile/updateProfile.php">
-								<input type="Submit" value="Edit your Profile">
-							</form><br>';
-						echo '<form action="../profile/addAddress.php">
-								<input type="Submit" value="Add an Address">
-							</form><br>';
-						echo '<form action="../profile/addCredit.php">
-								<input type="Submit" value="Add a Credit Card">
-							</form>';
+						echo '<br><form action="../profile/updateProfile.php">
+							<input type="Submit" value="Edit your Profile">
+						</form><br>';
 					}
+				?>
+			</div>
+			<div class="col-sm-4 text-center">
+				<?php
+					echo '<br><br><form action="../profile/addAddress.php">
+							<input type="Submit" value="Add an Address">
+						</form><br>';
+					echo '<form action="../profile/addCredit.php">
+							<input type="Submit" value="Add a Credit Card">
+						</form>';
 				?>
 			</div>
 		</div>
@@ -61,6 +70,7 @@
 		<div class="col-sm-2 sidenav">
 		</div>
 		<div class="col-sm-8 text-left">
+			<br>
 			<?php
 				echo "<div class=\"card-deck\">";
 					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
@@ -75,9 +85,10 @@
 					?>
 					  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
 						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-						<img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-						<div class="card-body">
-						  <?php
+						<?php
+						echo '<img class="card-img-top" src="'.$tuple['image'].'">
+						<div class="card-body">';
+						  
 						  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
 
 						  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";

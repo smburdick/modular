@@ -97,14 +97,13 @@ CREATE TABLE Purchases(
 
 CREATE TABLE Address(
 	user_id INTEGER,
-	address_id INTEGER,
+	address_id INTEGER PRIMARY KEY,
 	address_line_one TEXT NOT NULL,
 	address_line_two TEXT NOT NULL,
 	city TEXT,
 	state TEXT,
 	zipcode INTEGER NOT NULL,
 	country TEXT,
-	PRIMARY KEY (user_id, address_id),
 	FOREIGN KEY (user_id) REFERENCES User(user_id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
@@ -116,6 +115,8 @@ CREATE TABLE BankingInfo (
 	card_number INTEGER NOT NULL,
 	ccv INTEGER NOT NULL,
 	name_on_card TEXT NOT NULL,
+	expiration_month INTEGER NOT NULL,
+	expiration_year INTEGER NOT NULL,
 	PRIMARY KEY (banking_info_id),
 	FOREIGN KEY (user_id) REFERENCES User(user_id)
 		ON DELETE CASCADE
