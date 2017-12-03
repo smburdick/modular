@@ -54,6 +54,7 @@
     <?php
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
+      $quantity = $_GET["quantity"];
 
       if (isset($user_id)) {
         try {
