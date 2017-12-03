@@ -42,6 +42,8 @@
     </div>
 <?php 
   // Gabriel Pinkard
+  $success = false;
+  $results = false;
   $db_path = '../../db/modular.db'; 
   $db = new PDO('sqlite:' . $db_path);
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
