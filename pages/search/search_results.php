@@ -99,9 +99,10 @@ generate_head("Search Results", "search");
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
+                    <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
@@ -135,9 +136,10 @@ generate_head("Search Results", "search");
 			      ?>
 			        <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
 			        <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-			          <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-			          <div class="card-body">
-			            <?php
+			          <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
 			            echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
 			            echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
 			            ?>
@@ -172,9 +174,10 @@ generate_head("Search Results", "search");
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
+                    <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       ?>
@@ -211,9 +214,10 @@ generate_head("Search Results", "search");
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
+                    <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
 
@@ -419,9 +423,10 @@ generate_head("Search Results", "search");
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
+                    <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
@@ -452,9 +457,10 @@ generate_head("Search Results", "search");
                 ?>
                   <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
+                    <?php
+                      $image = $tuple[image];
+	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
+	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
                       echo "<a href=\"../product/product.php?id=$tuple[model_id]\" class=\"card-link\">View Model</a>";
                       echo "</div>";
