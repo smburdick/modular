@@ -56,7 +56,7 @@
 				<?php
 					echo '<br><br><form action="../profile/addAddress.php">
 							<input type="Submit" value="Add an Address">
-						</form><br>';
+						</form><br><br>';
 					echo '<form action="../profile/addCredit.php">
 							<input type="Submit" value="Add a Credit Card">
 						</form>';
@@ -70,7 +70,7 @@
 		<div class="col-sm-2 sidenav">
 		</div>
 		<div class="col-sm-8 text-left">
-			<br>
+			<center><br>
 			<?php
 				echo "<div class=\"card-deck\">";
 					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
@@ -83,7 +83,7 @@
 				  $new_results = $db->query($query);
 				  foreach($new_results as $tuple) {
 					?>
-					  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+					  <div class="card" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
 						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
 						<?php
 						echo '<img class="card-img-top" src="'.$tuple['image'].'">
@@ -100,6 +100,7 @@
 				  }
 				echo "</div>";
 			?>
+		</center>
 		</div>
 		<div class="col-sm-2 sidenav">
 		</div>
