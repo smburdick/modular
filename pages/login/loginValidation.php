@@ -17,23 +17,22 @@
 		//set errormode to use exceptions
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		//return all passengers, and store the result set
-		$stmt = $db->prepare("SELECT * FROM user WHERE username = ?");
+		$stmt = $db->prepare("SELECT * FROM user WHERE username = ?;");
 		$stmt->bindParam(1, $username);
 		$success = $stmt->execute();
 		$returnedValues = $stmt->fetchAll();
 
-		if (strcmp($returnedValues[0][1], $username) !== 0 || password_verify($password, $returnedValues[0][8])){
+		if (strcmp($returnedValues[0][1], $username) !== 0 && password_verify($password, $returnedValues[0][8]) !== 0){
+			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
+			echo '<form action="login.php">
+					<input type="Submit" value="Try Again">
+				  </form>';
+		}else{
 			echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
 			echo '<form action="../profile/profile.php">
 					<input type="Submit" value="Go to your Profile">
 				  </form>';
 			
-		}else{
-
-			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
-			echo '<form action="login.php">
-					<input type="Submit" value="Try Again">
-				  </form>';
 		}
 
 		$db = null;
