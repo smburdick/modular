@@ -43,10 +43,14 @@
 						<p>'.$data[0]['bio'];
 						echo '<form action="../profile/updateProfile.php">
 								<input type="Submit" value="Edit your Profile">
+							</form><br>';
+						echo '<form action="../profile/addAddress.php">
+								<input type="Submit" value="Add an Address">
+							</form><br>';
+						echo '<form action="../profile/addCredit.php">
+								<input type="Submit" value="Add a Credit Card">
 							</form>';
 					}
-
-					//$db = null;
 				?>
 			</div>
 		</div>
