@@ -94,10 +94,6 @@
 	</div>
 </div>
 
-<footer class="container-fluid text-center">
-	<p align="left">2017 Modular</p>
-</footer>
-
 </body>
 </html>
 
