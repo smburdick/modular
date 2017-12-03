@@ -3,10 +3,8 @@
 	include '../boilerplate.php';
     echo '<!DOCTYPE html>
 	<html lang="en">';
-    generate_head('Upload New Model', 'Upload');
+    generate_head('Your Profile', 'profile');
 ?>
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
 <html lang="en">
 	
 <div class="container-fluid text-center">    

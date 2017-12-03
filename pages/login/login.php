@@ -3,9 +3,8 @@
 	include '../boilerplate.php';
     echo '<!DOCTYPE html>
 	<html lang="en">';
-    generate_head('Upload New Model', 'Upload');
+    generate_head('Login', 'login');
 ?>
-<!doctype html>
 <body>
 
 <div class="container-fluid text-center">    
