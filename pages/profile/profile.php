@@ -70,6 +70,7 @@
 		<div class="col-sm-2 sidenav">
 		</div>
 		<div class="col-sm-8 text-left">
+			<br>
 			<?php
 				echo "<div class=\"card-deck\">";
 					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
@@ -85,7 +86,7 @@
 					  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
 						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
 						<?php
-						echo '<img class="card-img-top" src="'.$data[0][10].'" alt="Card image cap">
+						echo '<img class="card-img-top" src="'.$tuple['image'].'">
 						<div class="card-body">';
 						  
 						  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
