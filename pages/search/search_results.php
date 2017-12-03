@@ -1,65 +1,22 @@
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Modular</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="../css/style.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- important mandatory libraries -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-  <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
-</head>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="../">Modular</a> <!-- TODO logo -->
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="../">Home</a></li>
-        <li><a href="../cart">Cart</a></li>
-        <li><a href="#">Contact</a></li>
-        <li>
-          <form class="navbar-form" role="search" method="get" action="search_results.php">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-              </div>
-            </div>
-          </form>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<html>
+<?php
+include "../boilerplate.php";
+generate_head("Search Results", "search");
+?>
 
 <body style="height: 100%">
-<div class="container-fluid text-center" style="overflow: hidden; height: 100%">    
-  <div class="row content" style="overflow: hidden; height: 100%">
+<div class="container-fluid text-center" style="overflow: hidden; height: auto">    
+  <div class="row content" style="height: 100px">
     <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
     <div class="col-sm-10 text-left" style="margin-top: 10px; overflow: hidden;"> 
       <h3>Search Results</h3>
       <p>Search By</p>
     </div>
-    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px; overflow: hidden"></div>
   </div>
-  <div class="row content" style="overflow: hidden; height: 100%">
-    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px">
+  <div class="row content" style="height: 100%">
+    <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px; overflow: hidden">
     </div>
     <div class="col-sm-10 text-left">
       <ul class="nav nav-tabs">
@@ -204,7 +161,7 @@
               $i++;
             }
             $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . " COLLATE NOCASE;";
-            echo "<p>".$search_query."</p>";
+            //echo "<p>".$search_query."</p>";
             $result = $db->query($search_query);
             $new_results;
             echo "<div class=\"card-deck\">";
