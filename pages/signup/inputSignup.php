@@ -15,6 +15,7 @@
 		$photo = $_POST['photo'];
 		$emailAddress = $_POST['email'];
 		$verify_password = $_POST['verify_password'];
+		$default_image = '../profile/empty_profile_img.png';
 
 		if (strcmp($password, $verify_password) !== 0){
 			echo '<h2>The passwords that you entered did not match</h2>
@@ -33,7 +34,7 @@
 			$data = $checkUsername->fetchAll();
 
 			if (strcmp($username, $data[0][1]) !== 0){
-				$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL);");
+				$stmt = $db->prepare("insert into user values (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 				$stmt->bindParam(1, $username);
 				$stmt->bindParam(2, $f_name);
 				$stmt->bindParam(3, $l_name);
@@ -43,6 +44,7 @@
 				$stmt->bindParam(7, $bio);
 				$stmt->bindParam(8, $hashed_password);
 				$stmt->bindParam(9, $emailAddress);
+				$stmt->bindParam(10, $default_image);
 				$stmt->execute();
 				$data = $stmt->fetchAll();
 
