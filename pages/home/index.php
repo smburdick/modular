@@ -41,41 +41,32 @@
       </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <!-- TODO this should be conditioned on whether the user is logged in. We'll need to set a cookie to check this. -->
+
         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
 </nav>
-  
+<!--
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
 
     </div>
     <div class="col-sm-8 text-left"> 
+
       <h1>Welcome</h1>
       <p>Scroll through featured products here.</p>
       <hr>
       <h3>Test</h3>
       <p>Featured categories here.</p>
     </div>
+
     <div class="col-sm-2 sidenav">
-      <!--
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    -->
     </div>
   </div>
 </div>
-
-<footer class="container-fluid text-center">
-  <p align="left">2017 Modular</p>
-</footer>
+-->
 
 </body>
 </html>
