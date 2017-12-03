@@ -14,7 +14,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
   <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 </head>
-<body style="height: 100%">
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -47,7 +47,8 @@
     </div>
   </div>
 </nav>
-  
+
+<body style="height: 100%">
 <div class="container-fluid text-center" style="overflow: hidden; height: 100%">    
   <div class="row content" style="overflow: hidden; height: 100%">
     <div class="col-sm-1 sidenav" style="margin-bottom: -99999px; padding-bottom: 99999px"></div>
@@ -156,58 +157,41 @@
             echo "</div>";
           }
           //SEARCH MODEL BY COLOR
-          else if($search_by == color){
-            foreach($search_like as $value){
-            	$j = $i + 1;
-              if($i == $count){
-                $like_string .= "?";
-              }
-              else{
-                $like_string .= "? OR name LIKE ";   
-              }
-              $i++;
-            }
-            $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
-            $stmt=$db->prepare($search_query);
-            //$type_string = "";
-            //$vars_string = ""; 
-            $i = 1;
-            foreach($search_like as $term){
-            	//$term = "'".$term."'";
-            	echo $term;
-            	$stmt->bindParam($i, $term);
-            	$i++;
-            }
-            echo "<p>".$search_query."</p>";
-            //$result = $db->query($search_query);
-            $stmt->debugDumpParams();
-            $boolean = $stmt->execute();
-            $result = $stmt->fetchAll();
-            $new_results;
-            echo "<div class=\"card-deck\">";
-            foreach($result as $tuple) {
-            	echo "<h1>HEYYYYY</h1>";
-            	echo $tuple;
-              $query = "SELECT * FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
-              $new_results = $db->query($query);
-              foreach($new_results as $tuple) {
-                ?>
-                  <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
-                  <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-                    <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
-                    <div class="card-body">
-                      <?php
-                      echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-                      echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
-                      ?>
-                  </div>
-                <?php
-                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[name]</small></div>";
-                echo "</div>";
-              }
-            }
-            echo "</div>";
-          }
+		  else if($search_by == color){
+			  foreach($search_like as $value){
+			    if($i == $count){
+			      $like_string .= "'".$value."'";
+			    }
+			    else{
+			      $like_string .= "'".$value."' OR name LIKE ";   
+			    }
+			    $i++;
+			  }
+			  $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
+			  $result = $db->query($search_query);
+			  $new_results;
+			  echo "<div class=\"card-deck\">";
+			  foreach($result as $tuple) {
+			    $query = "SELECT * FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
+			    $new_results = $db->query($query);
+			    foreach($new_results as $tuple) {
+			      ?>
+			        <div class="card" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
+			        <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+			          <img class="card-img-top" src="../review/homer.png" alt="Card image cap">
+			          <div class="card-body">
+			            <?php
+			            echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+			            echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+			            ?>
+			        </div>
+			      <?php
+			      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[name]</small></div>";
+			      echo "</div>";
+			    }
+			  }
+			  echo "</div>";
+		  }
           //SEARCH MODEL BY MATERIAL
           else if($search_by == material){
             foreach($search_like as $value){
@@ -341,7 +325,7 @@
             //join all these tables so we can get all the data 
             $join_table = "Material NATURAL JOIN (Color NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id))))";
             $q1 = "SELECT * FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
-            echo "<p>".$q1."</p>";
+            //echo "<p>".$q1."</p>";
 
             //queries for each relation
             $query1 = "SELECT * FROM ".$join_table." WHERE name LIKE " . $like_string1;
@@ -540,9 +524,6 @@
 
 </div>
 
-<footer class="container-fluid text-center">
-  <p align="left">2017 Modular</p>
-</footer>
 
 
 
