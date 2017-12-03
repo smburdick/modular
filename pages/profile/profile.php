@@ -1,7 +1,9 @@
 <?php
 	$username = $_COOKIE['username'];
 	include '../boilerplate.php';
-
+    echo '<!DOCTYPE html>
+	<html lang="en">';
+    generate_head('Upload New Model', 'Upload');
 ?>
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
 <!DOCTYPE html>
