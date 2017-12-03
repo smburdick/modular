@@ -4,7 +4,7 @@
 	 * Add a new file to the database.
 	 */
 	$db_file = '../../db/modular.db';
-	$user_id = $_COOKIE["userID"];
+	$user_id = $_COOKIE["user_id"];
 	if (isset($user_id)) {
 		try {
 			$db = new PDO('sqlite:' . $db_file);
