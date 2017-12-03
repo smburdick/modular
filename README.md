@@ -1,4 +1,4 @@
-# modular
+# ![alt](logo/modular_logo.png)
 ## Contributors
 - Gabriel Pinkard
 - Ian White
