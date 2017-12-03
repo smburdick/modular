@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <title>Modular</title>
@@ -22,7 +21,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Modular</a> <!-- TODO logo -->
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -42,43 +40,65 @@
     <div class="col-sm-1 sidenav">
     </div>
       <?php
+      setcookie("user_id","3",time()+(8640 * 60)); // remember to remove this later
+// GET RID OF PRESLEYS PHOTO AND MAKE IT IMAGE (in slack)
+// MAKE BETTER addedToCart.php 
+// make better css for editor and project
 	echo "<div class='col-sm-3 text-center'>";
 	$db_path = '../../db/modular.db';
 	$model_id = $_GET["id"]; // model id
 	try {
 	  $db = new PDO('sqlite:' . $db_path);
-	  $get_Model = 'select * from Model natural join Material natural join Created natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
+	  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	  $get_Model = 'select * from Model natural join Material natural join User where model_id = ' . $model_id . ' and creator_id = user_id;';
 	  $result_set = $db->query($get_Model);
 	  foreach($result_set as $tuple){
 	    // change href to profile.php when that is ready
 	    echo "<img src='PresleyReed.jpg' width='320' height='400'>";
 	    echo "</div>";
-	    echo "<div class='col-sm-8 text-left'>";
-	    $model_name = $tuple["model_name"];
-	    $creator_name = $tuple["username"];
+	    echo "<div class='col-sm-8 text-left'>"; 
+	    $model_name = $tuple["model_name"]; $creator_name = $tuple["username"];
 	    $mass_in_grams = $tuple["mass_in_grams"];
 	    $cost_per_gram = $tuple["cost_per_gram"];
 	    $cost = $cost_per_gram * $mass_in_grams / 100;
 	    $material_name = $tuple["material_name"];
 	    $model_id = $tuple["model_id"];
-	    echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> Material: </font> <font size='4' color='black'><i>$material_name</i></font>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> Mass in grams:</font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
-	    echo "<br>";
-	    echo "<font size='4' color='282a2e'> price:</font> <font size='4' color='red'><i>$ $cost</i></font>";
-	    echo "<br>";
-	    echo "<form action='/cart/index.php'>";
-	    echo "<font size='4' color='282a2e'> quantity:</font> <input name='count' type='number' value='1' min='1'/>"; 
-	    echo "</form>";
-	    echo "<a href='/cart/index.php?id=$model_id'&quantity=$quantity><button>Add to cart </button></a>";
-	    echo "</div>";
+	    $current_user = $_COOKIE["user_id"];
+	    $description = $tuple["description"];
+	      echo "<font size='6' color='red'><b>$model_name<b></font><a href='/profile/profile.php?username=$creator_name'><font size='4'> by <i>$creator_name</i></font></a>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>Material:</u> </font> <font size='4' color='black'><i>$material_name</i></font>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>Mass in grams:</u></font><font size='4' color='black'> <i>$mass_in_grams</i> </font>";
+	      echo "<br>";
+	      echo "<font size='4' color='282a2e'> <u>price:</u></font> <font size='4' color='red'><i>$ $cost</i></font>";
+	      echo "<br>";
+	      echo "<p><font size='4' color='282a2e'><b><u><i>Description: </i></u></b></font>$description</p>";
+	    if(!isset($current_user)) {
+	      echo "<font size='3' color='282a2e'> Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart</font>";
+	    } else {
+	      echo "<form action='/product/addedToCart.php' method='post'";
+	      echo "<font size='4' color='282a2e'><u>quantity</u></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
+	      echo "<input type='hidden' name='current_user' value=$current_user>";
+	      echo "<input type='hidden' name='model_id' value=$model_id>";
+	      echo "<input type='hidden' name='model_name' value=$model_name>";
+	      echo "<br>";
+	      echo "<input type='submit' value='Add to cart'/>";
+	      echo "</form>";
+	      echo "<form action='/product/addedToBookmarks.php' method='post'>";
+	      echo "<input type='hidden' name='current_user' value=$current_user>";
+	      echo "<input type='hidden' name='model_id' value=$model_id>";
+	      echo "<br>";
+	      echo "<input type='submit' value='Add to bookmarks'/>";
+	      echo "</form>";
+	      echo "<br>";
+	      echo "</div>";
+	    }
 	  }
 	} catch(PDOException $e){
 	  die('Exception : ' . $e->getMessage());
 	}
-	$db = null // disconnect 
+	$db = null; // disconnect 
       ?>
   </div>
 </div>
@@ -109,17 +129,8 @@
       echo "<div class='card col-sm-10'>";
       echo "<div class='card-header'><i>$user_name</i> gave <i>$model_name</i> $score stars</div>";
       echo "<div class='card-body'>$comment</div>";
-      echo "<div class='card-footer'>Date $date</div>";
+      echo "<div class='card-footer'>Reviewd on $date</div>";
       echo "</div>";
-      //echo "<style> asdf {border :2px solid #021a40;} </style>";
-      //echo "<asdf>";
-      //echo "<font size='4' color='black'>";
-      //echo "<br>";
-      //echo $score;
-      //echo "<br>";
-      //echo $comment;
-      //echo "</font>";
-      //echo "</asdf>";
     }
     //echo "</div>";
   } catch(PDOException $e){
@@ -128,6 +139,7 @@
   //$db = null // disconnect
   echo "</div>";
   echo "</div>";
+  $db = null;
 ?>
 </body>
 </html>

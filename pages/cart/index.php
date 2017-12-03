@@ -17,6 +17,7 @@
     <div class="col-sm-8 text-left"> <br><br>
     <?php
       $db_file = '../../db/modular.db';
+
       $user_id = $_COOKIE["user_id"];
 
       if (isset($user_id)) {
