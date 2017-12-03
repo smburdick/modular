@@ -1,9 +1,5 @@
 <?php
-	$cookie_name = "username";
 	$username = $_POST['username'];
-	setcookie($cookie_name, $username, time() + 86400, '/');
-?>
-<?php
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
@@ -28,6 +24,9 @@
 					<input type="Submit" value="Try Again">
 				  </form>';
 		}else{
+			setcookie("username", $username, time() + 86400*30, '/');
+			setcookie("user_id", $returnedValues[0][0], time() + 86400*30, '/');
+
 			echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
 			echo '<form action="../profile/profile.php">
 					<input type="Submit" value="Go to your Profile">
