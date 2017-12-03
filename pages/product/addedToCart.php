@@ -30,7 +30,7 @@
     $insert_stmt->bindParam(3, $quantity);
     echo "<br>";
     echo "also made it here";
-    $db->exec($insert_stmt);
+    $temp = $db->exec($insert_stmt);
     //$insert_stmt->execute();
     echo "<br>";
     echo "<b>inserting</b>";
@@ -48,8 +48,9 @@
     $update_stmt->bindParam(3, $model_id);
     echo "made it here";
     echo "<br>";
-    $db->exec($update_stmt);
-    //$update_stmt->execute();
+    //$t = $db->exec($update_stmt);
+    $update_stmt->execute();
+    echo "<br>";
     echo "<b>updating</b>"; 
   }
   echo "<br>";
