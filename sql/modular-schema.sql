@@ -115,15 +115,11 @@ CREATE TABLE BankingInfo (
 	user_id INTEGER,
 	card_number INTEGER NOT NULL,
 	ccv INTEGER NOT NULL,
-	billing_address_id INTEGER NOT NULL,
 	name_on_card TEXT NOT NULL,
 	PRIMARY KEY (banking_info_id),
 	FOREIGN KEY (user_id) REFERENCES User(user_id)
 		ON DELETE CASCADE
-		ON UPDATE CASCADE,
-	FOREIGN KEY (billing_address_id) REFERENCES Address(address_id)
 		ON UPDATE CASCADE
-		ON DELETE SET NULL
 );
 
 CREATE TABLE InCart(
