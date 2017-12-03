@@ -49,6 +49,13 @@
 				$stmt->bindParam(9, $emailAddress);
 				$stmt->execute();
 
+				$stmt = $db->prepare('SELECT user_id FROM user WHERE username = ?;');
+				$stmt->bindParam(1, $username);
+				$stmt->execute();
+				$user_id = $stmt->fetchAll()[0][0];
+
+				setcookie("user_id", $user_id, time() * 86400, '/');
+
 				echo'<h1>Your Account was created!</h1>
 					<h3>Click here to go to your profile page:</h3>
 					<form action="../profile/profile.php">
