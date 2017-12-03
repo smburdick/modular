@@ -63,9 +63,9 @@
                         $model_mat = $model["material_id"];
                         $model_descr = $model["description"];
                         $image = $model["image"];
-                        echo '<div class="row"><div class="column">';
-                        echo '<div id="canvas"></div></div>';
-                        echo '<div class="column" >'; // second column is the 
+
+                        echo '<div id="canvas"></div>';
+
 
                     } else {
                         echo 'You don\'t have permission to edit this model.<br><br>';
