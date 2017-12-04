@@ -1,4 +1,6 @@
 <?php
+	echo '<!DOCTYPE html>';
+	echo '<html>';
  	include '../boilerplate.php';
     generate_head('Editor', '');
 
@@ -27,5 +29,6 @@ echo '<div class="container-fluid text-center">
 		<div class="col-sm-2 sidenav">
 	</div>
 </div>';
+echo '</html>';
 
 ?>

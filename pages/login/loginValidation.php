@@ -21,6 +21,8 @@
 			if (password_verify($password, $returnedValues[0]['hashed_password'])){
 				setcookie("username", $username, time() + 86400*30, '/');
 				setcookie("user_id", $returnedValues[0][0], time() + 86400*30, '/');
+				echo '<!DOCTYPE html>';
+				echo '<html>';
 				include '../boilerplate.php';
 	   			generate_head('Editor', '');
 				echo '<div class="container-fluid text-center">    
@@ -37,7 +39,10 @@
 						</div>
 					</div>
 				</div>';
+				echo '</html>';
 			}else{
+				echo '<!DOCTYPE html>';
+				echo '<html>';
 				include '../boilerplate.php';
 	   			generate_head('Editor', '');
 				echo '<div class="container-fluid text-center">    
@@ -54,8 +59,11 @@
 						</div>
 					</div>
 				</div>';
+				echo '</html>';
 			}
 		}else{
+			echo '<!DOCTYPE html>';
+			echo '<html>';
 			include '../boilerplate.php';
 	   		generate_head('Editor', '');
 			echo '<div class="container-fluid text-center">    
@@ -72,6 +80,7 @@
 					</div>
 				</div>
 			</div>';
+			echo '</html>';
 		}
 		$db = null;
 	}
