@@ -23,7 +23,7 @@ generate_head("Review", "search");
 
     <?php 
       $db_file = '../../db/modular.db';
-      $user_id = $_COOKIE["userID"];
+      $user_id = $_COOKIE["user_id"];
       $model_id = $_GET["id"];
 
       //if(isset($user_id)){

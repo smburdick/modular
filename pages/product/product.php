@@ -59,7 +59,7 @@
       } else {
 	echo "<br>";
 	echo "<font size='3'>";
-	echo "<form action='/product/addedToCart.php' method='post'";
+	echo "<form action='addedToCart.php' method='post'";
 	echo "<font size='4' color='282a2e'><b>quantity</b></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
 	echo "<input type='hidden' name='current_user' value=$current_user>";
 	echo "<input type='hidden' name='model_id' value=$model_id>";
@@ -68,12 +68,14 @@
 	echo "<input type='submit' value='Add to cart'/>";
 	echo "</form>";
 	echo "<br>";
-	echo "<form action='/product/addedToBookmarks.php' method='post'>";
+	echo "<form action='addedToBookmarks.php' method='post'>";
 	echo "<input type='hidden' name='current_user' value=$current_user>";
 	echo "<input type='hidden' name='model_id' value=$model_id>";
 	echo "<br>";
 	echo "<input type='submit' value='Add to bookmarks'/>";
 	echo "</form>";
+	echo "<br>";
+	echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
 	echo "</font>";
 	echo "<br>";
 	echo "<br>";
