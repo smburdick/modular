@@ -1,4 +1,4 @@
-insert into User values (0,'sam','Sam','Burdick',25,4,1996,'tester',0,'sam@modular.com', NULL);
+--insert into User values (0,'sam','Sam','Burdick',25,4,1996,'tester',0,'sam@modular.com', NULL);
 insert into Material values (
 	0,
 	'Gold',
@@ -9,6 +9,14 @@ insert into Material values (
 	'Silver',
 	1713
 );
+insert into Material values (
+	NULL,
+	'Plastic',
+	10
+);
+
+insert into Material values (NULL, 'Glass', 15);
+
 insert into Color values ("#FFFFFF", "white"), ("#FF0000", "red"), ("#00FF00", "green"), ("#0000FF", "blue"), ("#000000", "black");
 
 /*
@@ -18,17 +26,11 @@ insert into Model values (0,0,0,100,'#FFFFFF',
 	'Cube'
 );
 */
-insert into User values (NULL,'jd','Jonh','Doe',0,0,0,'tester',0,'john@modular.com', NULL);
+--insert into User values (NULL,'jd','Jonh','Doe',0,0,0,'tester',0,'john@modular.com', NULL);
 
 --insert into Model values (1,1,NULL,NULL,NULL,NULL,NULL,'test');
 
-insert into Material values (
-	NULL,
-	'Plastic',
-	10
-);
 
-insert into Material values (NULL, 'Glass', 15);
 
 
 --insert into InCart values(0,0,4);

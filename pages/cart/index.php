@@ -1,8 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
+  error_reporting(0);
+  echo '<!DOCTYPE html>
+  <html lang="en">';
   include '../boilerplate.php';
   generate_head('Cart', 'Cart');
 ?>

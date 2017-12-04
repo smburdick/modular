@@ -23,7 +23,7 @@
 			<div class="row content">
 				<div class="col-sm-1 sidenav"></div>
 				<div class="col-sm-5" align="center">
-					 <h3> Featured Categories </h3>
+					<!-- <h3> Featured Categories </h3>-->
 					<?php
 					$db = new PDO('sqlite:' . $db_path);
 					$get_categories = 'select * from category;';
