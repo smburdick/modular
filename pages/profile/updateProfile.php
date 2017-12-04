@@ -25,8 +25,7 @@
 		$birth_year = $returnedValues[0][6];
 		$bio = $returnedValues[0][7];
 		$email = $returnedValues[0]['email'];
-		var_dump($email);
-
+		
 		echo '<!DOCTYPE html>';
 		echo '<html>';
 		include '../boilerplate.php';
