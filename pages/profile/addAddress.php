@@ -14,7 +14,7 @@ echo '<div class="container-fluid text-center">
 				Address 1:<br>
 				<input type="text" name="address_line_one" required><span class="error"> * </span><br>
 				Address 2:<br>
-				<input type="text" name="address_line_two" required><span class="error"> * </span><br>
+				<input type="text" name="address_line_two"><br>
 				City: <br>
 				<input type="text" name="city" required><span class="error"> * </span><br>
 				State: <br>
