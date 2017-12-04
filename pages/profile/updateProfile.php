@@ -26,8 +26,10 @@
 		$bio = $returnedValues[0][7];
 		$email = $returnedValues[0][9];
 
-				include '../boilerplate.php';
-   				generate_head('Editor', '');
+		echo '<!DOCTYPE html>';
+		echo '<html>';
+		include '../boilerplate.php';
+		generate_head('Editor', '');
 		echo 	'<div class="container-fluid text-center">    
 				<div class="row content">
 					<div class="col-sm-2 sidenav">
@@ -60,6 +62,7 @@
 				<div class="col-sm-2 sidenav">
 				</div>
 				</div>';
+		echo '</html>';
 		$db = null;
 	}
 	catch(PDOException $e) {
