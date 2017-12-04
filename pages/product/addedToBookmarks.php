@@ -1,5 +1,10 @@
+
 <?php 
   // Gabriel Pinkard
+  echo "<!DOCTYPE html>";
+  echo "<html lang='en'>";
+  include '../boilerplate.php';
+  generate_head('Categories', 'Categories');
   $db_path = '../../db/modular.db'; 
   $db = new PDO('sqlite:' . $db_path);
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -16,12 +21,20 @@
     $ins_stmt->bindParam(2, $model_id);
     $success = $ins_stmt->execute(); 
     if($success){
-      header("Location: /product/product.php?id=$model_id");
+      //header("Location: /product/product.php?id=$model_id");
+      echo "<div class='col-sm-8 text-center'>"; 
+      echo "<font size='6' color='282a2e'>This model has been added to your bookmarks.</font>";
+      echo "</div>";
     } else {
-      echo "There was an error adding this item to you bookmarks";
+      echo "<div class='col-sm-8 text-center'>"; 
+      echo "<font size='6' color='282a2e'>There was an error processing your request.</font>";
+      echo "</div>";
     }
   }
   else { // already bookmarked
-    header("Location: /product/product.php?id=$model_id");
+    //header("Location: /product/product.php?id=$model_id");
+    echo "<div class='col-sm-8 text-center'>"; 
+    echo "<font size='6' color='282a2e'>This item was already bookmarked.</font>";
+    echo "</div>";
   }
 ?>
