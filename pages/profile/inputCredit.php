@@ -28,6 +28,8 @@
 		$success = $stmt->execute();
 
 		if ($success){
+			echo '<!DOCTYPE html>';
+			echo '<html>';
 			include '../boilerplate.php';
    			generate_head('Editor', '');
 			echo '<div class="container-fluid text-center">    
@@ -45,7 +47,10 @@
 					</div>
 				</div>
 			</div>';
+			echo '</html>';
 		}else{
+			echo '<!DOCTYPE html>';
+			echo '<html>';
 			include '../boilerplate.php';
    			generate_head('Editor', '');
    			echo '<div class="container-fluid text-center">    
@@ -63,6 +68,7 @@
 					</div>
 				</div>
 			</div>';
+			echo '</html>';
 		}
 		
 	}
