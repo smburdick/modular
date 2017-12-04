@@ -294,7 +294,7 @@ error_reporting(0);
               $i++;
             }
             //join all these tables so we can get all the data 
-            $join_table = "Material NATURAL JOIN (Color NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id))))";
+            $join_table = "Material NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)))";
             $q1 = "SELECT Model.model_id, Model.model_name, Model.image, name, material_name, category_name, username FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
             //echo "<p>".$q1."</p>";
 
@@ -412,8 +412,8 @@ error_reporting(0);
             echo "<p></p>";
             */
             array_multisort($model_counts, SORT_DESC, $matched_models);
-            /*
-            echo "<p> model counts post sort</p>";
+            
+            /*echo "<p> model counts post sort</p>";
             foreach($model_counts as $item) {
               echo $item;
             }
