@@ -23,7 +23,7 @@
 		$birth_day = $_POST['birth_day'];
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
-		$emailAddress = $_POST['email'];
+		$email = $_POST['email'];
 
 		$stmt = $db->prepare("UPDATE user SET username = ?, f_name = ?, l_name = ?, bio = ?, birth_month = ?, birth_year = ?, birth_day = ?, email = ? WHERE username = ?");
 		$stmt->bindParam(1, $username);
