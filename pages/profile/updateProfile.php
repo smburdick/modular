@@ -24,32 +24,45 @@
 		$birth_month = $returnedValues[0][5];
 		$birth_year = $returnedValues[0][6];
 		$bio = $returnedValues[0][7];
-		$email = $returnedValues[0][9];
-
-		echo '<form action="update.php" method="post">
-				First Name: <br>
-				<input type="text" name="f_name" value="'.$f_name.'"> <span class="error"> * </span>
-				<br>
-				Last name: <br>
-				<input type="text" name="l_name" value="'.$l_name.'">  <span class="error"> * </span>
-				<br>
-				Email: <br>
-				<input type="text" name="email" value="'.$email.'" required>  <span class="error"> * </span>
-				<br>
-				Username: <br>
-				<input type="text" name="username" value="'.$username.'"required>  <span class="error"> * </span>
-				<br>
-				Birthday:<br>
-				(MM/DD/YYYY)<br>
-				<input type="text" name="birth_month" value="'.$birth_month.'">     <input type="text" name="birth_day" value="'.$birth_day.'">      <input type="text" name="birth_year" value="'.$birth_year.'">
-				<br>
-				Biography: <br>
-				<textarea name="bio" rows="5" cols="30">'.$bio.'</textarea>
-				<br>
-				<input type="submit" value="Submit">
-			</form>';
-
-
+		$email = $returnedValues[0]['email'];
+		
+		echo '<!DOCTYPE html>';
+		echo '<html>';
+		include '../boilerplate.php';
+		generate_head('Editor', '');
+		echo 	'<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+					<h2>Update your Information below</h2>
+			    		<form action="update.php" method="post">
+							First Name: <br>
+							<input type="text" name="f_name" value="'.$f_name.'"> <span class="error"> * </span>
+							<br>
+							Last name: <br>
+							<input type="text" name="l_name" value="'.$l_name.'">  <span class="error"> * </span>
+							<br>
+							Email: <br>
+							<input type="text" name="email" value="'.$email.'" required>  <span class="error"> * </span>
+							<br>
+							Username: <br>
+							<input type="text" name="username" value="'.$username.'"required>  <span class="error"> * </span>
+							<br>
+							Birthday:<br>
+							(MM/DD/YYYY)<br>
+							<input type="text" name="birth_month" value="'.$birth_month.'">     <input type="text" name="birth_day" value="'.$birth_day.'">      <input type="text" name="birth_year" value="'.$birth_year.'">
+							<br>
+							Biography: <br>
+							<textarea name="bio" rows="5" cols="30">'.$bio.'</textarea>
+							<br>
+							<input type="submit" value="Submit">
+						</form>
+					</div>
+				<div class="col-sm-2 sidenav">
+				</div>
+				</div>';
+		echo '</html>';
 		$db = null;
 	}
 	catch(PDOException $e) {

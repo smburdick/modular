@@ -23,7 +23,7 @@
 		$birth_day = $_POST['birth_day'];
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
-		$emailAddress = $_POST['email'];
+		$email = $_POST['email'];
 
 		$stmt = $db->prepare("UPDATE user SET username = ?, f_name = ?, l_name = ?, bio = ?, birth_month = ?, birth_year = ?, birth_day = ?, email = ? WHERE username = ?");
 		$stmt->bindParam(1, $username);
@@ -38,13 +38,46 @@
 		$success = $stmt->execute();
 
 		if ($success){
-			echo '<h2>Your profile has been updated</h2>';
-			echo '<form action="../profile/profile.php">
-					<input type="Submit" value="Go to your Profile">
-				  </form>';
+			echo '<!DOCTYPE html>';
+			echo '<html>';
+			include '../boilerplate.php';
+   			generate_head('Editor', '');
+			echo '<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+						<h2>Your profile has been updated</h2>
+						<form action="../profile/profile.php">
+							<input type="Submit" value="Go to your Profile">
+						</form>
+					</div>
+					<div class="col-sm-2 sidenav">
+					</div>
+				</div>
+			</div>';
+			echo '</html>';
 		}else{
-			echo'<h2> Something went wrong!</h2>
-				<h4>Please try again later.</h4>';
+			echo '<!DOCTYPE html>';
+			echo '<html>';
+			include '../boilerplate.php';
+   			generate_head('Editor', '');
+			echo '<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+						<h2> Something went wrong!</h2>
+						<h4>Please try again later.</h4>
+						<form action="profile.php">
+							<input type="Submit" value="Go to your Profile"
+					</div>
+					<div class="col-sm-2 sidenav">
+					</div>
+				</div>
+			</div>';
+			echo '</html>';
+			echo'';
 		}
 	}
 	catch(PDOException $e) {
