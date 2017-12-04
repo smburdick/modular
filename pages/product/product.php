@@ -91,7 +91,7 @@
       die('Exception : ' . $e->getMessage());
   }
   // reviews
-  echo "<br>";
+  echo "<br><br><br>";
   echo "<font size='6' color='282a2e'>Reviews</font>"; 
   $db_path = '../../db/modular.db';
   $model_id = $_GET["id"]; // model id

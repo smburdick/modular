@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
     include '../boilerplate.php';
     echo '<!DOCTYPE html>
 	<html lang="en">';
