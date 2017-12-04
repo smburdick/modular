@@ -33,15 +33,15 @@
       echo "<h2>$model_name</h2><font size='4'> by <a href='../profile/profile.php?username=$creator_name'>$creator_name</a></font>";
       echo "<br>";
       // Picture
-      echo "<div class='col-sm-6 text-left'>";
-      echo "<img src='$image'>";
+      echo "<div class='col-sm-6 '><br><br>";
+      echo '<img style="height: 95%; width: 95%" src="' . $image . '">';
       echo "</div>";
       // Stats
-      echo "<div class='col-sm-6 text-left'>";
+      echo "<div class='col-sm-6 text-center'>";
       echo "<br>";
       echo "<br>";
       echo "<font size='3'>";
-      echo "<b>Material</b>:<i>$material_name</i>";
+      echo "<b>Material</b>: <i>$material_name</i>";
       echo "<br>";
       echo "<br>";
       echo "<b>Mass in grams</b>: <i>$mass_in_grams</i>";

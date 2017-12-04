@@ -25,7 +25,7 @@
           $db = new PDO('sqlite:'.$db_file);
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          $stmt = $db->prepare('SELECT * FROM InCart NATURAL JOIN Model NATURAL JOIN Material WHERE user_id = ?;');
+          $stmt = $db->prepare('SELECT model_id, model_name, quantity, mass_in_grams, cost_per_gram FROM InCart NATURAL JOIN Model NATURAL JOIN Material WHERE user_id = ?;');
           $stmt->bindParam(1, $user_id);
           $success = $stmt->execute();
           $result_set = $stmt->fetchAll();
