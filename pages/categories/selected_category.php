@@ -29,7 +29,7 @@
 	$description = $tuple["description"];
 	echo "<div class='card'>";
 	echo "<div class='card-header'>";
-	echo "<a href='/product/product.php?id=$model_id'><font size='5'>$model_name</font></a> <font size=3>by <i>$user_name</i></font>";
+	echo "<a href='../product/product.php?id=$model_id'><font size='5'>$model_name</font></a> <font size=3>by <i>$user_name</i></font>";
 	echo "<br>";
 	echo "<br>";
 	echo "<i>$description</i>";
