@@ -30,6 +30,7 @@
     $name = $_POST["model_name"];
     $image = $_POST["image"];
     $description = $_POST["model_descr"];
+    $category_id = $_POST["category_id"];
 
     if (isset($user_id)) {
         try {
@@ -44,7 +45,7 @@
             $model = $result_set[0];
             
             if ($model["creator_id"] == $user_id) { // model's userID matches logged-in userID
-                $stmt = $db->prepare('UPDATE Model SET material_id = ?, mass_in_grams = ?, color_hex = ?, model_name = ?, description = ?, image = ? WHERE model_id = ?;');
+                $stmt = $db->prepare('UPDATE Model SET material_id = ?, mass_in_grams = ?, color_hex = ?, model_name = ?, description = ?, image = ?, category_id = ? WHERE model_id = ?;');
                 $stmt->bindParam(1, $material_id);
                 $stmt->bindParam(2, $mass);
                 $stmt->bindParam(3, $color);
@@ -52,6 +53,7 @@
                 $stmt->bindParam(5, $description);
                 $stmt->bindParam(6, $image);
                 $stmt->bindParam(7, $model_id);
+                $stmt->bindParam(8, $category_id);
 
                 $executed = $stmt->execute();
                 if ($executed) {
