@@ -1,9 +1,9 @@
 <?php
 	$username = $_COOKIE['username'];
 	include '../boilerplate.php';
-    echo '<!DOCTYPE html>
+	echo '<!DOCTYPE html>
 	<html lang="en">';
-    generate_head('Your Profile', 'profile');
+	generate_head('Your Profile', 'profile');
 ?>
 <html lang="en">
 	
@@ -30,6 +30,7 @@
 					$stmt->bindParam(1, $checkingUsername);
 					$success = $stmt->execute();
 					$data = $stmt->fetchAll();
+					if (sizeof($data) != 0){
 
 				echo '<br>
 				<center><img src="'.$data[0]['photo'].'" style="height: 75%; width: 75%"><br><br>
@@ -59,6 +60,10 @@
 							</form>';
 						}
 					}
+				}else{
+					echo '<h2>This user does not exist.</h2>
+						<h4>Please check your information and try agian.</h4>';
+				}
 				?>
 			</div>
 		</div>
@@ -73,9 +78,15 @@
 			<h3>Models</h3>
 			<center><br>
 			<?php
+				$checkingUsername = '';
+				if (!isset($_GET['username'])){
+					$checkingUsername = $username;
+				}else{
+					$checkingUsername = $_GET['username'];
+				}
 				echo "<div class=\"card-deck\">";
 					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
-					$stmt->bindParam(1, $username);
+					$stmt->bindParam(1, $checkingUsername);
 					$success = $stmt->execute();
 					$data = $stmt->fetchAll();
 
@@ -112,43 +123,39 @@
 		</div>
 		<div class="col-sm-8 text-left">
 			<?php
-			if (!isset($_GET['username'])){
-				echo '<hr>
-				<h3>Bookmarks</h3><form action="deleteBookmarks.php">
-					<input type="Submit" value="Delete all Bookmarks">
-				</form>
-				<center><br>';
-				echo "<div class=\"card-deck\">";
-					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
-					$stmt->bindParam(1, $username);
-					$success = $stmt->execute();
-					$data = $stmt->fetchAll();
-
-		 
-				  $new_results = $db->prepare("SELECT * FROM Bookmarks NATURAL JOIN Model WHERE user_id = ?;");
-				  $new_results->bindParam(1, $data[0][0]);
-				  $new_results->execute();
-				  $newdata = $new_results->fetchAll();
-				  foreach($newdata as $tuple) {
-					?>
-					  <div class="card" align="center" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
-						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
-						<?php
-						echo '<img class="card-img-top" src="'.$tuple['image'].'">
-						<div class="card-body">';
-						  
-						  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
-
-						  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
-						  echo "</div>";
-						  echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
-						  ?>
-					</div>
+			echo '<hr>
+			<h3>Bookmarks</h3><form action="deleteBookmarks.php">
+				<input type="Submit" value="Delete all Bookmarks">
+			</form>
+			<center><br>';
+			echo "<div class=\"card-deck\">";
+			$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
+			$stmt->bindParam(1, $checkingUsername);
+			$success = $stmt->execute();
+			$data = $stmt->fetchAll();	 
+			$new_results = $db->prepare("SELECT * FROM Bookmarks NATURAL JOIN Model WHERE user_id = ?;");
+			$new_results->bindParam(1, $data[0][0]);
+			$new_results->execute();
+			$newdata = $new_results->fetchAll();
+			foreach($newdata as $tuple) {
+				?>
+				  <div class="card" align="center" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
+					<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
 					<?php
-				  }
-				echo "</div>";
-			}
-			?>
+					echo '<img class="card-img-top" src="'.$tuple['image'].'">
+					<div class="card-body">';
+					  
+					  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
+
+					  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+					  echo "</div>";
+					  echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
+					  ?>
+				</div>
+				<?php
+			  }
+			echo "</div>";
+		?>
 		</center>
 		</div>
 		<div class="col-sm-2 sidenav">
