@@ -105,7 +105,6 @@
 
 						  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
 						  echo "</div>";
-						  echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
 						  ?>
 					</div>
 					<?php
@@ -149,7 +148,6 @@
 
 					  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
 					  echo "</div>";
-					  echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_id]</small></div>";
 					  ?>
 				</div>
 				<?php
