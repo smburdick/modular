@@ -134,7 +134,8 @@ error_reporting(0);
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
-    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
+    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color INNER JOIN Model ON Model.color_hex = Color.hex WHERE name == '" . $tuple[name] . "';";
+              //echo $query;
     			    $new_results = $db->query($query);
     			    foreach($new_results as $tuple) {
     			      ?>
@@ -294,16 +295,27 @@ error_reporting(0);
               $i++;
             }
             //join all these tables so we can get all the data 
-            $join_table = "Material NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)))";
+            $join_table = "Material NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)";
+            $join_table2 = "Material NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)))";
             $q1 = "SELECT Model.model_id, Model.model_name, Model.image, name, material_name, category_name, username FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
             //echo "<p>".$q1."</p>";
 
             //queries for each relation
             $query1 = "SELECT * FROM ".$join_table." WHERE name LIKE " . $like_string1;
+            //echo '<p> query: </p>';
+            //echo $query1;
             $query2 = "SELECT * FROM ".$join_table." WHERE model_name LIKE " . $like_string2;
+            //echo '<p> query: </p>';
+            //echo $query2;
             $query3 = "SELECT * FROM ".$join_table." WHERE material_name LIKE " . $like_string3;
-            $query4 = "SELECT * FROM ".$join_table." WHERE category_name LIKE " . $like_string4;
+            //echo '<p> query: </p>';
+            //echo $query3;
+            $query4 = "SELECT * FROM ".$join_table2." WHERE category_name LIKE " . $like_string4;
+            //echo '<p> query: </p>';
+            //echo $query4;
             $query5 = "SELECT * FROM ".$join_table." WHERE username LIKE " . $like_string5;
+            //echo '<p> query: </p>';
+            //echo $query5;
 
             $color_match = $db->query($query1);
             $model_match = $db->query($query2);
@@ -316,6 +328,7 @@ error_reporting(0);
 
             foreach($color_match as $tuple){
               //if this model already exists in the array
+              //echo $tuple[name];
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -333,6 +346,7 @@ error_reporting(0);
             }
             foreach($model_match as $tuple){
               //if this model already exists in the array
+              //echo $tuple[model_name];
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -348,8 +362,14 @@ error_reporting(0);
                 array_push($matched_models, $tuple[model_id]);
               }
             }
+            $i = 0;
             foreach($material_match as $tuple){
               //if this model already exists in the array
+              //echo '<p>';
+              //echo $i.' ';
+              //echo $tuple[model_name].' ';
+              //echo $tuple[material_name]. ' ';
+              //echo '</p>';
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -364,8 +384,10 @@ error_reporting(0);
                 array_push($model_counts, 1);
                 array_push($matched_models, $tuple[model_id]);
               }
+              $i++;
             }
             foreach($category_match as $tuple){
+              //echo $tuple[category_name];
               //if this model already exists in the array
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
@@ -383,6 +405,7 @@ error_reporting(0);
               }
             }
             foreach($user_match as $tuple){
+              //echo $tuple[username];
               //if this model already exists in the array
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
@@ -412,8 +435,8 @@ error_reporting(0);
             echo "<p></p>";
             */
             array_multisort($model_counts, SORT_DESC, $matched_models);
-            
-            /*echo "<p> model counts post sort</p>";
+            /*
+            echo "<p> model counts post sort</p>";
             foreach($model_counts as $item) {
               echo $item;
             }
