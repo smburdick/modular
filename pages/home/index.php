@@ -52,6 +52,7 @@
 							}
 						echo "</div>";
 					?>
+				</center>
 				</div>
 				<div class="col-sm-5">
 					<hr>
