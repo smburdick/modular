@@ -12,7 +12,6 @@
 		$birth_day = $_POST['birth_day'];
 		$birth_month = $_POST['birth_month'];
 		$birth_year = $_POST['birth_year'];
-		$photo = $_POST['photo'];
 		$emailAddress = $_POST['email'];
 		$verify_password = $_POST['verify_password'];
 		$default_image = '../profile/empty_profile_img.png';
