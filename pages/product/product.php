@@ -30,7 +30,7 @@
       $model_id = $tuple["model_id"];
       $current_user = $_COOKIE["user_id"];
       $description = $tuple["description"];
-      echo "<h2>$model_name</h2><font size='4'> by <a href='/profile/profile.php?username=$creator_name'>$creator_name</a></font>";
+      echo "<h2>$model_name</h2><font size='4'> by <a href='../profile/profile.php?username=$creator_name'>$creator_name</a></font>";
       echo "<br>";
       // Picture
       echo "<div class='col-sm-6 text-left'>";
@@ -75,6 +75,7 @@
 	echo "<input type='submit' value='Add to bookmarks'/>";
 	echo "</form>";
 	echo "<br>";
+	echo "<br>";
 	echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
 	echo "</font>";
 	echo "<br>";
@@ -106,7 +107,7 @@
       // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
       echo "<div class='card col-sm-12'>";
-      echo "<div class='card-header'><i><a href='/profile/profile.php?username=$$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars";
+      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars";
       echo "<br>";
       echo "$comment";
       echo "<br>";
