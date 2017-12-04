@@ -18,11 +18,26 @@
 		$default_image = '../profile/empty_profile_img.png';
 
 		if (strcmp($password, $verify_password) !== 0){
-			echo '<h2>The passwords that you entered did not match</h2>
-				  <h4>Click below to try again</h4>
-				  <form action="signup.php">
-					<input type="Submit" value="Try Again">
-				  </form>';
+			echo '<!DOCTYPE html>';
+				echo '<html>';
+				include '../boilerplate.php';
+	   			generate_head('Editor', '');
+				echo '<div class="container-fluid text-center">    
+					<div class="row content">
+						<div class="col-sm-2 sidenav">
+						</div>
+						<div class="col-sm-8 text-left"> 
+							<h2>The passwords that you entered did not match</h2>
+							  <h4>Click below to try again</h4>
+							  <form action="signup.php">
+								<input type="Submit" value="Try Again">
+							  </form>
+						</div>
+						<div class="col-sm-2 sidenav">
+						</div>
+					</div>
+				</div>';
+				echo '</html>';
 		}
 		else{
 			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -56,6 +71,8 @@
 				setcookie("user_id", $user_id, time() + 86400, '/');
 				setcookie("username", $username, time() + 86400, '/');
 
+				echo '<!DOCTYPE html>';
+				echo '<html>';
 				include '../boilerplate.php';
 	   			generate_head('Editor', '');
 				echo '<div class="container-fluid text-center">    
@@ -73,8 +90,11 @@
 						</div>
 					</div>
 				</div>';
+				echo '</html>';
 			}
 			else{
+				echo '<!DOCTYPE html>';
+				echo '<html>';
 				include '../boilerplate.php';
 	   			generate_head('Editor', '');
 				echo '<div class="container-fluid text-center">    
@@ -91,6 +111,7 @@
 						</div>
 					</div>
 				</div>';
+				echo '</html>';
 			}
 		}
 		
