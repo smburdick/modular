@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
 	$username = $_COOKIE['username'];
 	include '../boilerplate.php';
 	echo '<!DOCTYPE html>
@@ -19,6 +20,8 @@
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$checkingUsername = '';
 					if (!isset($_GET['username'])){
+						$checkingUsername = $username;
+					}elseif($_GET['username'] == $username){
 						$checkingUsername = $username;
 					}else{
 						$checkingUsername = $_GET['username'];
