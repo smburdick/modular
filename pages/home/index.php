@@ -4,6 +4,7 @@
   include '../boilerplate.php';
   generate_head('Modular', '');
   //style="height: auto; overflow: hidden"
+  error_reporting(0);
 ?>
 <body>
 	<div class="container-fluid text-center">
@@ -20,8 +21,8 @@
 			<h4> Featured Categories </h4>
 	  <?php 
       $db_file = '../../db/modular.db';
-      $user_id = $_COOKIE["userID"];
-      $model_id = $_GET["id"];
+      //$user_id = $_COOKIE["user_id"];
+      //$model_id = $_GET["id"];
 
       //if(isset($user_id)){
         try {
@@ -37,18 +38,18 @@
             $i = 0;
             foreach($result as $tuple) {
             if($i < 3){
-              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple[category_id];
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple['category_id'];
 	               $image = $tuple[2];
 	               $modname = $tuple[1];
 	               $modid = $tuple[0];
-	               $catid = $tuple[category_id];
+	               $catid = $tuple['category_id'];
               $new_results = $db->query($query);
               $j = 0;
               foreach($new_results as $tuple) {
               	if($j < 1){
                   echo '<div class="card" align="center" style="margin-bottom: 20px">';
                     
-                    echo '<h3 a href="">'.$tuple[category_name].'</h3>';
+                    echo '<h3 a href="">'.$tuple['category_name'].'</h3>';
 	               echo '<img class="card-img-top" src="'.$image.'" alt="no image">
 	                    <div class="card-body">';
                    //echo "<h4 class=\"card-title\">$modname</h4>";
@@ -68,12 +69,18 @@
          catch(PDOException $e) {
             die('Exception : '.$e->getMessage());
          }
+     //}
          $db = null;
          ?>
          </div>
+    	 </div>
+    	 <div class="col-sm-1 sidenav"></div>
+    	</div>
+    	    		<div class="col-sm-1 sidenav"></div>
+    		<div class="col-sm-10 text-center"> 
+    			<br><br><center><h1>Welcome to Modular</h1></center>
     		</div>
     		<div class="col-sm-1 sidenav"></div>
-    	</div>
     </div>
 	
 </body>
