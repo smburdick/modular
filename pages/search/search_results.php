@@ -4,6 +4,7 @@
 <?php
 include "../boilerplate.php";
 generate_head("Search Results", "search");
+error_reporting(0);
 ?>
 
 <body style="height: 100%">
