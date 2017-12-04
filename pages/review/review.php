@@ -4,6 +4,8 @@
 <?php
 include "../boilerplate.php";
 generate_head("Review", "search");
+$model_id = $_GET["id"];
+error_reporting(0);
 ?>
 <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
@@ -14,7 +16,9 @@ generate_head("Review", "search");
     </div>
     <div class="col-sm-4 text-left" style="margin-top: 10px"> 
       <h3>Headline</h3>
-      <form method="post" action="review_help.php">
+      <?php
+      echo '<form method="post" action="review_help.php?id='.$model_id.'">';
+      ?>
         <input type="text" name="review_title" placeholder="What's most important to know?" style="width:100%">
       <h3>Rating</h3>
       <input name="rating" id="input-id" type="text" class="rating" data-size="sm" style="showCaption: false">
@@ -74,15 +78,6 @@ generate_head("Review", "search");
   </div>
 
 </div>
-
-
-
-
-
-</body>
-</html>
-
-
 
 
 </body>

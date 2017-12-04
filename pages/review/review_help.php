@@ -3,12 +3,13 @@
 	<?php
     $db_file = '../../db/modular.db';
     ////testing only/////
-    $username = $_COOKIE["username"];
+    $user_id = $_COOKIE["user_id"];
     //$_GET["model_ID"] = mt_rand();
-    if(isset($username)){
+    if(isset($user_id)){
       $review = $_POST["review"];
       $rating = $_POST["rating"];
       $review_title = $_POST["review_title"];
+      $model_id = $_GET["id"];
       try {
         //open connection to the modular database file
         $db = new PDO('sqlite:' . $db_file);
@@ -36,7 +37,7 @@
       catch(PDOException $e) {
           die('Exception : '.$e->getMessage());
       }
-      header("Location: ../");
+      header("Location: ../product/product.php?id=".$model_id);
       exit();
     }
     else{

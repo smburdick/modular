@@ -60,7 +60,7 @@ CREATE TABLE Review(
 	review_date TEXT NOT NULL,
 	review_title TEXT NOT NULL,
 	comment TEXT NOT NULL,
-	stars INTEGER CHECK (stars > 0 AND stars < 6),
+	stars INTEGER CHECK (stars >= 0 AND stars < 6),
 	PRIMARY KEY (model_id, user_id),
 	FOREIGN KEY (model_id) REFERENCES Model(model_id)
 		ON UPDATE CASCADE
