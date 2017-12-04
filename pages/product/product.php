@@ -92,7 +92,7 @@
   }
   // reviews
   echo "<br>";
-  echo "<font size='6' color='282a2e'>Reviews</font>"; 
+   
   $db_path = '../../db/modular.db';
   $model_id = $_GET["id"]; // model id
   try {
@@ -103,6 +103,8 @@
     $result_set = $get_Review->fetchAll();
     echo "<br>";
     echo "<br>";
+    echo "<div class='card col-sm-12'>";
+    echo "<font size='6' color='282a2e'>Reviews</font>";
     foreach($result_set as $tuple){
       $score = $tuple["stars"];
       $user_name = $tuple["username"];
@@ -110,7 +112,6 @@
       $date = $tuple["review_date"];
       // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
-      echo "<div class='card col-sm-12'>";
       echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars";
       echo "<br>";
       echo "$comment";
