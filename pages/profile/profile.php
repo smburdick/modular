@@ -1,6 +1,8 @@
 <?php
 	error_reporting(0);
-	$username = $_COOKIE['username'];
+	if (isset($_COOKIE['username'])){
+		$username = $_COOKIE['username'];
+	}
 	include '../boilerplate.php';
 	echo '<!DOCTYPE html>
 	<html lang="en">';
