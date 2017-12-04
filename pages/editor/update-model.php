@@ -31,6 +31,8 @@
     $image = $_POST["image"];
     $description = $_POST["model_descr"];
 
+    $category_id = $_POST["model_category"];
+
     if (isset($user_id)) {
         try {
             $db = new PDO('sqlite:' . $db_file);
@@ -54,6 +56,19 @@
                 $stmt->bindParam(7, $model_id);
 
                 $executed = $stmt->execute();
+
+                // make sure this model isn't in the category
+                $stmt = $db->prepare('SELECT model_id FROM BelongsTo WHERE category_id = ?');
+                $stmt->bindParam(1, $category_id);
+                $stmt->execute();
+                if (sizeof($stmt->fetchAll()) == 0) { // if it hasn't already been added to that category, add it.
+                    $stmt = $db->prepare('INSERT INTO BelongsTo VALUES (?, ?);');
+                    $stmt->bindParam(1, $model_id);
+                    $stmt->bindParam(2, $category_id);
+                    $stmt->execute();
+                }
+
+
                 if ($executed) {
                     echo 'Model successfully updated.';
                 } else {
