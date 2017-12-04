@@ -48,11 +48,21 @@
 		}else{
 			include '../boilerplate.php';
    			generate_head('Editor', '');
-			echo '<h2>Something went wrong</h2>
-				  <h4> Please try again later</h4>
-				  <form action="profile.php">
-					<input type="Submit" value="Go to your Profile">
-				  </form>';
+   			echo '<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+						<h2>Something went wrong</h2>
+						  <h4> Please try again later</h4>
+						  <form action="profile.php">
+							<input type="Submit" value="Go to your Profile">
+						  </form>
+					</div>
+					<div class="col-sm-2 sidenav">
+					</div>
+				</div>
+			</div>';
 		}
 		
 	}
