@@ -24,9 +24,9 @@ generate_head("Review", "search");
 
     <?php 
       $db_file = '../../db/modular.db';
-      $user_id = $_COOKIE["user_id"];
+      //$user_id = $_COOKIE["user_id"];
       $model_id = $_GET["id"];
-      if(isset($user_id)){
+      if(isset($_COOKIE["user_id"])){
         try {
           //open connection to the modular database file
           $db = new PDO('sqlite:' . $db_file);
