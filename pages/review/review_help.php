@@ -9,6 +9,7 @@
       $review = $_POST["review"];
       $rating = $_POST["rating"];
       $review_title = $_POST["review_title"];
+      $model_id = $_GET["id"];
       try {
         //open connection to the modular database file
         $db = new PDO('sqlite:' . $db_file);
