@@ -21,22 +21,66 @@
 			if (password_verify($password, $returnedValues[0]['hashed_password'])){
 				setcookie("username", $username, time() + 86400*30, '/');
 				setcookie("user_id", $returnedValues[0][0], time() + 86400*30, '/');
-				echo '<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>';
-				echo '<form action="../profile/profile.php">
-					<input type="Submit" value="Go to your Profile">
-				  </form>';
+				echo '<!DOCTYPE html>';
+				echo '<html>';
+				include '../boilerplate.php';
+	   			generate_head('Editor', '');
+				echo '<div class="container-fluid text-center">    
+					<div class="row content">
+						<div class="col-sm-2 sidenav">
+						</div>
+						<div class="col-sm-8 text-left"> 
+							<h2>You are now logged in!</h2> <br> <h4> Click below to go to your profile</h4><br>
+							<form action="../profile/profile.php">
+								<input type="Submit" value="Go to your Profile">
+				 			</form>
+						</div>
+						<div class="col-sm-2 sidenav">
+						</div>
+					</div>
+				</div>';
+				echo '</html>';
 			}else{
-			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
-			echo '<form action="login.php">
-					<input type="Submit" value="Try Again">
-				  </form>';
-			
+				echo '<!DOCTYPE html>';
+				echo '<html>';
+				include '../boilerplate.php';
+	   			generate_head('Editor', '');
+				echo '<div class="container-fluid text-center">    
+					<div class="row content">
+						<div class="col-sm-2 sidenav">
+						</div>
+						<div class="col-sm-8 text-left"> 
+							<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>
+							<form action="login.php">
+								<input type="Submit" value="Try Again">
+							</form>
+						</div>
+						<div class="col-sm-2 sidenav">
+						</div>
+					</div>
+				</div>';
+				echo '</html>';
 			}
 		}else{
-			echo '<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>';
-			echo '<form action="login.php">
-					<input type="Submit" value="Try Again">
-				  </form>';
+			echo '<!DOCTYPE html>';
+			echo '<html>';
+			include '../boilerplate.php';
+	   		generate_head('Editor', '');
+			echo '<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+						<h2>The information you entered is wrong.</h2><p>Click the button below to try again.</p><br>
+						<form action="login.php">
+							<input type="Submit" value="Try Again">
+						</form>
+					</div>
+					<div class="col-sm-2 sidenav">
+					</div>
+				</div>
+			</div>';
+			echo '</html>';
 		}
 		$db = null;
 	}
