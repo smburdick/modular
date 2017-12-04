@@ -114,7 +114,9 @@
 			<?php
 			if (!isset($_GET['username'])){
 				echo '<hr>
-				<h3>Bookmarks</h3>
+				<h3>Bookmarks</h3><form action="deleteBookmarks.php">
+					<input type="Submit" value="Delete all Bookmarks">
+				</form>
 				<center><br>';
 				echo "<div class=\"card-deck\">";
 					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
@@ -123,12 +125,11 @@
 					$data = $stmt->fetchAll();
 
 		 
-				  $query = "SELECT * FROM Bookmarks WHERE user_id == " . $data[0][0];
-				  $new_results = $db->query($query);
+				  $new_results = $db->prepare("SELECT * FROM Bookmarks NATURAL JOIN Model WHERE user_id = ?;");
+				  $new_results->bindParam(1, $data[0][0]);
+				  $new_results->execute();
 				  $newdata = $new_results->fetchAll();
-				  $query = "SELECT * FROM Model WHERE model_id == " . $newdata[0][1];
-				  $new_results = $db->query($query);
-				  foreach($new_results as $tuple) {
+				  foreach($newdata as $tuple) {
 					?>
 					  <div class="card" align="center" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
 						<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
