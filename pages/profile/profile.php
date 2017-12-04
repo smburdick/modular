@@ -103,7 +103,7 @@
 						  
 						  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
 
-						  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+						  echo "<a href=\"../product/product.php?id=".$tuple['model_id']."\" class=\"card-link\">View Model</a>";
 						  echo "</div>";
 						  ?>
 					</div>
@@ -146,7 +146,7 @@
 					  
 					  echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
 
-					  echo "<a href=\"../product/product.php\" class=\"card-link\">View Model</a>";
+					  echo "<a href=\"../product/product.php?id=".$tuple['model_id']."\" class=\"card-link\">View Model</a>";
 					  echo "</div>";
 					  ?>
 				</div>
