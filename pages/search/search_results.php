@@ -1,8 +1,10 @@
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
+<!DOCTYPE html>
 <html>
 <?php
 include "../boilerplate.php";
 generate_head("Search Results", "search");
+error_reporting(0);
 ?>
 
 <body style="height: 100%">
