@@ -1,4 +1,5 @@
 <!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
+<!DOCTYPE html>
 <html>
 <?php
 include "../boilerplate.php";
@@ -25,7 +26,6 @@ generate_head("Review", "search");
       $db_file = '../../db/modular.db';
       $user_id = $_COOKIE["userID"];
       $model_id = $_GET["id"];
-
       //if(isset($user_id)){
         try {
           //open connection to the modular database file
@@ -41,7 +41,6 @@ generate_head("Review", "search");
           echo '<img src="'.$image.'" style="max-width:100%"/>
           </div>
           <div class="col-sm-3 text-left" style="margin-top: 10px">';
-
           echo "<h2>" . $result[0][0] . "</h2>";
           echo "<p> </p>";
           //echo "<h4>Description</h4>";
@@ -76,6 +75,12 @@ generate_head("Review", "search");
 
 </div>
 
+
+
+
+
+</body>
+</html>
 
 
 
