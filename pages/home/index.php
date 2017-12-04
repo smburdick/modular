@@ -1,86 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-  include '../boilerplate.php';
-  generate_head('Modular', '');
-  //style="height: auto; overflow: hidden"
-  error_reporting(0);
+	include '../boilerplate.php';
+	generate_head('Modular', '');
+	//style="height: auto; overflow: hidden"
+	error_reporting(0);
 ?>
 <body>
 	<div class="container-fluid text-center">
 		<div class="row content">
-    		<div class="col-sm-1 sidenav"></div>
-    		<div class="col-sm-10 text-center"> 
-    			<br><br><center><h1>Welcome to Modular</h1></center>
-    		</div>
-    		<div class="col-sm-1 sidenav"></div>
-    	</div>
-    	<div class="row content">
-    		<div class="col-sm-1 sidenav"></div>
-			<div class="col-sm-10" align="center">
-			<h4> Featured Categories </h4>
-	  <?php 
-      $db_file = '../../db/modular.db';
-      //$user_id = $_COOKIE["user_id"];
-      //$model_id = $_GET["id"];
+				<div class="col-sm-1 sidenav">
+					
+				</div>
+				<div class="col-sm-10 text-center"> 
+					<center><img src="../../logo/modular_logo.png" style="width: 75%; height: 75%"></center>
+					<h2>Welcome to the future of 3-D printing!</h2>
+				</div>
+				<div class="col-sm-1 sidenav">
+					
+				</div>
+			</div>
+			<div class="row content">
+				<div class="col-sm-1 sidenav"></div>
+				<div class="col-sm-5" align="center">
+					<hr>
+					<h3> Featured Models</h3>
+					<center><br>
+					<?php
+					$db_file = '../../db/modular.db';
+					$db = new PDO('sqlite:' . $db_file);
+					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						echo "<div class=\"card-deck\">";
+							$stmt = $db->prepare("SELECT * FROM Model;");
+							$success = $stmt->execute();
+							$results = $stmt->fetchAll();
+							foreach($results as $tuple) {
+							?>
+								<div class="card" align="center" style="max-width: 300px; min-width: 300px; width: 300px; margin-bottom: 20px">
+								<div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
+								<?php
+								echo '<img class="card-img-top" src="'.$tuple['image'].'">
+								<div class="card-body">';
+									
+									echo "<h4 class=\"card-title\">   $tuple[model_name]</h4>";
 
-      //if(isset($user_id)){
-        try {
-          //open connection to the modular database file
-          $db = new PDO('sqlite:' . $db_file);
-          //set errormode to use exceptions
-          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			//SEARCH MODEL BY CATEGORY
-            $search_query = "SELECT * FROM Category;";//" WHERE category_name LIKE " . $like_string . " COLLATE NOCASE;";
-            $result = $db->query($search_query);
-            $new_results;
-            echo "<div class=\"card-deck\" align=\"center\">";
-            $i = 0;
-            foreach($result as $tuple) {
-            if($i < 3){
-              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple['category_id'];
-	               $image = $tuple[2];
-	               $modname = $tuple[1];
-	               $modid = $tuple[0];
-	               $catid = $tuple['category_id'];
-              $new_results = $db->query($query);
-              $j = 0;
-              foreach($new_results as $tuple) {
-              	if($j < 1){
-                  echo '<div class="card" align="center" style="margin-bottom: 20px">';
-                    
-                    echo '<h3 a href="">'.$tuple['category_name'].'</h3>';
-	               echo '<img class="card-img-top" src="'.$image.'" alt="no image">
-	                    <div class="card-body">';
-                   //echo "<h4 class=\"card-title\">$modname</h4>";
-                   echo "<a href=\"../categories/selected_category.php?id=$catid\" class=\"card-link\">View Category</a>";
-                   echo "</div>";
-                   //echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_name]</small></div>";     
-                   echo '</div>';
-                   $j++;
-                  }
-            	}
-            	$i++;	
-              }
-            }
-            echo "</div>";
-          
-      	 }
-         catch(PDOException $e) {
-            die('Exception : '.$e->getMessage());
-         }
-     //}
-         $db = null;
-         ?>
-         </div>
-    	 </div>
-    	 <div class="col-sm-1 sidenav"></div>
-    	</div>
-    	    <div class="col-sm-1 sidenav"></div>
-    		<div class="col-sm-10 text-center"> 
-    		</div>
-    		<div class="col-sm-1 sidenav"></div>
-    </div>
-	
+									echo "<a href=\"../product/product.php?id=".$tuple['model_id']."\" class=\"card-link\">View Model</a>";
+									echo "</div>";
+									?>
+							</div>
+							<?php
+							}
+						echo "</div>";
+					?>
+				</center>
+				</div>
+				<div class="col-sm-5">
+					<hr>
+					<h3> Featured Categories</h3>
+					<br>
+					<?php 
+						$db_file = '../../db/modular.db';
+						$get_categories = 'select * from category;';
+						$result_set = $db->query($get_categories);
+						//loop and print out all the categories
+						foreach($result_set as $tuple){
+						  $name = $tuple["category_name"];
+						  $description = $tuple["category_description"];
+						  $categoryID = $tuple["category_id"];
+						  echo "<div class='card'>";
+						  echo "<div class='card-header'>";
+						  echo "<a href='selected_category.php?id=$categoryID&cat_name=$name'><font size='5'>$name</font></a>";
+						  echo "<div class='card-body'>";
+						  echo "<i>$tuple[category_description]</i>";
+						  echo "</div>";
+						  echo "</div>";
+						  echo "</div>";
+						  echo "<br>";
+						}
+						$db = null;
+					?>
+				</div>
+			</div>
+			<div class="col-sm-1 sidenav">
+			</div>
+	</div>
 </body>
 </html>
