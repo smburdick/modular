@@ -73,7 +73,6 @@
 
                     } else {
                         echo 'You don\'t have permission to edit this model.<br><br>';
-                        echo '<a href="../index.php"><button>Return to homepage</button></a>';
                         $editable = false;
                     }
 
@@ -260,7 +259,7 @@
             echo '<div>Your screenshot: </div><img id="screenshot" height="200px" width="200px" src="' . $image . '"><br><br>';
             echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
             echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
-            echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
+            echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_mat . '">';
             foreach ($materials as $mat) {
                 $selected = '';
                 if ($mat["material_id"] == $model_mat) { // if provided material is the one in the list, make it the default one in the dropdown
