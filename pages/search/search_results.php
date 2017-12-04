@@ -95,7 +95,7 @@ error_reporting(0);
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
-              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple['category_id'];
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, category_id, category_name FROM Model NATURAL JOIN (BelongsTo NATURAL JOIN Category) WHERE category_id == " . $tuple[category_id];
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
@@ -110,7 +110,7 @@ error_reporting(0);
                       echo "<h4 class=\"card-title\">$modname</h4>";
                       echo "<a href=\"../product/product.php?id=$modid\" class=\"card-link\">View Model</a>";
                       echo "</div>";
-                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple['category_name']</small></div>";
+                      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[category_name]</small></div>";
                       ?>
                 </div>
                 <?php
@@ -134,7 +134,7 @@ error_reporting(0);
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
-    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color NATURAL JOIN Model WHERE name == '" . $tuple['name'] . "';";
+    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color NATURAL JOIN Model WHERE name == '" . $tuple[name] . "';";
     			    $new_results = $db->query($query);
     			    foreach($new_results as $tuple) {
     			      ?>
@@ -151,7 +151,7 @@ error_reporting(0);
     			            ?>
     			        </div>
     			      <?php
-    			      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple['name']</small></div>";
+    			      echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[name]</small></div>";
     			      echo "</div>";
     			    }
     			  }
@@ -192,7 +192,7 @@ error_reporting(0);
                   </div>
                 
                 <?php
-                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple['material_name']</small></div>";
+                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[material_name]</small></div>";
                 echo "</div>";
               }
             }
@@ -235,7 +235,7 @@ error_reporting(0);
                   </div>
                 
                 <?php
-                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple['username']</small></div>";
+                echo "<div class=\"card-footer\"><small class=\"text-muted\">$tuple[username]</small></div>";
                 echo "</div>";
               }
             }
@@ -316,9 +316,9 @@ error_reporting(0);
 
             foreach($color_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple['model_id'], $matched_models)){
+              if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple['model_id'], $matched_models);
+                $key = array_search($tuple[model_id], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -328,14 +328,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple['model_id']);
+                array_push($matched_models, $tuple[model_id]);
               }
             }
             foreach($model_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple['model_id'], $matched_models)){
+              if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple['model_id'], $matched_models);
+                $key = array_search($tuple[model_id], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -345,14 +345,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple['model_id']);
+                array_push($matched_models, $tuple[model_id]);
               }
             }
             foreach($material_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple['model_id'], $matched_models)){
+              if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple['model_id'], $matched_models);
+                $key = array_search($tuple[model_id], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -362,14 +362,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple['model_id']);
+                array_push($matched_models, $tuple[model_id]);
               }
             }
             foreach($category_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple['model_id'], $matched_models)){
+              if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple['model_id'], $matched_models);
+                $key = array_search($tuple[model_id], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -379,14 +379,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple['model_id']);
+                array_push($matched_models, $tuple[model_id]);
               }
             }
             foreach($user_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple['model_id'], $matched_models)){
+              if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple['model_id'], $matched_models);
+                $key = array_search($tuple[model_id], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -396,7 +396,7 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple['model_id']);
+                array_push($matched_models, $tuple[model_id]);
               }
             }
             /*
@@ -469,9 +469,9 @@ error_reporting(0);
                   <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple['image'];
-                      $modname = $tuple['model_name'];
-                      $modid = $tuple['model_id'];
+                      $image = $tuple[image];
+                      $modname = $tuple[model_name];
+                      $modid = $tuple[model_id];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
 	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">$modname</h4>";

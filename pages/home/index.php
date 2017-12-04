@@ -76,9 +76,8 @@
     	 </div>
     	 <div class="col-sm-1 sidenav"></div>
     	</div>
-    	    		<div class="col-sm-1 sidenav"></div>
+    	    <div class="col-sm-1 sidenav"></div>
     		<div class="col-sm-10 text-center"> 
-    			<br><br><center><h1>Welcome to Modular</h1></center>
     		</div>
     		<div class="col-sm-1 sidenav"></div>
     </div>
