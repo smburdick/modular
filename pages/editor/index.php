@@ -56,6 +56,10 @@
                         $color_stmt->execute();
                         $colors = array($color_stmt->fetchAll())[0];
 
+                        $cat_stmt = $db->prepare('SELECT category_id, category_name FROM Category;'); // TODO instead, select categories that this model doesn't already belong to
+                        $cat_stmt->execute();
+                        $categories = $cat_stmt->fetchAll();
+
                         $obj_file = $model["object_file"];
                         $model_name = $model["model_name"];
                         $model_color = $model["color_hex"];
@@ -69,7 +73,6 @@
 
                     } else {
                         echo 'You don\'t have permission to edit this model.<br><br>';
-                        echo '<a href="../index.php"><button>Return to homepage</button></a>';
                         $editable = false;
                     }
 
@@ -252,11 +255,11 @@
             echo '<form action="update-model.php" method="post">';
             echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
             echo '<input type="hidden" name="image" id="image" value=""><br>';
-            echo '<button type="button" id="shutter"><img height="50px" width="50px" src="img/camera.png"></button>'; // button must be of type button to make it not submit
-            echo 'Your screenshot: <img id="screenshot" height="200px" width="200px" src="' . $image . '"><br><br>'; // TODO should be scaled down
+            echo '<button type="button" id="shutter"><img height="50px" width="50px" src="img/camera.png" ></button>'; // button must be of type button to make it not submit
+            echo '<div>Your screenshot: </div><img id="screenshot" height="200px" width="200px" src="' . $image . '"><br><br>';
             echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
             echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
-            echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_material . '">';
+            echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_mat . '">';
             foreach ($materials as $mat) {
                 $selected = '';
                 if ($mat["material_id"] == $model_mat) { // if provided material is the one in the list, make it the default one in the dropdown
@@ -276,6 +279,15 @@
                 echo '<option ' . $selected . ' value="' . $color["hex"] . '">' . $color["name"] .'</option>';
             }
             echo '</select><br>';
+            
+            echo 'Add to a category: <select name="model_category">';
+            foreach ($categories as $category) {
+                $cat_name = $category["category_name"];
+                $cat_id = $category["category_id"];
+                echo '<option value="' . $cat_id . '">' . $cat_name . '</option>';
+            }
+            echo '</select><br>';
+
             echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
             echo '<input type="submit" value="Submit" id="submit" id="submitButton">';
             echo '</form>';
