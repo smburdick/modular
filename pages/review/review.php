@@ -5,7 +5,7 @@
 include "../boilerplate.php";
 generate_head("Review", "search");
 $model_id = $_GET["id"];
-error_reporting(0);
+//error_reporting(0);
 ?>
 <script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
 <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
