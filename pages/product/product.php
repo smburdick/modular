@@ -110,9 +110,12 @@
       $user_name = $tuple["username"];
       $model_name = $tuple["model_name"];
       $date = $tuple["review_date"];
+      $title =$tuple["review_title"];
       // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
-      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars";
+      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars"; 
+      echo "<br>";
+      echo "Title: $title";
       echo "<br>";
       echo "$comment";
       echo "<br>";
@@ -120,9 +123,8 @@
       echo "</div>";
       //echo "<div class='card-body'>$comment</div>";
       //echo "<div class='card-footer'>Reviewed on $date</div>";
-      echo "</div>";
-    }
-    //echo "</div>";
+    } 
+    echo "</div>";
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());
   }
