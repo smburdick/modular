@@ -1,8 +1,11 @@
 <?php
-	$username = $_COOKIE['username'];
+	error_reporting(0);
+	if (isset($_COOKIE['username'])){
+		$username = $_COOKIE['username'];
+	}
 	include '../boilerplate.php';
     echo '<!DOCTYPE html>
-	<html lang="en">';
+	<html>';
     generate_head('Signup', '');
 ?>
 <html lang="en">

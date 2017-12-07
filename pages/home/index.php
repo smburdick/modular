@@ -69,7 +69,7 @@
 						  $categoryID = $tuple["category_id"];
 						  echo "<div class='card'>";
 						  echo "<div class='card-header'>";
-						  echo "<a href='selected_category.php?id=$categoryID&cat_name=$name'><font size='5'>$name</font></a>";
+						  echo "<a href='../categories/selected_category.php?id=$categoryID&cat_name=$name'><font size='5'>$name</font></a>";
 						  echo "<div class='card-body'>";
 						  echo "<i>$tuple[category_description]</i>";
 						  echo "</div>";
