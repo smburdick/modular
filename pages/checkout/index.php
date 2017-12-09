@@ -47,18 +47,17 @@
 ?>
 	<form action="checkout.php" method="post">
 			<?php
-			echo 'Billing Address: <select>';
-				//print_selects($addresses);
+			echo '<b>Shipping Address: </b><select>';
 			foreach ($addresses as $address) {
 				echo '<option name="shipping_address" value="' . $address["address_id"] . '">' . $address["address_line_one"] . '   ' . $address["address_line_two"] . '   ' . $address["city"] .'</option>' ;
 			}
-			echo '</select><br>';
-			echo 'Banking Info:<select>';
+			echo '</select><br><br>';
+			echo '<b>Banking Info: </b><select>';
 			foreach ($banking_infos as $info) {
-				echo '<option name="banking_info" value="' . $info["banking_info_id"] . '">' . $info["name_on_card"] . '   ' . $address["card_number"] . '   ' . $address["ccv"] .'</option>' ;
+				echo '<option name="banking_info" value="' . $info["banking_info_id"] . '">' . $info["name_on_card"] . '   ' . $info["card_number"] . '   ' . $info["ccv"] .'</option>' ;
 			}
-			echo '</select><br>';
-			echo 'Banking Info:<select>';
+			echo '</select><br><br>';
+			echo '<b>Billing Address: </b><select>';
 			foreach ($addresses as $address) {
 				echo '<option name="billing_address" value="' . $address["address_id"] . '">' . $address["address_line_one"] . '   ' . $address["address_line_two"] . '   ' . $address["city"] .'</option>' ;
 			}

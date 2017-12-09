@@ -53,37 +53,37 @@
       echo "<p><b><i>Description: </i></b>$description</p>";
       echo "</font>";
       if(!isset($current_user)) {
-      	echo "<font size='3'>";
-      	echo "Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart";
-      	echo "<font>";
+        echo "<font size='3'>";
+        echo "Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart";
+        echo "<font>";
       } else {
-      	echo "<br>";
-      	echo "<font size='3'>";
-      	echo "<form action='addedToCart.php' method='post'";
-      	echo "<font size='4' color='282a2e'><b>quantity</b></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
-      	echo "<input type='hidden' name='current_user' value=$current_user>";
-      	echo "<input type='hidden' name='model_id' value=$model_id>";
-      	echo "<input type='hidden' name='model_name' value=$model_name>";
-      	echo "<br>";
-      	echo "<input type='submit' value='Add to cart'/>";
-      	echo "</form>";
-      	echo "<br>";
-      	echo "<form action='addedToBookmarks.php' method='post'>";
-      	echo "<input type='hidden' name='current_user' value=$current_user>";
-      	echo "<input type='hidden' name='model_id' value=$model_id>";
-      	echo "<br>";
-      	echo "<input type='submit' value='Add to bookmarks'/>";
-      	echo "</form>";
-      	echo "<br>";
-      	echo "<br>";
-      	echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
+        echo "<br>";
+        echo "<font size='3'>";
+        echo "<form action='addedToCart.php' method='post'";
+        echo "<font size='4' color='282a2e'><b>quantity</b></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
+        echo "<input type='hidden' name='current_user' value=$current_user>";
+        echo "<input type='hidden' name='model_id' value=$model_id>";
+        echo "<input type='hidden' name='model_name' value=$model_name>";
+        echo "<br>";
+        echo "<input type='submit' value='Add to cart'/>";
+        echo "</form>";
+        echo "<br>";
+        echo "<form action='addedToBookmarks.php' method='post'>";
+        echo "<input type='hidden' name='current_user' value=$current_user>";
+        echo "<input type='hidden' name='model_id' value=$model_id>";
+        echo "<br>";
+        echo "<input type='submit' value='Add to bookmarks'/>";
+        echo "</form>";
+        echo "<br>";
+        echo "<br>";
+        echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
         echo '<br><br>';
         if ($tuple["creator_id"] == $_COOKIE["user_id"]) {
           echo '<a href="../editor/index.php?modelID=' . $model_id .  '"><button>Edit this model</button></a>';
         }
-      	echo "</font>";
-      	echo "<br>";
-      	echo "<br>";
+        echo "</font>";
+        echo "<br>";
+        echo "<br>";
       }
       echo "</div>";
     }
