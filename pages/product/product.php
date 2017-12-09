@@ -53,37 +53,37 @@
       echo "<p><b><i>Description: </i></b>$description</p>";
       echo "</font>";
       if(!isset($current_user)) {
-      	echo "<font size='3'>";
-      	echo "Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart";
-      	echo "<font>";
+        echo "<font size='3'>";
+        echo "Please <a href='../login/login.php'><span class='glyphicon glyphicon-log-in'></span> Login</a> to add this to your cart";
+        echo "<font>";
       } else {
-      	echo "<br>";
-      	echo "<font size='3'>";
-      	echo "<form action='addedToCart.php' method='post'";
-      	echo "<font size='4' color='282a2e'><b>quantity</b></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
-      	echo "<input type='hidden' name='current_user' value=$current_user>";
-      	echo "<input type='hidden' name='model_id' value=$model_id>";
-      	echo "<input type='hidden' name='model_name' value=$model_name>";
-      	echo "<br>";
-      	echo "<input type='submit' value='Add to cart'/>";
-      	echo "</form>";
-      	echo "<br>";
-      	echo "<form action='addedToBookmarks.php' method='post'>";
-      	echo "<input type='hidden' name='current_user' value=$current_user>";
-      	echo "<input type='hidden' name='model_id' value=$model_id>";
-      	echo "<br>";
-      	echo "<input type='submit' value='Add to bookmarks'/>";
-      	echo "</form>";
-      	echo "<br>";
-      	echo "<br>";
-      	echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
+        echo "<br>";
+        echo "<font size='3'>";
+        echo "<form action='addedToCart.php' method='post'";
+        echo "<font size='4' color='282a2e'><b>quantity</b></font>: <input type='number' name='qty' value='1' min='1'/><br>"; 
+        echo "<input type='hidden' name='current_user' value=$current_user>";
+        echo "<input type='hidden' name='model_id' value=$model_id>";
+        echo "<input type='hidden' name='model_name' value=$model_name>";
+        echo "<br>";
+        echo "<input type='submit' value='Add to cart'/>";
+        echo "</form>";
+        echo "<br>";
+        echo "<form action='addedToBookmarks.php' method='post'>";
+        echo "<input type='hidden' name='current_user' value=$current_user>";
+        echo "<input type='hidden' name='model_id' value=$model_id>";
+        echo "<br>";
+        echo "<input type='submit' value='Add to bookmarks'/>";
+        echo "</form>";
+        echo "<br>";
+        echo "<br>";
+        echo "<a href='../review/review.php?id=$model_id'><button>Add review</button></a>";
         echo '<br><br>';
         if ($tuple["creator_id"] == $_COOKIE["user_id"]) {
           echo '<a href="../editor/index.php?modelID=' . $model_id .  '"><button>Edit this model</button></a>';
         }
-      	echo "</font>";
-      	echo "<br>";
-      	echo "<br>";
+        echo "</font>";
+        echo "<br>";
+        echo "<br>";
       }
       echo "</div>";
     }
@@ -91,8 +91,8 @@
       die('Exception : ' . $e->getMessage());
   }
   // reviews
-  echo "<br><br><br>";
-  echo "<font size='6' color='282a2e'>Reviews</font>"; 
+  echo "<br>";
+   
   $db_path = '../../db/modular.db';
   $model_id = $_GET["id"]; // model id
   try {
@@ -103,15 +103,19 @@
     $result_set = $get_Review->fetchAll();
     echo "<br>";
     echo "<br>";
+    echo "<div class='card col-sm-12'>";
+    echo "<font size='6' color='282a2e'>Reviews</font>";
     foreach($result_set as $tuple){
       $score = $tuple["stars"];
       $user_name = $tuple["username"];
       $model_name = $tuple["model_name"];
       $date = $tuple["review_date"];
+      $title =$tuple["review_title"];
       // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
-      echo "<div class='card col-sm-12'>";
-      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars";
+      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars"; 
+      echo "<br>";
+      echo "Title: $title";
       echo "<br>";
       echo "$comment";
       echo "<br>";
@@ -119,9 +123,8 @@
       echo "</div>";
       //echo "<div class='card-body'>$comment</div>";
       //echo "<div class='card-footer'>Reviewed on $date</div>";
-      echo "</div>";
-    }
-    //echo "</div>";
+    } 
+    echo "</div>";
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());
   }

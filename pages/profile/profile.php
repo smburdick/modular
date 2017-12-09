@@ -20,6 +20,8 @@
 					$checkingUsername = '';
 					if (!isset($_GET['username'])){
 						$checkingUsername = $username;
+					}elseif($_GET['username'] == $username){
+						$checkingUsername = $username;
 					}else{
 						$checkingUsername = $_GET['username'];
 					}
