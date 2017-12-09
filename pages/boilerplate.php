@@ -51,6 +51,8 @@ function generate_head($page_name, $active_page) {
 			}
 		}
 
+		$profile_active = '';
+
 		// profile
 		if ($active_page == 'profile') {
 			$profile_active = 'class="active"';
