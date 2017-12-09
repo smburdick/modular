@@ -12,14 +12,14 @@
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/three.min.js"></script>
 <script src="js/Detector.js"></script>
-    <script src="js/CanvasRenderer.js"></script>
-    <script src="js/Projector.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    <script src="js/dat.gui.min.js"></script>
-    <script src="js/KeyboardState.js"></script>
-    <script src="js/LoaderSupport.js"></script>
-    <script src="js/OBJLoader2.js"></script>
-    <script src="js/OBJLoader.js"></script>
+<script src="js/CanvasRenderer.js"></script>
+<script src="js/Projector.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/dat.gui.min.js"></script>
+<script src="js/KeyboardState.js"></script>
+<script src="js/LoaderSupport.js"></script>
+<script src="js/OBJLoader2.js"></script>
+<script src="js/OBJLoader.js"></script>
 <body>
 <div class="container-fluid text-center"> 
     <div class="row content">
@@ -56,7 +56,7 @@
                         $color_stmt->execute();
                         $colors = array($color_stmt->fetchAll())[0];
 
-                        $cat_stmt = $db->prepare('SELECT category_id, category_name FROM Category;'); // TODO instead, select categories that this model doesn't already belong to
+                        $cat_stmt = $db->prepare('SELECT category_id, category_name FROM Category;');
                         $cat_stmt->execute();
                         $categories = $cat_stmt->fetchAll();
 
@@ -256,7 +256,7 @@
             echo '<input type="hidden" name="model_id" value="'. $model_id .'">';
             echo '<input type="hidden" name="image" id="image" value=""><br>';
             echo '<button type="button" id="shutter"><img height="50px" width="50px" src="img/camera.png" ></button>'; // button must be of type button to make it not submit
-            echo '<div>Your screenshot: </div><img id="screenshot" height="200px" width="200px" src="' . $image . '"><br><br>';
+            echo '<div>Your screenshot: </div><img id="screenshot" width="15%" height="25%" src="' . $image . '"><br><br>';
             echo 'Name: <input type="text" name="model_name" value="' . $model_name . '"><br>';
             echo 'Mass: <input type="number" name="model_mass" min="1" max="2000" onchange="rescale(this.value);" value="' . $model_mass . '"> g<br>';
             echo 'Material: <select onchange="updateMaterial(this.value); updateDOMElements();" id="material_select" name="model_material" value="' . $model_mat . '">';

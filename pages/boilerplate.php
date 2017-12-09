@@ -50,13 +50,20 @@ function generate_head($page_name, $active_page) {
 				echo '<li><a href="' . $href . '">'. $name . '</a></li>';
 			}
 		}
-		
-					if (isset($_COOKIE['username'])){
-						echo '<li><a href="../profile/profile.php">Profile</a></li>';
-					}else{
-						echo '<li><a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
-					}
-			echo '
+
+		// profile
+		if ($active_page == 'profile') {
+			$profile_active = 'class="active"';
+		}
+		echo '<li ' . $profile_active . '>';
+		if (isset($_COOKIE['username'])){
+			echo '<a href="../profile/profile.php">Profile</a>';
+		} else {
+			echo '<a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a>';
+		}
+		echo '</li>';
+
+		echo '
 				</ul>';
 		echo '
 			</div>

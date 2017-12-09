@@ -1,8 +1,9 @@
 <?php
-  error_reporting(0);
+  //error_reporting(0);
   echo '<!DOCTYPE html>
   <html lang="en">';
   include '../boilerplate.php';
+  include '../conversion.php';
   generate_head('Cart', 'Cart');
 ?>
 
@@ -24,7 +25,7 @@
           $db = new PDO('sqlite:'.$db_file);
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          $stmt = $db->prepare('SELECT model_id, model_name, quantity, mass_in_grams, cost_per_gram FROM InCart NATURAL JOIN Model NATURAL JOIN Material WHERE user_id = ?;');
+          $stmt = $db->prepare('SELECT model_id, model_name, quantity, mass_in_grams, cost_per_gram, image FROM InCart NATURAL JOIN Model NATURAL JOIN Material WHERE user_id = ?;');
           $stmt->bindParam(1, $user_id);
           $success = $stmt->execute();
           $result_set = $stmt->fetchAll();
@@ -36,14 +37,15 @@
               echo 'Your cart is empty.';
             } else {
               // TODO item image, be able to modify quantity and delete tuples
-              echo '<center><table ><tr><th>Name</th><th>Quantity</th><th>Price</th></tr>';
+              echo '<center><table ><tr><th>Product</th><th>Quantity</th><th>Price</th></tr>';
               foreach ($result_set as $tuple) {
-                $cost = $tuple["mass_in_grams"] * ( floatval($tuple["cost_per_gram"]) / 100); // model unit cost
+                $cost = $tuple["mass_in_grams"] * (floatval($tuple["cost_per_gram"]) / 100); // model unit cost
                 $item_qty_total = $cost * $tuple["quantity"];
                 $cart_subtotal += $item_qty_total;
-                echo '<tr><th><a href="../product/product.php?id=' . $tuple["model_id"] . '">'.$tuple["model_name"].'</a></th>' . '<th>'. $tuple["quantity"] .'</th><th>$'. sprintf("%.2f", $cost) .' </tr>';
+                echo '<tr><th><a href="../product/product.php?id=' . $tuple["model_id"] . '"><img src="' . $tuple["image"] . '" width="15%" height="25%"/> '.$tuple["model_name"].'</a></th>' . '<th>'. $tuple["quantity"] .'</th><th>'. sprintf("$%.2f", $cost) .' </tr>';
               }
-              echo '</table>';
+              echo '</table><br>';
+              echo 'Subtotal: <b>$' . sprintf("%.2f", $cart_subtotal) . '</b><br><br><br>';
               echo '<form action="../checkout/" method="post"><input type="hidden" name="checking_out" value="true"><input type="submit" value="Checkout"></form>';
             }
             
