@@ -124,11 +124,13 @@
 		</div>
 		<div class="col-sm-8 text-left">
 			<?php
-			echo '<hr>
-			<h3>Bookmarks</h3><form action="deleteBookmarks.php">
-				<input type="Submit" value="Delete all Bookmarks">
-			</form>
-			<center><br>';
+			if (!isset($_GET['username'])){
+				echo '<hr>
+				<h3>Bookmarks</h3><form action="deleteBookmarks.php">
+					<input type="Submit" value="Delete all Bookmarks">
+				</form>
+				<center><br>';
+			}
 			echo "<div class=\"card-deck\">";
 			$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
 			$stmt->bindParam(1, $checkingUsername);
