@@ -124,9 +124,9 @@
 		</div>
 		<div class="col-sm-8 text-left">
 			<?php
+			echo '<h3>Bookmarks</h3><hr>';
 			if (!isset($_GET['username'])){
-				echo '<hr>
-				<h3>Bookmarks</h3><form action="deleteBookmarks.php">
+				echo '<form action="deleteBookmarks.php">
 					<input type="Submit" value="Delete all Bookmarks">
 				</form>
 				<center><br>';
