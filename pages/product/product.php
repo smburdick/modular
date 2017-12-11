@@ -4,7 +4,7 @@
   echo "<!DOCTYPE html>";
   echo "<html lang='en'>";
   include '../boilerplate.php';
-  generate_head('Categories', 'Categories');
+  generate_head('Product', '');
   echo "<div class='container-fluid text-left'>";
   echo "<div class='row content'>";
   echo "<div class='col-sm-1 sidenav'>";

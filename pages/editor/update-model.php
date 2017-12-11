@@ -6,7 +6,7 @@
 
 <?php
     include '../boilerplate.php';
-    generate_head('Editor', '');
+    generate_head('Model Updated', '');
 ?>
 <body>
 <div class="container-fluid text-center"> 
