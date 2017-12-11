@@ -81,7 +81,7 @@
         if ($tuple["creator_id"] == $_COOKIE["user_id"]) {
           echo '<a href="../editor/index.php?modelID=' . $model_id .  '"><button>Edit this model</button></a>';
         }
-        echo "</font><br>";
+        echo "</font><br><br>";
         echo '<a href="forkedModel.php?modelID=' . $model_id . '"><button>Fork this model</button></a>';
         echo "<br>";
         echo "<br>";
