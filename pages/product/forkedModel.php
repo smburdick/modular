@@ -1,9 +1,10 @@
 <?php
+	error_reporting(0);
 	echo "<!DOCTYPE html>";
-  echo "<html lang='en'>";
-  include '../boilerplate.php';
-  generate_head('Forked model', '');
- ?>
+	echo "<html lang='en'>";
+	include '../boilerplate.php';
+	generate_head('Forked model', '');
+?>
 <body>
 
 <div class="container-fluid text-center">    
