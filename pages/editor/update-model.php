@@ -57,18 +57,13 @@
 
                 $executed = $stmt->execute();
 
-                // make sure this model isn't in the category
-                $stmt = $db->prepare('SELECT model_id FROM BelongsTo WHERE category_id = ?');
-                $stmt->bindParam(1, $category_id);
-                $stmt->execute();
-                if (sizeof($stmt->fetchAll()) == 0) { // if it hasn't already been added to that category, add it.
+                if ($category_id != '') {
                     $stmt = $db->prepare('INSERT INTO BelongsTo VALUES (?, ?);');
                     $stmt->bindParam(1, $model_id);
                     $stmt->bindParam(2, $category_id);
                     $stmt->execute();
                 }
-
-
+                
                 if ($executed) {
                     echo 'Model successfully updated.';
                 } else {

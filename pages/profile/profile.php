@@ -1,30 +1,30 @@
 <?php
 	$username = $_COOKIE['username'];
 	include '../boilerplate.php';
-	echo '<!DOCTYPE html>
-	<html lang="en">';
-	generate_head('Your Profile', 'profile');
-?>
-<html lang="en">
-	
-<div class="container-fluid text-center">    
-	<div class="row content">
-		<div class="col-sm-2 sidenav">
-		</div>
-		<div class="col-sm-8 text-left"> 
-			<div class="col-sm-4">
-				<?php
+	echo '<!DOCTYPE html><html lang="en">';
+
 					$db_file = '../../db/modular.db';
 					$db = new PDO('sqlite:' . $db_file);
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$checkingUsername = '';
-					if (!isset($_GET['username'])){
+					$profileType = '';
+					if (!isset($_GET['username']) || ($_GET['username'] == $username)){
 						$checkingUsername = $username;
-					}elseif($_GET['username'] == $username){
-						$checkingUsername = $username;
-					}else{
+						$profileType = 'my_profile';
+					} else {
 						$checkingUsername = $_GET['username'];
+						$profileType = 'other_profile';
 					}
+
+					generate_head($checkingUsername . '\'s Profile', $profileType);
+
+			echo '			
+			<div class="container-fluid text-center">    
+				<div class="row content">
+					<div class="col-sm-2 sidenav">
+					</div>
+					<div class="col-sm-8 text-left"> 
+						<div class="col-sm-4">';
 					
 					$data = 0;
 					$success = '';
