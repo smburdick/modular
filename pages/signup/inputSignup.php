@@ -1,4 +1,8 @@
 <?php
+	error_reporting(0);
+	if (isset($_COOKIE['username'])){
+		$username = $_COOKIE['username'];
+	}
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
