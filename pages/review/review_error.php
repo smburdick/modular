@@ -1,9 +1,9 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
 <!DOCTYPE html>
 <html lang="en">
 <?php
   include "../boilerplate.php";
   generate_head("Review Error", "search");
+  error_reporting(0);
 ?>
   
 <div class="container-fluid text-center">    
