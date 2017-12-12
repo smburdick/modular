@@ -137,8 +137,6 @@ error_reporting(0);
     			    $i++;
     			  }
     			  $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
-            echo $search_query;
-            echo "<p></p>";
     			  $stmt=$db->prepare($search_query);
             $i = 1;
             foreach($search_like as $term){
@@ -147,8 +145,6 @@ error_reporting(0);
             }
             $boolean = $stmt->execute();
             $result = $stmt->fetchAll();
-            echo "<p></p>";
-            var_dump($result);
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
