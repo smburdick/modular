@@ -1,20 +1,19 @@
-<HTML>
-  <body>
 	<?php
+    error_reporting(0);
     $db_file = '../../db/modular.db';
-    ////testing only/////
     $user_id = $_COOKIE["user_id"];
-    //$_GET["model_ID"] = mt_rand();
     if(isset($user_id)){
-      $review = $_POST["review"];
-      $rating = $_POST["rating"];
       $review_title = $_POST["review_title"];
+      $rating = $_POST["rating"];
+      $review = $_POST["review"];
       $model_id = $_GET["id"];
+      if($review_title == null || $review == null || $rating == null){
+        header("Location: review_error.php?review_error=0");
+        exit();
+      }
       try {
         //open connection to the modular database file
         $db = new PDO('sqlite:' . $db_file);
-        echo '<p> testing 123 </p>';
-        echo '<p> ' . $review_title . '</p>';
         //set errormode to use exceptions
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //store the rating in the datbase, keep user on the review page
@@ -28,8 +27,6 @@
         $stmt->bindParam(':reviewtitle', $review_title);
         $stmt->bindParam(':comment', $review);
         $stmt->bindParam(':stars', $rating);
-        //echo "<p> stmt: " . $stmt . "</p>";
-        //$db->query($query_str);
         $stmt->execute();
         //disconnect from db
         $db = null;
@@ -41,11 +38,7 @@
       exit();
     }
     else{
-      header("Location: review_error.php");
-      //echo "<p>You must be logged in to write a review</p>";
+      header("Location: review_error.php?review_error=3");
       exit();
     }
     ?>
-
-  </body>
-</HTML>
