@@ -34,12 +34,19 @@
 	    $model_stmt->bindParam(5, $model["object_file"]);
 	    $model_stmt->bindParam(6, $model_id);
 	    $model_stmt->bindParam(7, $model["model_name"]);
-	    $model_stmt->bindParam(8, time());
+	    $uploaded_date = time();
+	    $model_stmt->bindParam(8, $uploaded_date);
 	    $model_stmt->bindParam(9, $model["description"]);
 	    $model_stmt->bindParam(10, $model["image"]);
 	    $success = $model_stmt->execute();
 	    if ($success) {
-	    	echo 'Model successfully forked.';	
+	    	echo 'Model successfully forked.<br><br>';
+	    	$stmt = $db->prepare('SELECT model_id FROM Model WHERE creator_id = ? AND uploaded_date = ?;');
+			$stmt->bindParam(1, $user_id);
+			$stmt->bindParam(2, $uploaded_date);
+			$stmt->execute();
+			$model_id = $stmt->fetchAll()[0][0];
+			echo '<a href="../editor/index.php?modelID=' . $model_id . '"><button>Edit your new model</button></a>';
 	    } else {
 	    	echo 'There was a problem forking to the database.';
 	    }
