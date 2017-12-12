@@ -54,11 +54,11 @@ function generate_head($page_name, $active_page) {
 		$profile_active = '';
 
 		// profile
-		if ($active_page == 'profile') {
+		if ($active_page == 'my_profile') {
 			$profile_active = 'class="active"';
 		}
 		echo '<li ' . $profile_active . '>';
-		if (isset($_COOKIE['username'])){
+		if (isset($_COOKIE['username']) || $active_page == 'signup_success'){
 			echo '<a href="../profile/profile.php">Profile</a>';
 		} else {
 			echo '<a href="../login/login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a>';

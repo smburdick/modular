@@ -3,7 +3,7 @@
   echo "<!DOCTYPE html>";
   echo "<html lang='en'>";
   include '../boilerplate.php';
-  generate_head('Categories', 'Categories');
+  generate_head('Added to cart', 'Cart');
   $success = false;
   $results = false;
   $db_path = '../../db/modular.db'; 

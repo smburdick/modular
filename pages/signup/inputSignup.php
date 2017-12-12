@@ -1,4 +1,8 @@
 <?php
+	error_reporting(0);
+	if (isset($_COOKIE['username'])){
+		$username = $_COOKIE['username'];
+	}
 	//path to the SQLite database file
 	$db_file = '../../db/modular.db';
 	try {
@@ -73,7 +77,7 @@
 				echo '<!DOCTYPE html>';
 				echo '<html>';
 				include '../boilerplate.php';
-	   			generate_head('Editor', '');
+	   			generate_head('Success', 'signup_success'); // indicate boilerplate function to show "profile" in navbar
 				echo '<div class="container-fluid text-center">    
 					<div class="row content">
 						<div class="col-sm-2 sidenav">
@@ -95,7 +99,7 @@
 				echo '<!DOCTYPE html>';
 				echo '<html>';
 				include '../boilerplate.php';
-	   			generate_head('Editor', '');
+	   			generate_head('Please try again', '');
 				echo '<div class="container-fluid text-center">    
 					<div class="row content">
 						<div class="col-sm-2 sidenav">

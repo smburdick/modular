@@ -56,9 +56,12 @@
                         $color_stmt->execute();
                         $colors = array($color_stmt->fetchAll())[0];
 
-                        $cat_stmt = $db->prepare('SELECT category_id, category_name FROM Category;');
+                        // select categories that this model doesn't belong to.
+                        $cat_stmt = $db->prepare('SELECT category_name, category_id FROM (SELECT category_name, category_id FROM Category EXCEPT SELECT category_name, category_id FROM Model NATURAL JOIN BelongsTo NATURAL JOIN Category WHERE model_id = ?);');
+                        $cat_stmt->bindParam(1, $model_id);
                         $cat_stmt->execute();
-                        $categories = $cat_stmt->fetchAll();
+                        $categories = array(array('category_name' => '', 'category_id' => ''));
+                        $categories = array_merge($categories, $cat_stmt->fetchAll()); // have a 'blank' category, which will be ignored by the result page.
 
                         $obj_file = $model["object_file"];
                         $model_name = $model["model_name"];
@@ -280,14 +283,16 @@
             }
             echo '</select><br>';
             
-            echo 'Add to a category: <select name="model_category">';
-            foreach ($categories as $category) {
-                $cat_name = $category["category_name"];
-                $cat_id = $category["category_id"];
-                echo '<option value="' . $cat_id . '">' . $cat_name . '</option>';
+            if (sizeof($categories) > 0) {
+                echo 'Add to a category: <select name="model_category">';
+                foreach ($categories as $category) {
+                    $cat_name = $category["category_name"];
+                    $cat_id = $category["category_id"];
+                    echo '<option value="' . $cat_id . '">' . $cat_name . '</option>';
+                }
+                echo '</select><br>';
             }
-            echo '</select><br>';
-
+            
             echo 'Description: <input type="text" name="model_descr" value="' . $model_descr . '""><br><br>';
             echo '<input type="submit" value="Submit" id="submit" id="submitButton">';
             echo '</form>';
