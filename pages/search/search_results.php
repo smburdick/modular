@@ -1,4 +1,3 @@
-<!-- Source: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_webpage&stacked=h -->
 <!DOCTYPE html>
 <html>
 <?php
@@ -79,19 +78,27 @@ error_reporting(0);
           //SEARCH MODEL BY CATEGORY (DEFAULT)
           $count = count($search_like) - 1;
           $i = 0;
+
           //SEARCH MODEL BY CATEGORY
           if($search_by == category){
             foreach($search_like as $value){
               if($i == $count){
-                $like_string .= "'".$value."'";
+                $like_string .= "?";
               }
               else{
-                $like_string .= "'".$value."' OR category_name LIKE ";   
+                $like_string .= "? OR category_name LIKE ";   
               }
               $i++;
             }
             $search_query = "SELECT * FROM Category WHERE category_name LIKE " . $like_string . " COLLATE NOCASE;";
-            $result = $db->query($search_query);
+            $stmt=$db->prepare($search_query);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindParam($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $result = $stmt->fetchAll();
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
@@ -122,20 +129,30 @@ error_reporting(0);
     		  else if($search_by == color){
     			  foreach($search_like as $value){
     			    if($i == $count){
-    			      $like_string .= "'".$value."'";
+    			      $like_string .= "?";
     			    }
     			    else{
-    			      $like_string .= "'".$value."' OR name LIKE ";   
+    			      $like_string .= "? OR name LIKE ";   
     			    }
     			    $i++;
     			  }
     			  $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
-    			  $result = $db->query($search_query);
+            echo $search_query;
+            echo "<p></p>";
+    			  $stmt=$db->prepare($search_query);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $result = $stmt->fetchAll();
+            echo "<p></p>";
+            var_dump($result);
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
     			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color INNER JOIN Model ON Model.color_hex = Color.hex WHERE name == '" . $tuple[name] . "';";
-              //echo $query;
     			    $new_results = $db->query($query);
     			    foreach($new_results as $tuple) {
     			      ?>
@@ -162,16 +179,22 @@ error_reporting(0);
           else if($search_by == material){
             foreach($search_like as $value){
               if($i == $count){
-                $like_string .= "'".$value."'";
+                $like_string .= "?";
               }
               else{
-                $like_string .= "'".$value."' OR material_name LIKE ";   
+                $like_string .= "? OR material_name LIKE ";   
               }
               $i++;
             }
             $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . " COLLATE NOCASE;";
-            //echo "<p>".$search_query."</p>";
-            $result = $db->query($search_query);
+            $stmt=$db->prepare($search_query);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $result = $stmt->fetchAll();
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
@@ -203,15 +226,22 @@ error_reporting(0);
           else if($search_by == user){
             foreach($search_like as $value){
               if($i == $count){
-                $like_string .= "'".$value."'";
+                $like_string .= "?";
               }
               else{
-                $like_string .= "'".$value."' OR username LIKE ";   
+                $like_string .= "? OR username LIKE ";   
               }
               $i++;
             }
             $search_query = "SELECT * FROM User WHERE username LIKE " . $like_string . " COLLATE NOCASE;";
-            $result = $db->query($search_query);
+            $stmt=$db->prepare($search_query);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $result = $stmt->fetchAll();
             $new_results;
             ?>
           <div class="card-deck">
@@ -247,88 +277,117 @@ error_reporting(0);
           else if($search_by == all  || $search_by == ""){
             foreach($search_like as $value){
               if($i == $count){
-                $like_string1 .= "'".$value."'";
+                $like_string1 .= "?";
               }
               else{
-                $like_string1 .= "'".$value."' OR name LIKE ";   
+                $like_string1 .= "? OR name LIKE ";   
               }
               $i++;
             }
             $i = 0;
             foreach($search_like as $value){
               if($i == $count){
-                $like_string2 .= "'".$value."'";
+                $like_string2 .= "?";
               }
               else{
-                $like_string2 .= "'".$value."' OR model_name LIKE ";   
+                $like_string2 .= "? OR model_name LIKE ";   
               }
               $i++;
             }
             $i = 0;
             foreach($search_like as $value){
               if($i == $count){
-                $like_string3 .= "'".$value."'";
+                $like_string3 .= "?";
               }
               else{
-                $like_string3 .= "'".$value."' OR material_name LIKE ";   
+                $like_string3 .= "? OR material_name LIKE ";   
               }
               $i++;
             }
             $i = 0;
             foreach($search_like as $value){
               if($i == $count){
-                $like_string4 .= "'".$value."'";
+                $like_string4 .= "?";
               }
               else{
-                $like_string4 .= "'".$value."' OR category_name LIKE ";   
+                $like_string4 .= "? OR category_name LIKE ";   
               }
               $i++;
             }
             $i = 0;
             foreach($search_like as $value){
               if($i == $count){
-                $like_string5 .= "'".$value."'";
+                $like_string5 .= "?";
               }
               else{
-                $like_string5 .= "'".$value."' OR username LIKE ";   
+                $like_string5 .= "? OR username LIKE ";   
               }
               $i++;
             }
             //join all these tables so we can get all the data 
             $join_table = "Material NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)";
             $join_table2 = "Material NATURAL JOIN (Category NATURAL JOIN (BelongsTo NATURAL JOIN (Color INNER JOIN (User INNER JOIN Model ON User.user_id = Model.creator_id) ON Model.color_hex = Color.hex)))";
-            $q1 = "SELECT Model.model_id, Model.model_name, Model.image, name, material_name, category_name, username FROM ".$join_table." WHERE name LIKE " . $like_string1 . " OR model_name LIKE " . $like_string2 . " OR material_name LIKE " . $like_string3 . " OR category_name LIKE " . $like_string4 . " OR username LIKE " . $like_string5 .  ";";
-            //echo "<p>".$q1."</p>";
+
 
             //queries for each relation
             $query1 = "SELECT * FROM ".$join_table." WHERE name LIKE " . $like_string1;
-            //echo '<p> query: </p>';
-            //echo $query1;
             $query2 = "SELECT * FROM ".$join_table." WHERE model_name LIKE " . $like_string2;
-            //echo '<p> query: </p>';
-            //echo $query2;
             $query3 = "SELECT * FROM ".$join_table." WHERE material_name LIKE " . $like_string3;
-            //echo '<p> query: </p>';
-            //echo $query3;
             $query4 = "SELECT * FROM ".$join_table2." WHERE category_name LIKE " . $like_string4;
-            //echo '<p> query: </p>';
-            //echo $query4;
             $query5 = "SELECT * FROM ".$join_table." WHERE username LIKE " . $like_string5;
-            //echo '<p> query: </p>';
-            //echo $query5;
+            //colors
+            $stmt=$db->prepare($query1);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $color_match = $stmt->fetchAll();
+            //models
+            $stmt=$db->prepare($query2);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $model_match = $stmt->fetchAll();
+            //materials
+            $stmt=$db->prepare($query3);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $material_match = $stmt->fetchAll();
+            //categories
+            $stmt=$db->prepare($query4);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $category_match = $stmt->fetchAll();
+            //users
+            $stmt=$db->prepare($query5);
+            $i = 1;
+            foreach($search_like as $term){
+              $stmt->bindValue($i, $term);
+              $i++;
+            }
+            $boolean = $stmt->execute();
+            $user_match = $stmt->fetchAll();
 
-            $color_match = $db->query($query1);
-            $model_match = $db->query($query2);
-            $material_match = $db->query($query3);
-            $category_match = $db->query($query4);
-            $user_match = $db->query($query5);
+
 
             $matched_models = array();
             $model_counts = array();
 
             foreach($color_match as $tuple){
               //if this model already exists in the array
-              //echo $tuple[name];
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -346,7 +405,6 @@ error_reporting(0);
             }
             foreach($model_match as $tuple){
               //if this model already exists in the array
-              //echo $tuple[model_name];
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -365,11 +423,6 @@ error_reporting(0);
             $i = 0;
             foreach($material_match as $tuple){
               //if this model already exists in the array
-              //echo '<p>';
-              //echo $i.' ';
-              //echo $tuple[model_name].' ';
-              //echo $tuple[material_name]. ' ';
-              //echo '</p>';
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
                 $key = array_search($tuple[model_id], $matched_models);
@@ -387,7 +440,6 @@ error_reporting(0);
               $i++;
             }
             foreach($category_match as $tuple){
-              //echo $tuple[category_name];
               //if this model already exists in the array
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
@@ -405,7 +457,6 @@ error_reporting(0);
               }
             }
             foreach($user_match as $tuple){
-              //echo $tuple[username];
               //if this model already exists in the array
               if(in_array($tuple[model_id], $matched_models)){
                 //get the index of the model
@@ -422,32 +473,9 @@ error_reporting(0);
                 array_push($matched_models, $tuple[model_id]);
               }
             }
-            /*
-            echo "<p> model counts pre sort</p>";
-            foreach($model_counts as $item) {
-              echo $item;
-            }
-            echo "<p></p>";
-            echo "<p> model ids pre sort</p>";
-            foreach($matched_models as $item) {
-              echo $item;
-            }
-            echo "<p></p>";
-            */
+
             array_multisort($model_counts, SORT_DESC, $matched_models);
-            /*
-            echo "<p> model counts post sort</p>";
-            foreach($model_counts as $item) {
-              echo $item;
-            }
-            echo "<p></p>";
-            echo "<p> model ids post sort</p>";
-            foreach($matched_models as $item) {
-              echo $item;
-            }
-            echo "<p></p>";
-            echo "<p>" . $q1 . "</p>";
-            */
+
             echo "<div class=\"card-deck\">";
             foreach($matched_models as $value){
               $result = $db->query("SELECT model_id, model_name, uploaded_date, image FROM Model WHERE model_id == ".$value.";");
