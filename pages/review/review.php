@@ -12,19 +12,6 @@ error_reporting(0);
 <body style="height: 100%">
 <div class="container-fluid text-center" style=" height: auto; overflow: hidden">
   <div class="row content" style="min-width: 761px; height: auto">
-    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
-    </div>
-    <div class="col-sm-4 text-left" style="margin-top: 10px"> 
-      <h3>Headline</h3>
-      <?php
-      echo '<form method="post" action="review_help.php?id='.$model_id.'">';
-      ?>
-        <input type="text" name="review_title" placeholder="What's most important to know?" style="width:100%">
-      <h3>Rating</h3>
-      <input name="rating" id="input-id" type="text" class="rating" data-size="sm" style="showCaption: false">
-      <script type = "text/javascript">$("#input-id").rating();</script>
-    </div>
-    <div class="col-sm-3 text-left" style="margin-top: 10px"> 
 
     <?php 
       $db_file = '../../db/modular.db';
@@ -43,9 +30,19 @@ error_reporting(0);
 	  $check_prep->execute();
 	  $review_result = $check_prep->fetchAll(); 
 	  if(sizeOf($review_result) != 0){ // if they already have a review
-	    header("Location: reviewed_already.php");
+	    header("Location: review_error.php?review_error=2");
 	  } else{
-	    //echo sizeOf($review_result)
+      echo '<div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
+      </div>
+      <div class="col-sm-4 text-left" style="margin-top: 10px"> 
+      <h3>Headline</h3>';
+      echo '<form method="post" action="review_help.php?id='.$model_id.'">';
+      echo '<input type="text" name="review_title" placeholder="What\'s most important to know?" style="width:100%">
+      <h3>Rating</h3>
+      <input name="rating" id="input-id" type="text" class="rating" data-size="sm" style="showCaption: false">
+      <script type = "text/javascript">$("#input-id").rating();</script>
+      </div>
+      <div class="col-sm-3 text-left" style="margin-top: 10px">';
 	    $prod_query = "SELECT model_name, image FROM Model WHERE model_id=:id LIMIT 1;";
 	    $prod_prep = $db->prepare($prod_query);
 	    $prod_prep->bindParam(":id", $model_id);
@@ -57,35 +54,30 @@ error_reporting(0);
 	    <div class="col-sm-3 text-left" style="margin-top: 10px">';
 	    echo "<h2>" . $result[0][0] . "</h2>";
 	    echo "<p> </p>";
-          //echo "<h4>Description</h4>";
 	    echo "<p>". $result[0][9] . "</p>";
+      echo '</div>
+      <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
+      </div>
+      </div>
+      <div class="row content" style="height: auto; overflow: hidden">
+      <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
+      </div>
+      <div class="col-sm-10 text-left">
+      <h2>Review</h2>
+      <input type="text" name="review" placeholder="What did you think of this product?" style="width:100%; height:100px">
+      <input  type="submit" value="Submit">
+      </div>
+      </form>
+      <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
+      </div>';
 	  }
          }
          catch(PDOException $e) {
             die('Exception : '.$e->getMessage());
          }
       }
-    
-    //echo "<h3>Other Info</h3>";
     ?>
-    </div>
-    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">
-    
-    </div>
-  </div>
-  <div class="row content" style="height: auto; overflow: hidden">
-    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
-    </div>
-    <div class="col-sm-10 text-left">
-      <h2>Review</h2>
-      <input type="text" name="review" placeholder="What did you think of this product?" style="width:100%; height:100px">
-      <input  type="submit" value="Submit">
-    </div>
-    
-    </form>
-    <div class="col-sm-1 sidenav" style="height: auto; overflow: hidden">   
 
-    </div>
   </div>
 
 </div>
