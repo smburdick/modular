@@ -36,19 +36,30 @@ error_reporting(0);
           $db = new PDO('sqlite:' . $db_file);
           //set errormode to use exceptions
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          $prod_query = "SELECT model_name, image FROM Model WHERE model_id=:id LIMIT 1;";
-          $prod_prep = $db->prepare($prod_query);
-          $prod_prep->bindParam(":id", $model_id);
-          $result = $prod_prep->execute();
-          $result = $prod_prep->fetchAll();
-          $image = $result[0][1];
-          echo '<img src="'.$image.'" style="max-width:100%"/>
-          </div>
-          <div class="col-sm-3 text-left" style="margin-top: 10px">';
-          echo "<h2>" . $result[0][0] . "</h2>";
-          echo "<p> </p>";
+	  $check_stmt = "select * from review where user_id=? and model_id=?";
+	  $check_prep = $db->prepare($check_stmt);
+	  $check_prep->bindParam(1, $user_id);
+	  $check_prep->bindParam(2, $model_id);
+	  $check_prep->execute();
+	  $review_result = $check_prep->fetchAll(); 
+	  if(sizeOf($review_result) != 0){ // if they already have a review
+	    header("Location: reviewed_already.php");
+	  } else{
+	    //echo sizeOf($review_result)
+	    $prod_query = "SELECT model_name, image FROM Model WHERE model_id=:id LIMIT 1;";
+	    $prod_prep = $db->prepare($prod_query);
+	    $prod_prep->bindParam(":id", $model_id);
+	    $result = $prod_prep->execute();
+	    $result = $prod_prep->fetchAll();
+	    $image = $result[0][1];
+	    echo '<img src="'.$image.'" style="max-width:100%"/>
+	    </div>
+	    <div class="col-sm-3 text-left" style="margin-top: 10px">';
+	    echo "<h2>" . $result[0][0] . "</h2>";
+	    echo "<p> </p>";
           //echo "<h4>Description</h4>";
-          echo "<p>". $result[0][9] . "</p>";
+	    echo "<p>". $result[0][9] . "</p>";
+	  }
          }
          catch(PDOException $e) {
             die('Exception : '.$e->getMessage());
