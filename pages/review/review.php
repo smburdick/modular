@@ -38,7 +38,7 @@ error_reporting(0);
       echo '<form method="post" action="review_help.php?id='.$model_id.'">';
       echo '<input type="text" name="review_title" placeholder="What\'s most important to know?" style="width:100%">
       <h3>Rating</h3>
-      <input name="rating" id="input-id" type="text" class="rating" data-size="xxs" style="showCaption: false">
+      <input name="rating" id="input-id" type="text" class="rating" data-size="sm" style="showCaption: false">
       <script type = "text/javascript">$("#input-id").rating();</script>
       </div>
       <div class="col-sm-3 text-left" style="margin-top: 10px">';
