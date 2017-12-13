@@ -2,7 +2,7 @@
 <html>
 <?php
 include "../boilerplate.php";
-generate_head("Search Results", "search");
+generate_head("Search Results", "");
 error_reporting(0);
 ?>
 
@@ -28,23 +28,24 @@ error_reporting(0);
         $s2 = "";
         $s3 = "";
         $s4 = "";
+        $s5 = "";
         $s6 = "";
-        if($search_by == category){
+        if($search_by == 'category'){
           $s1 = "class=\"active\"";
         }
-        else if($search_by == all || $search_by == ""){
+        else if($search_by == 'all' || $search_by == ""){
           $s6 = "class=\"active\"";
         }
-        else if($search_by == color){
+        else if($search_by == 'color'){
           $s2 = "class=\"active\"";
         }
-        else if($search_by == material){
+        else if($search_by == 'material'){
           $s3 = "class=\"active\"";
         }
-        else if($search_by == user){
+        else if($search_by == 'user'){
           $s4 = "class=\"active\"";
         }
-        else if($search_by == model){
+        else if($search_by == 'model'){
           $s5 = "class=\"active\"";
         }
         echo "<li role=\"presentation \"" . $s6 . "><a href=\"search_results.php?link=all&srch-term=" . $term . "\">All</a></li>";
@@ -78,9 +79,9 @@ error_reporting(0);
           //SEARCH MODEL BY CATEGORY (DEFAULT)
           $count = count($search_like) - 1;
           $i = 0;
-
+          $like_string = '';
           //SEARCH MODEL BY CATEGORY
-          if($search_by == category){
+          if($search_by == 'category'){
             foreach($search_like as $value){
               if($i == $count){
                 $like_string .= "?";
@@ -126,7 +127,7 @@ error_reporting(0);
             echo "</div>";
           }
           //SEARCH MODEL BY COLOR
-    		  else if($search_by == color){
+    		  else if($search_by == 'color'){
     			  foreach($search_like as $value){
     			    if($i == $count){
     			      $like_string .= "?";
@@ -148,7 +149,7 @@ error_reporting(0);
     			  $new_results;
     			  echo "<div class=\"card-deck\">";
     			  foreach($result as $tuple) {
-    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color INNER JOIN Model ON Model.color_hex = Color.hex WHERE name == '" . $tuple[name] . "';";
+    			    $query = "SELECT Model.model_id, Model.model_name, Model.image, name FROM Color INNER JOIN Model ON Model.color_hex = Color.hex WHERE name == '" . $tuple['name'] . "';";
     			    $new_results = $db->query($query);
     			    foreach($new_results as $tuple) {
     			      ?>
@@ -172,7 +173,7 @@ error_reporting(0);
     			  echo "</div>";
     		  }
           //SEARCH MODEL BY MATERIAL
-          else if($search_by == material){
+          else if($search_by == 'material'){
             foreach($search_like as $value){
               if($i == $count){
                 $like_string .= "?";
@@ -194,7 +195,7 @@ error_reporting(0);
             $new_results;
             echo "<div class=\"card-deck\">";
             foreach($result as $tuple) {
-              $query = "SELECT Model.model_id, Model.model_name, Model.image, material_name FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple[material_name] . "';";
+              $query = "SELECT Model.model_id, Model.model_name, Model.image, material_name FROM Material NATURAL JOIN Model WHERE material_name == '" . $tuple['material_name'] . "';";
               $new_results = $db->query($query);
               foreach($new_results as $tuple) {
                 ?>
@@ -219,7 +220,7 @@ error_reporting(0);
             echo "</div>";
           }
           //SEARCH MODEL BY USERNAME
-          else if($search_by == user){
+          else if($search_by == 'user'){
             foreach($search_like as $value){
               if($i == $count){
                 $like_string .= "?";
@@ -270,7 +271,12 @@ error_reporting(0);
           }
           //SEARCH MODEL BY ALL ATTRIBUTES GIVEN
           //making query strings for each category
-          else if($search_by == all  || $search_by == ""){
+          else if($search_by == 'all'  || $search_by == ""){
+            $like_string1 = '';
+            $like_string2 = '';
+            $like_string3 = '';
+            $like_string4 = '';
+            $like_string5 = '';
             foreach($search_like as $value){
               if($i == $count){
                 $like_string1 .= "?";
@@ -326,11 +332,11 @@ error_reporting(0);
 
 
             //queries for each relation
-            $query1 = "SELECT * FROM ".$join_table." WHERE name LIKE " . $like_string1;
-            $query2 = "SELECT * FROM ".$join_table." WHERE model_name LIKE " . $like_string2;
-            $query3 = "SELECT * FROM ".$join_table." WHERE material_name LIKE " . $like_string3;
-            $query4 = "SELECT * FROM ".$join_table2." WHERE category_name LIKE " . $like_string4;
-            $query5 = "SELECT * FROM ".$join_table." WHERE username LIKE " . $like_string5;
+            $query1 = "SELECT model_id FROM ".$join_table." WHERE name LIKE " . $like_string1;
+            $query2 = "SELECT model_id FROM ".$join_table." WHERE model_name LIKE " . $like_string2;
+            $query3 = "SELECT model_id FROM ".$join_table." WHERE material_name LIKE " . $like_string3;
+            $query4 = "SELECT model_id FROM ".$join_table2." WHERE category_name LIKE " . $like_string4;
+            $query5 = "SELECT model_id FROM ".$join_table." WHERE username LIKE " . $like_string5;
             //colors
             $stmt=$db->prepare($query1);
             $i = 1;
@@ -384,9 +390,9 @@ error_reporting(0);
 
             foreach($color_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple[model_id], $matched_models)){
+              if(in_array($tuple['model_id'], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple[model_id], $matched_models);
+                $key = array_search($tuple['model_id'], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -396,14 +402,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple[model_id]);
+                array_push($matched_models, $tuple['model_id']);
               }
             }
             foreach($model_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple[model_id], $matched_models)){
+              if(in_array($tuple['model_id'], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple[model_id], $matched_models);
+                $key = array_search($tuple['model_id'], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -413,15 +419,15 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple[model_id]);
+                array_push($matched_models, $tuple['model_id']);
               }
             }
             $i = 0;
             foreach($material_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple[model_id], $matched_models)){
+              if(in_array($tuple['model_id'], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple[model_id], $matched_models);
+                $key = array_search($tuple['model_id'], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -431,15 +437,15 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple[model_id]);
+                array_push($matched_models, $tuple['model_id']);
               }
               $i++;
             }
             foreach($category_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple[model_id], $matched_models)){
+              if(in_array($tuple['model_id'], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple[model_id], $matched_models);
+                $key = array_search($tuple['model_id'], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -449,14 +455,14 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple[model_id]);
+                array_push($matched_models, $tuple['model_id']);
               }
             }
             foreach($user_match as $tuple){
               //if this model already exists in the array
-              if(in_array($tuple[model_id], $matched_models)){
+              if(in_array($tuple['model_id'], $matched_models)){
                 //get the index of the model
-                $key = array_search($tuple[model_id], $matched_models);
+                $key = array_search($tuple['model_id'], $matched_models);
                 //get the count of that model using the index and add 1
                 $model_help = array_values($model_counts);
                 $count = $model_help[$key] + 1;
@@ -466,7 +472,7 @@ error_reporting(0);
               //if it doesn't already exist in the array, insert into the array
               else{
                 array_push($model_counts, 1);
-                array_push($matched_models, $tuple[model_id]);
+                array_push($matched_models, $tuple['model_id']);
               }
             }
 
@@ -498,7 +504,8 @@ error_reporting(0);
           }
 
           //SEARCH MODEL BY MODEL NAME 
-          if($search_by == model){
+          if($search_by == 'model'){
+            $like_string = '';
             foreach($search_like as $value){
               if($i == $count){
                 $like_string .= "'".$value."'";
@@ -516,9 +523,9 @@ error_reporting(0);
                   <div class="card" align="center" style="max-width: 350px; min-width: 350px; width: 300px; margin-bottom: 20px">
                     <div class="w-300 hidden-xs-down hidden-md-up"><!-- wrap every 2 on sm--></div>
                     <?php
-                      $image = $tuple[image];
-                      $modname = $tuple[model_name];
-                      $modid = $tuple[model_id];
+                      $image = $tuple['image'];
+                      $modname = $tuple['model_name'];
+                      $modid = $tuple['model_id'];
 	                  echo '<img class="card-img-top" src="'.$image.'" alt="no image">
 	                    <div class="card-body">';
                       echo "<h4 class=\"card-title\">$modname</h4>";

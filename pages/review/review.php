@@ -2,7 +2,7 @@
 <html>
 <?php
 include "../boilerplate.php";
-generate_head("Review", "search");
+generate_head("Review", "");
 $model_id = $_GET["id"];
 error_reporting(0);
 ?>
