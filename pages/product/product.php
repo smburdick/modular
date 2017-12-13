@@ -5,6 +5,8 @@
   echo "<html lang='en'>";
   include '../boilerplate.php';
   generate_head('Product', '');
+  echo '<script src="../css/stars/js/star-rating.js" type="text/javascript"></script>
+  <link href="../css/stars/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />';
   echo "<div class='container-fluid text-left'>";
   echo "<div class='row content'>";
   echo "<div class='col-sm-1 sidenav'>";
@@ -32,12 +34,17 @@
       $description = $tuple["description"];
       echo "<h2>$model_name</h2><font size='4'> by <a href='../profile/profile.php?username=$creator_name'>$creator_name</a></font>";
       echo "<br>";
+      echo "</div>";
+      echo "<div class='col-sm-1 sidenav'></div>";
+      echo "</div>";
       // Picture
-      echo "<div class='col-sm-6 '><br><br>";
+      echo "<div class='row content'>";
+      echo "<div class='col-sm-1 sidenav'></div>";
+      echo "<div class='col-sm-5 '><br><br>";
       echo '<img style="height: 95%; width: 95%" src="' . $image . '">';
       echo "</div>";
       // Stats
-      echo "<div class='col-sm-6 text-center'>";
+      echo "<div class='col-sm-5 text-center'>";
       echo "<br>";
       echo "<br>";
       echo "<font size='3'>";
@@ -87,6 +94,8 @@
         echo "<br>";
       }
       echo "</div>";
+      echo "<div class='col-sm-1 sidenav'></div>";
+      echo "</div>";
     }
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());
@@ -102,36 +111,51 @@
     $get_Review->bindParam(1, $model_id); 
     $get_Review->execute();  
     $result_set = $get_Review->fetchAll();
-    echo "<br>";
-    echo "<br>";
-    echo "<div class='card col-sm-12'>";
-    echo "<font size='6' color='282a2e'>Reviews</font>";
+    echo "<div class='row content'>";
+    echo "<div class='col-sm-1 sidenav'></div>";
+    echo "<div class='col-sm-10'>";
+    echo "<p style='text-align:center'>";
+    echo "<font size='6'>Reviews</font>";
+    echo "</p>";
+    $i = 0;
     foreach($result_set as $tuple){
       $score = $tuple["stars"];
       $user_name = $tuple["username"];
       $model_name = $tuple["model_name"];
       $date = $tuple["review_date"];
       $title =$tuple["review_title"];
+
       // MAKE SURE TO GET REVIEW TITLE
       $comment = $tuple["comment"];
-      echo "<div class='card-header'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i> $score stars"; 
-      echo "<br>";
+      echo "<div class='card col-sm-12' style='padding: 0px; text-align: center; margin-bottom: 1%'>";
+      echo "<div class='card-header'>"; 
+
+      echo "<div style='display: inline-block; margin-right: 10px'><i><a href='../profile/profile.php?username=$user_name'>$user_name</a></i> gave <i>$model_name</i></div>";
+      echo '<div style="display: inline-block"><input name="rating" value='. $score .' id="input-'. $i .'" type="text" class="rating" data-size="xxs">
+      <script type = "text/javascript">
+          $(\'#input-'. $i .'\').rating({displayOnly: true});
+      </script>';
+      echo "</div>";
+      echo "</div>";
+      echo "<div class='card-body'>";
+      //echo "<br>";
       echo "Title: $title";
       echo "<br>";
       echo "$comment";
       echo "<br>";
       echo "Reviewed on $date";
       echo "</div>";
-      //echo "<div class='card-body'>$comment</div>";
+      
       //echo "<div class='card-footer'>Reviewed on $date</div>";
+      echo "</div>";
+      $i++;
     } 
-    echo "</div>";
   } catch(PDOException $e){
       die('Exception : ' . $e->getMessage());
   }
   //$db = null // disconnect
   echo "</div>";
-  echo "<div class='col-sm-1 sidenav'>";
+  echo "<div class='col-sm-1 sidenav'></div>";
   echo "</div>";
   $db = null;
 ?>
