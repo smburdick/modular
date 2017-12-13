@@ -4,7 +4,7 @@
   echo "<!DOCTYPE html>";
   echo "<html lang='en'>";
   include '../boilerplate.php';
-  generate_head('Categories', 'Categories');
+  generate_head('Adding to bookmarks', '');
   $db_path = '../../db/modular.db'; 
   $db = new PDO('sqlite:' . $db_path);
   $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

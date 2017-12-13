@@ -32,7 +32,7 @@
 			echo '<!DOCTYPE html>';
 			echo '<html>';
 			include '../boilerplate.php';
-   			generate_head('Editor', '');
+   			generate_head('Adding address', '');
 			echo '<div class="container-fluid text-center">    
 				<div class="row content">
 					<div class="col-sm-2 sidenav">

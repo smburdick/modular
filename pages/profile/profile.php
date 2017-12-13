@@ -87,13 +87,8 @@
 					$checkingUsername = $_GET['username'];
 				}
 				echo "<div class=\"card-deck\">";
-					$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
-					$stmt->bindParam(1, $checkingUsername);
-					$success = $stmt->execute();
-					$data = $stmt->fetchAll();
-
 		 
-				  $query = "SELECT * FROM Model WHERE creator_id == " . $data[0][0];
+				  $query = "SELECT model_name, model_id, image FROM Model WHERE creator_id == " . $data[0][0];
 				  $new_results = $db->query($query);
 				  foreach($new_results as $tuple) {
 					?>
@@ -132,11 +127,7 @@
 				<center><br>';
 			}
 			echo "<div class=\"card-deck\">";
-			$stmt = $db->prepare("SELECT * FROM user WHERE username = ? ;");
-			$stmt->bindParam(1, $checkingUsername);
-			$success = $stmt->execute();
-			$data = $stmt->fetchAll();	 
-			$new_results = $db->prepare("SELECT * FROM Bookmarks NATURAL JOIN Model WHERE user_id = ?;");
+			$new_results = $db->prepare("SELECT model_name, model_id, image FROM Bookmarks NATURAL JOIN Model WHERE user_id = ?;");
 			$new_results->bindParam(1, $data[0][0]);
 			$new_results->execute();
 			$newdata = $new_results->fetchAll();
