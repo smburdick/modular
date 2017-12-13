@@ -31,7 +31,7 @@
 					$db = new PDO('sqlite:' . $db_file);
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 						echo "<div class=\"card-deck\">";
-							$stmt = $db->prepare("SELECT * FROM Model;");
+							$stmt = $db->prepare("SELECT model_id, model_name, image FROM Model;");
 							$success = $stmt->execute();
 							$results = $stmt->fetchAll();
 							foreach($results as $tuple) {
