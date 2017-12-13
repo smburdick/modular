@@ -2,7 +2,7 @@
 <html lang="en">
 <?php
   include "../boilerplate.php";
-  generate_head("Review Error", "search");
+  generate_head("Review Error", "");
   error_reporting(0);
 ?>
   
