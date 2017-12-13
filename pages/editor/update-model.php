@@ -5,6 +5,7 @@
 <!-- Model editor view -->
 
 <?php
+    error_reporting(0);
     include '../boilerplate.php';
     generate_head('Model Updated', '');
 ?>
