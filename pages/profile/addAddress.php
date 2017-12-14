@@ -2,7 +2,7 @@
 	echo '<!DOCTYPE html>';
 	echo '<html>';
  	include '../boilerplate.php';
-    generate_head('Editor', '');
+    generate_head('Adding Address', '');
 
 echo '<div class="container-fluid text-center">    
 	<div class="row content">

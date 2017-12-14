@@ -1,6 +1,7 @@
 
 <?php
   // Gabriel Pinkard
+  error_reporting(0);
   echo "<!DOCTYPE html>";
   echo "<html lang='en'>";
   include '../boilerplate.php';
