@@ -61,24 +61,24 @@
 								<input type="Submit" value="Add a Credit Card">
 							</form>';
 						}
+						echo '</div>
+						</div>
+						<div class="col-sm-2 sidenav">
+						</div>
+					</div>
+					<div class="row content">
+						<div class="col-sm-2 sidenav">
+						</div>
+						<div class="col-sm-8 text-left">
+							<hr>
+							<h3>Models</h3>
+							<center><br>';
 					}
 				}else{
 					echo '<h2>This user does not exist.</h2>
 						<h4>Please check your information and try agian.</h4>';
 				}
 				?>
-			</div>
-		</div>
-		<div class="col-sm-2 sidenav">
-		</div>
-	</div>
-	<div class="row content">
-		<div class="col-sm-2 sidenav">
-		</div>
-		<div class="col-sm-8 text-left">
-			<hr>
-			<h3>Models</h3>
-			<center><br>
 			<?php
 				$checkingUsername = '';
 				if (!isset($_GET['username'])){
