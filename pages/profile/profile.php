@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
 	$username = $_COOKIE['username'];
 	include '../boilerplate.php';
 	echo '<!DOCTYPE html><html lang="en">';
@@ -70,9 +71,8 @@
 						<div class="col-sm-2 sidenav">
 						</div>
 						<div class="col-sm-8 text-left">
-							<hr>
 							<h3>Models</h3>
-							<center><br>';
+							<hr><center><br>';
 					}
 				}else{
 					echo '<h2>This user does not exist.</h2>
@@ -119,7 +119,7 @@
 		</div>
 		<div class="col-sm-8 text-left">
 			<?php
-			echo '<h3>Bookmarks</h3><hr>';
+			echo '<hr><h3>Bookmarks</h3><hr>';
 			if (!isset($_GET['username'])){
 				echo '<form action="deleteBookmarks.php">
 					<input type="Submit" value="Delete all Bookmarks">
