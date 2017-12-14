@@ -18,7 +18,7 @@
   try {
     $db = new PDO('sqlite:' . $db_path);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $get_Model = $db->prepare("select model_name, username, mass_in_grams, cost_per_gram, material_name, image, model_id, description from Model natural join Material natural join User where model_id = ? and creator_id = user_id");
+    $get_Model = $db->prepare("select model_name, username, creator_id, mass_in_grams, cost_per_gram, material_name, image, model_id, description from Model natural join Material natural join User where model_id = ? and creator_id = user_id");
     $get_Model->bindParam(1, $model_id); 
     $get_Model->execute();
     $result_set = $get_Model->fetchAll();
