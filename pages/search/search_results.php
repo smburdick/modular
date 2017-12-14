@@ -476,6 +476,9 @@ error_reporting(0);
               }
             }
 
+            //sorts two arrays simultaneously, but only orders by attributes in the first array
+            //the number of "matches" is how these are being sorted, in descending order
+            //thankfully I didn't need to do this myself. 
             array_multisort($model_counts, SORT_DESC, $matched_models);
 
             echo "<div class=\"card-deck\">";
