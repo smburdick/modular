@@ -25,12 +25,12 @@
           	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
           	// get the user addresses
-          	$stmt = $db->prepare('SELECT * FROM Address WHERE user_id = ?;');
+          	$stmt = $db->prepare('SELECT address_id, address_line_one, address_line_two, city FROM Address WHERE user_id = ?;');
           	$stmt->bindParam(1, $user_id);
           	$stmt->execute();
           	$addresses = $stmt->fetchAll();
           	// get the banking account info
-          	$stmt = $db->prepare('SELECT * FROM BankingInfo WHERE user_id = ?;');
+          	$stmt = $db->prepare('SELECT banking_info_id, name_on_card, card_number, ccv FROM BankingInfo WHERE user_id = ?;');
           	$stmt->bindParam(1, $user_id);
           	$stmt->execute();
           	$banking_infos = $stmt->fetchAll();
