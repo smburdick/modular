@@ -2,6 +2,7 @@
 <?php
       // database path
   echo "<!DOCTYPE html>";
+  error_reporting(0);
   echo "<html lang='en'>";
   include '../boilerplate.php';
   generate_head('Categories', 'Categories');
@@ -18,7 +19,7 @@
   if(!isset($cat_id)) echo "ERROR!";
     try {
       $db = new PDO('sqlite:' . $db_path);
-      $get_belongsTo = $db->prepare("select * from Category natural join BelongsTo natural join Model natural join User where category_id = ? and creator_id = user_id;");
+      $get_belongsTo = $db->prepare("select model_name, username, model_id, description from Category natural join BelongsTo natural join Model natural join User where category_id = ? and creator_id = user_id;");
       $get_belongsTo->bindParam(1, $cat_id);
       $get_belongsTo->execute();
       $results = $get_belongsTo->fetchAll(); 
