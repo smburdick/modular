@@ -18,7 +18,6 @@
 <script src="js/dat.gui.min.js"></script>
 <script src="js/KeyboardState.js"></script>
 <script src="js/LoaderSupport.js"></script>
-<script src="js/OBJLoader2.js"></script>
 <script src="js/OBJLoader.js"></script>
 <body>
 <div class="container-fluid text-center"> 
