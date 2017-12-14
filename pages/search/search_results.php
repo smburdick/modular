@@ -91,7 +91,7 @@ error_reporting(0);
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Category WHERE category_name LIKE " . $like_string . " COLLATE NOCASE;";
+            $search_query = "SELECT category_id FROM Category WHERE category_name LIKE " . $like_string . " COLLATE NOCASE;";
             $stmt=$db->prepare($search_query);
             $i = 1;
             foreach($search_like as $term){
@@ -137,7 +137,7 @@ error_reporting(0);
     			    }
     			    $i++;
     			  }
-    			  $search_query = "SELECT * FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
+    			  $search_query = "SELECT name FROM Color WHERE name LIKE " . $like_string . " COLLATE NOCASE;";
     			  $stmt=$db->prepare($search_query);
             $i = 1;
             foreach($search_like as $term){
@@ -183,7 +183,7 @@ error_reporting(0);
               }
               $i++;
             }
-            $search_query = "SELECT * FROM Material WHERE material_name LIKE " . $like_string . " COLLATE NOCASE;";
+            $search_query = "SELECT material_name FROM Material WHERE material_name LIKE " . $like_string . " COLLATE NOCASE;";
             $stmt=$db->prepare($search_query);
             $i = 1;
             foreach($search_like as $term){
@@ -230,7 +230,7 @@ error_reporting(0);
               }
               $i++;
             }
-            $search_query = "SELECT * FROM User WHERE username LIKE " . $like_string . " COLLATE NOCASE;";
+            $search_query = "SELECT username FROM User WHERE username LIKE " . $like_string . " COLLATE NOCASE;";
             $stmt=$db->prepare($search_query);
             $i = 1;
             foreach($search_like as $term){
@@ -476,6 +476,9 @@ error_reporting(0);
               }
             }
 
+            //sorts two arrays simultaneously, but only orders by attributes in the first array
+            //the number of "matches" is how these are being sorted, in descending order
+            //thankfully I didn't need to do this myself. 
             array_multisort($model_counts, SORT_DESC, $matched_models);
 
             echo "<div class=\"card-deck\">";

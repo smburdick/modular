@@ -22,7 +22,7 @@ error_reporting(0);
           $db = new PDO('sqlite:' . $db_file);
           //set errormode to use exceptions
           $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	  $check_stmt = "select * from review where user_id=? and model_id=?";
+	  $check_stmt = "select review_title from review where user_id=? and model_id=?";
 	  $check_prep = $db->prepare($check_stmt);
 	  $check_prep->bindParam(1, $user_id);
 	  $check_prep->bindParam(2, $model_id);
